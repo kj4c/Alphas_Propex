@@ -10,28 +10,8 @@ resource "aws_s3_bucket" "lambda_bucket" {
 # Upload Lambda ZIP file to S3
 resource "aws_s3_object" "lambda_zip" {
   bucket = aws_s3_bucket.lambda_bucket.id
-  key    = "lambda_function.zip"
-  source = "lambda_function.zip"
-}
-
-# Lambda Role and Policy
-resource "aws_iam_role" "lambda_exec_role" {
-  name = "lambda_exec_role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [{
-      Action = "sts:AssumeRole"
-      Effect = "Allow"
-      Principal = {
-        Service = "lambda.amazonaws.com"
-      }
-    }]
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "lambda_policy_attach" {
-  role       = aws_iam_role.lambda_exec_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  key    = "lambda.zip"
+  source = "lambda.zip"
 }
 
 # Lambda Function
@@ -41,7 +21,7 @@ resource "aws_lambda_function" "api_lambda" {
   s3_key        = aws_s3_object.lambda_zip.key
   handler       = "handler.lambda_handler"
   runtime       = "python3.9"
-  role          = aws_iam_role.lambda_exec_role.arn
+  role          = "arn:aws:iam::109471428046:role/LabRole"
 }
 
 # API Gateway
