@@ -69,3 +69,13 @@ resource "aws_apigatewayv2_stage" "api_stage" {
   name        = "$default"
   auto_deploy = true
 }
+
+terraform {
+  backend "s3" {
+    bucket = "seng3011-alpha-terraform-state"
+    key = "terraform.tfstate"
+    region = "us-east-1"
+    encrypt = true
+    dynamodb_table = "terraform-lock"
+  }
+}
