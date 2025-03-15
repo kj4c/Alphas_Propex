@@ -8,20 +8,36 @@ resource "aws_s3_bucket" "lambda_bucket" {
 }
 
 # Upload Lambda ZIP file to S3
-resource "aws_s3_object" "lambda_zip" {
+resource "aws_s3_object" "lambda_zips" {
+  for_each = var.lambda_functions
+
   bucket = aws_s3_bucket.lambda_bucket.id
-  key    = "lambda.zip"
-  source = "lambda.zip"
+  key    = "lambdas/${each.key}.zip"
+  source = "backend/${each.key}/lambda.zip"
+  
+  # forces terraform to detect any zip changes for S3 bucket
+  etag = filemd5("backend/${each.key}/lambda.zip")
 }
 
 # Lambda Function
-resource "aws_lambda_function" "api_lambda" {
-  function_name = "data_preprocessing"
+resource "aws_lambda_function" "multi_lambda" {
+  for_each = var.lambda_functions
+
+  function_name = each.key
   s3_bucket     = aws_s3_bucket.lambda_bucket.id
-  s3_key        = aws_s3_object.lambda_zip.key
-  handler       = "handler.lambda_handler"
-  runtime       = "python3.9"
+  s3_key        = aws_s3_object.lambda_zips[each.key].key
+  handler       = each.value.handler
+  runtime       = each.value.runtime
   role          = "arn:aws:iam::109471428046:role/LabRole"
+
+  # makes lambda function redeploy for any changes
+  source_code_hash = filebase64sha256("backend/${each.key}/lambda.zip")
+
+  environment {
+    variables = {
+      FUNCTION_NAME = each.key
+    }
+  }
 }
 
 # API Gateway
@@ -31,17 +47,21 @@ resource "aws_apigatewayv2_api" "api" {
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
+  for_each = var.lambda_functions
+
   api_id             = aws_apigatewayv2_api.api.id
   integration_type   = "AWS_PROXY"
-  integration_uri    = aws_lambda_function.api_lambda.invoke_arn
+  integration_uri    = aws_lambda_function.multi_lambda[each.key].invoke_arn
   integration_method = "POST"
   payload_format_version = "2.0"
 }
 
 resource "aws_apigatewayv2_route" "lambda_route" {
+  for_each = var.lambda_functions
+
   api_id    = aws_apigatewayv2_api.api.id
-  route_key = "$default"
-  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+  route_key = "POST /${each.key}"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration[each.key].id}"
 }
 
 resource "aws_apigatewayv2_stage" "api_stage" {
