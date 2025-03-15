@@ -3,7 +3,7 @@ variable "aws_region" {
 }
 
 variable "lambda_bucket_name" {
-  default = "alphas-raw-esg-bucket"
+  default = "property_raw_data"
   description = "raw_data"
   type = string
 }
