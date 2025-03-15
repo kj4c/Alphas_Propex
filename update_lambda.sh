@@ -12,7 +12,7 @@ for FUNCTION_DIR in "$BACKEND_DIR"/*; do
 
         echo "📦 Zipping function: $FUNCTION_NAME..."
         cd "$FUNCTION_DIR" || exit
-        zip -r lambda.zip . > /dev/null
+        zip -r lambda.zip . helpers.py > /dev/null
         cd - > /dev/null
         echo "✅ Created: $ZIP_FILE"
     fi
