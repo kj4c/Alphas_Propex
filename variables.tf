@@ -15,11 +15,10 @@ variable "lambda_functions" {
     handler  = string
     runtime  = string
   }))
-  # to add a new function make sure you have a folder in the backend with your function name
-  # and the file in the directory MUST be handler.py and inside handler.py it must have the function
-  # lambda_handler. After that zip up the file using "zip lambda.zip handler.py" while in the directory you created.
+  # Auto-detected functions from backend/
   default = {
-    "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9" }
     "income_analysis" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9" }
   }
 }
