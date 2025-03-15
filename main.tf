@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "lambda_bucket" {
 resource "aws_s3_object" "lambda_zips" {
   for_each = var.lambda_functions
 
-  bucket = aws_s3_bucket.lambda_bucket.id
+  bucket = var.lambda_bucket_name
   key    = "lambdas/${each.key}.zip"
   source = "backend/${each.key}/lambda.zip"
   
@@ -24,7 +24,7 @@ resource "aws_lambda_function" "multi_lambda" {
   for_each = var.lambda_functions
 
   function_name = each.key
-  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_bucket     = var.lambda_bucket_name
   s3_key        = aws_s3_object.lambda_zips[each.key].key
   handler       = each.value.handler
   runtime       = each.value.runtime
