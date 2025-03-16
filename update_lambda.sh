@@ -29,7 +29,7 @@ for FUNCTION_DIR in "$BACKEND_DIR"/*; do
             echo "📦 Changes detected for $FUNCTION_NAME. Updating the zip"
             echo "📦 Zipping function: $FUNCTION_NAME..."
             cd "$FUNCTION_DIR" || exit
-            zip -r -X lambda.zip handler.py helpers.py > /dev/null
+            zip -r -X lambda.zip handler.py helpers.py ../general_helpers.py > /dev/null
             cd - > /dev/null
             # stores the new CHECKSUM FILE
             echo "$NEW_CHECKSUM" | tee "$TEMP_CHECKSUM_FILE" > /dev/null
