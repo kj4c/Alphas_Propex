@@ -14,11 +14,13 @@ variable "lambda_functions" {
   type = map(object({
     handler  = string
     runtime  = string
+    method   = string
   }))
   # Auto-detected functions from backend/
   default = {
-    "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9" }
-    "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9" }
-    "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "upload_json" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
   }
 }
