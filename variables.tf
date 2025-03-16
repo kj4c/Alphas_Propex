@@ -17,7 +17,7 @@ variable "lambda_functions" {
   }))
   # Auto-detected functions from backend/
   default = {
-    "income_analysis" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9" }
     "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9" }
     "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9" }
   }
