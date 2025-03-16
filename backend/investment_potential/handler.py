@@ -1,5 +1,6 @@
 import json
 from helpers import investment_potential
+from general_helpers import to_dataframe
 
 def lambda_handler(event, context):
     """
@@ -11,11 +12,22 @@ def lambda_handler(event, context):
 
     try:
         data = json.loads(event['body'])
-        investment_potential_score = investment_potential(data)
+
+        df = to_dataframe(data)  # Expecting "data" field in the event payload
+        
+        if df.empty:
+            return {
+                "statusCode": 400,
+                "body": json.dumps({"error": "No valid data provided."})
+            }
+        
+        investment_potentials = investment_potential(df)
+
         response = {
             "statusCode": 200,
-            "body": json.dumps({"investment_potential_score": investment_potential_score})
+            "body": json.dumps({"investment_potentials": investment_potentials})
         }
+        
     except Exception as e:
         response = {
             "statusCode": 500,

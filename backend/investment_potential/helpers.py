@@ -26,17 +26,22 @@ def investment_potential(data):
     WEIGHT_LOCATION_DEMAND = 0.2
     WEIGHT_AFFORDABILITY = 0.1
 
+    data.columns = data.columns.str.strip()
+
     req_columns = ['price', 'property_inflation_index', 'suburb_median_income', 'km_from_cbd', 'suburb']
-    if not all(col in data.columns for col in req_columns):
-        return "Missing columns"
     
-    # Calculate raw values first
+    # missing cols (if any)
+    if not all(col in data.columns for col in req_columns):
+        print("Missing required columns")
+        return pd.DataFrame()
+    
+    # calc raw values first
     price_growth = data['property_inflation_index']
     rental_yield = (data['suburb_median_income'] * 0.3 * 12) / data['price'] * 100
     location_demand = 1 / (data['km_from_cbd'] + 1) * 100
     affordability = data['suburb_median_income'] / data['price'] * 100
 
-    # Normalize each component to 0-100 scale
+    # normalize each component to 0-100 
     price_growth_norm = normalize_to_100(price_growth)
     rental_yield_norm = normalize_to_100(rental_yield)
     location_demand_norm = normalize_to_100(location_demand)
@@ -50,21 +55,5 @@ def investment_potential(data):
             
     top_suburbs = data.sort_values(by="investment_score", ascending=False).head(20)[["suburb", "investment_score"]]
     top_suburbs = top_suburbs.reset_index(drop=True)
-    
+
     return top_suburbs
-
-if __name__ == "__main__":
-    # Sample test data
-    test_data = pd.DataFrame({
-        "price": [530000, 525000, 480000],  # Property prices
-        "property_inflation_index": [150.9, 150.9, 150.9],  # Growth index
-        "suburb_median_income": [29432, 24752, 31668],  # Annual median income
-        "km_from_cbd": [47.05, 78.54, 63.59],  # Distance from city center
-        "suburb": ["Kincumber", "Halekulani", "Chittaway Bay"]  # Suburb names
-    })
-
-    # Call function
-    scores = investment_potential(test_data)
-
-    # Print results
-    print(scores)
