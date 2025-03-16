@@ -11,7 +11,7 @@ resource "aws_s3_bucket" "lambda_bucket" {
 resource "aws_s3_object" "lambda_zips" {
   for_each = var.lambda_functions
 
-  bucket = aws_s3_bucket.lambda_bucket.id
+  bucket = var.lambda_bucket_name
   key    = "lambdas/${each.key}.zip"
   source = "backend/${each.key}/lambda.zip"
   
@@ -24,7 +24,7 @@ resource "aws_lambda_function" "multi_lambda" {
   for_each = var.lambda_functions
 
   function_name = each.key
-  s3_bucket     = aws_s3_bucket.lambda_bucket.id
+  s3_bucket     = var.lambda_bucket_name
   s3_key        = aws_s3_object.lambda_zips[each.key].key
   handler       = each.value.handler
   runtime       = each.value.runtime
@@ -68,4 +68,14 @@ resource "aws_apigatewayv2_stage" "api_stage" {
   api_id      = aws_apigatewayv2_api.api.id
   name        = "$default"
   auto_deploy = true
+}
+
+terraform {
+  backend "s3" {
+    bucket = "seng3011-alpha-terraform-state"
+    key = "terraform.tfstate"
+    region = "us-east-1"
+    encrypt = true
+    dynamodb_table = "terraform-lock"
+  }
 }
