@@ -7,6 +7,16 @@ resource "aws_s3_bucket" "lambda_bucket" {
   bucket = var.lambda_bucket_name
 }
 
+# S3 Bucket for RAW DATA
+resource "aws_s3_bucket" "raw_data_bucket" {
+  bucket = "alpha-raw-data-bucket"
+
+  tags = {
+    Name        = "JSON Raw Data Storage Bucket"
+    Environment = "Dev"
+  }
+}
+
 # Upload Lambda ZIP file to S3
 resource "aws_s3_object" "lambda_zips" {
   for_each = var.lambda_functions
