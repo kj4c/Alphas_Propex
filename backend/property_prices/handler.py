@@ -12,14 +12,14 @@ def lambda_handler(event, context):
     try:
         data = json.loads(event["body"])
         
-        avg_income = avg_property_price(
+        avg_price = avg_property_price(
             df=to_dataframe(data),
             filters=event.get("queryStringParameters", None)
         )
         
         return {
             "statusCode": 200,
-            "body": json.dumps({"avg_income": avg_income})
+            "body": json.dumps({"avg_price": avg_price})
         }
 
     except Exception as e:
