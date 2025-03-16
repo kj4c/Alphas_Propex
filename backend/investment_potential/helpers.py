@@ -1,13 +1,11 @@
 import pandas as pd
 
 def normalize_to_100(series):
-    """
-    Normalizes a series to 0-100 scale
-    """
+    # normalise to 0-100
     min_val = series.min()
     max_val = series.max()
     if max_val == min_val:
-        return series.map(lambda x: 50)  # Return middle value if all values are the same
+        return series.map(lambda x: 50)  # return mid value if all values are the same
     return ((series - min_val) / (max_val - min_val)) * 100
 
 def investment_potential(data):
@@ -18,8 +16,6 @@ def investment_potential(data):
     - Rental yield (30%)
     - Location demand (20%)
     - Affordability (10%)
-    
-    Final score will be between 0-100.
     """
     WEIGHT_PRICE_GROWTH = 0.4
     WEIGHT_RENTAL_YIELD = 0.3
@@ -47,7 +43,7 @@ def investment_potential(data):
     location_demand_norm = normalize_to_100(location_demand)
     affordability_norm = normalize_to_100(affordability)
 
-    # Calculate weighted score (will naturally be 0-100 since components are 0-100)
+    # calculate investment score
     data["investment_score"] = (WEIGHT_PRICE_GROWTH * price_growth_norm + 
                               WEIGHT_RENTAL_YIELD * rental_yield_norm + 
                               WEIGHT_LOCATION_DEMAND * location_demand_norm + 

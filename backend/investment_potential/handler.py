@@ -13,7 +13,7 @@ def lambda_handler(event, context):
     try:
         data = json.loads(event['body'])
 
-        df = to_dataframe(data)  # Expecting "data" field in the event payload
+        df = to_dataframe(data) # convert to pandas dataframe
         
         if df.empty:
             return {
@@ -27,7 +27,7 @@ def lambda_handler(event, context):
             "statusCode": 200,
             "body": json.dumps({"investment_potentials": investment_potentials})
         }
-        
+
     except Exception as e:
         response = {
             "statusCode": 500,
