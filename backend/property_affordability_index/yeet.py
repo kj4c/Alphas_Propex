@@ -54,3 +54,16 @@ def fetch_data(id):
             "statusCode": 500,
             "body": {"error": str(e)}
         }
+
+
+
+data = fetch_data("76d3b838-5880-4320-b42f-8bd8273ab6a0")
+
+print(type(data))
+print(data.keys())
+print(type(data['body']))
+data = data['body']['events']
+# data = json.loads(data['body'])
+print(data.keys())
+# print(data['events'])
+# print(data)
