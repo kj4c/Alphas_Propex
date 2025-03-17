@@ -18,7 +18,10 @@ variable "lambda_functions" {
   # Auto-detected functions from backend/
   default = {
     "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "upload_json" = { handler = "handler.lambda_handler", runtime = "python3.9" }
     "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9" }
     "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "investment_potential" = { handler = "handler.lambda_handler", runtime = "python3.9" }
+    "property_affordability_index" = { handler = "handler.lambda_handler", runtime = "python3.9" }
   }
 }
