@@ -9,9 +9,9 @@ def lambda_handler(event, context):
     @return:
     """
     try:
-        data = json.loads(event["body"])
+        data_id= json.loads(event["body"])
         
-        recommendations = find_commerical_recs(data)
+        recommendations = find_commerical_recs(data_id)
         
         return {
             "statusCode": 200,

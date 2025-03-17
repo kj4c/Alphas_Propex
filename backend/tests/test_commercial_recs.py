@@ -1,5 +1,5 @@
 import unittest
-from commercial_recs.helpers import find_commerical_recs
+from backend.commercial_recs.helpers import find_commerical_recs
 
 class TestCommercialRecs(unittest.TestCase):
     def test_input1(self):
