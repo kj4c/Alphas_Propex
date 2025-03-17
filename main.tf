@@ -29,27 +29,6 @@ resource "aws_s3_object" "lambda_zips" {
   etag = filemd5("backend/${each.key}/lambda.zip")
 }
 
-resource "aws_s3_object" "pandas_layer_zip" {
-  bucket = var.lambda_bucket_name
-  key    = "layers/pandas_layer.zip"
-  source = "${path.module}/lambda_layer/pandas_layer.zip"
-
-  # Detects changes to the layer zip file
-  etag = filemd5("${path.module}/lambda_layer/pandas_layer.zip")
-}
-
-
-# Pandas Lambda Layer
-resource "aws_lambda_layer_version" "pandas_layer" {
-  layer_name          = "pandas-layer"
-  s3_bucket           = var.lambda_bucket_name
-  s3_key              = aws_s3_object.pandas_layer_zip.key
-  compatible_runtimes = ["python3.9"]
-  description         = "Layer that provides pandas library"
-
-  source_code_hash = filebase64sha256("${path.module}/lambda_layer/pandas_layer.zip")
-}
-
 # Lambda Function
 resource "aws_lambda_function" "multi_lambda" {
   for_each = var.lambda_functions
@@ -69,9 +48,9 @@ resource "aws_lambda_function" "multi_lambda" {
       FUNCTION_NAME = each.key
     }
   }
-
+  
   layers = [
-    aws_lambda_layer_version.pandas_layer.arn
+    "arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python39:28"
   ]
 }
 
