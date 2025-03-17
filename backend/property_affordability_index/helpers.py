@@ -32,5 +32,6 @@ def find_property_price_index(data_id):
 
     res['norm_affordability_index'] =((res['affordability_index'] - min_afford_index)/(diff)) * 100
     res = res.reset_index()
+    res = res[['suburb', 'norm_affordability_index']]
 
     return res.sort_values('norm_affordability_index', ascending=False)
