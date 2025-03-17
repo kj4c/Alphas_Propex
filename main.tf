@@ -48,6 +48,10 @@ resource "aws_lambda_function" "multi_lambda" {
       FUNCTION_NAME = each.key
     }
   }
+  
+  layers = [
+    "arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python39:28"
+  ]
 }
 
 # API Gateway
@@ -70,7 +74,7 @@ resource "aws_apigatewayv2_route" "lambda_route" {
   for_each = var.lambda_functions
 
   api_id    = aws_apigatewayv2_api.api.id
-  route_key = "POST /${each.key}"
+  route_key = "${each.value.method} /${each.key}"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration[each.key].id}"
 }
 
@@ -79,6 +83,18 @@ resource "aws_apigatewayv2_stage" "api_stage" {
   name        = "$default"
   auto_deploy = true
 }
+
+# gives the lambda functions permissions
+resource "aws_lambda_permission" "api_gateway_invoke" {
+  for_each = var.lambda_functions
+
+  statement_id  = "${each.key}-AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.multi_lambda[each.key].function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
+}
+
 
 terraform {
   backend "s3" {
