@@ -10,6 +10,14 @@ def to_dataframe(id):
     
     events = response["body"].get("events", [])
 
+def to_dataframe(id):
+    response = fetch_data(id)
+    
+    if response["statusCode"] != 200:
+        raise ValueError(f"Failed to fetch data: {response['body']}")
+    
+    events = response["body"].get("events", [])
+
     flattened_events = []
     for event in events:
         flattened_event = {
