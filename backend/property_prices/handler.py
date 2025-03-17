@@ -10,10 +10,28 @@ def lambda_handler(event, context):
     @return:
     """
     try:
-        data = json.loads(event["body"])
+        body = event.get("body")
+        if not body:
+            raise ValueError("Missing 'body' in event")
+
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognized body format")
+        
+        print("DEBUG Raw body:", body)
+        print("DEBUG Parsed data:", data)
+        print("DEBUG Type of data:", type(data))
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
         
         avg_price = avg_property_price(
-            df=to_dataframe(data),
+            df=to_dataframe(data["id"]),
             filters=event.get("queryStringParameters", None)
         )
         
