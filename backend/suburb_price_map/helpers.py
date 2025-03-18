@@ -15,13 +15,13 @@ def suburb_price_map(df):
     colormap = branca.colormap.LinearColormap(
         colors=['green', 'yellow', 'orange', 'red', 'purple', '#03257b', 'black'],
         index=[500000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000],
-        vmin=0, vmax=2500000
+        vmin=0, vmax=4000000
     )
 
     # colouring suburbs
     for _, row in data.iterrows():
         folium.CircleMarker(
-            location=[row['suburb_lat'], row['suburb_lng']],  # Use latitude and longitude
+            location=[row['suburb_lat'], row['suburb_lng']],
             color=colormap(row['median_price']),
             fill=True,
             fill_color=colormap(row['median_price']),
@@ -29,5 +29,4 @@ def suburb_price_map(df):
             tooltip=f"{row['suburb']}: ${row['median_price']}"
         ).add_to(sydney_map)
 
-    # Return the HTML representation of the map
     return sydney_map._repr_html_()
