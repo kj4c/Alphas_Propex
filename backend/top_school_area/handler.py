@@ -23,22 +23,19 @@ def lambda_handler(event, context):
         
         query_params = event.get('queryStringParameters', {})
         district = query_params.get('district')
-        property_type = query_params.get('type')
+        school_type = query_params.get('school_type')
 
-        if not district or not property_type:
+        if not district or not school_type:
             return {
                 "statusCode": 400,
-                "body": json.dumps({"error": "Missing 'district' or 'type' query parameter."})
+                "body": json.dumps({"error": "Missing 'district' or 'school_ype' query parameter."})
             }
 
-        ret = top_school_area(df, district, property_type)
+        ret = top_school_area(df, district, school_type)
 
         response = {
             "statusCode": 200,
-            "headers": {
-                "Content-Type": "text/html"
-            },
-            "body": ret
+            "body": json.dumps({"top_school_area": ret})
         }
 
     except Exception as e:
