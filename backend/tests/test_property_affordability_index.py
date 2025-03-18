@@ -1,13 +1,13 @@
 import unittest
 import pandas as pd 
 import json
-# import boto3
 import sys
 sys.path.append('../..')
 from unittest.mock import patch, MagicMock
 from backend.property_affordability_index.handler import lambda_handler
 from backend.property_affordability_index.helpers import find_property_price_index
 
+# import boto3
 # def to_dataframe(id):
 #     response = fetch_data(id)
     
@@ -138,74 +138,68 @@ from backend.property_affordability_index.helpers import find_property_price_ind
 #     return res.sort_values('norm_affordability_index', ascending=False)
 
 
-
-
-
-
-
-
 # Verifies that the lambda function correctly processes input and calls 
 # find_property_price_index
-# class TestLambdaHandler(unittest.TestCase) :
-#     @patch('helpers.find_property_price_index')
-#     def test_lambda_handler_sucess(self, mock_find_property_price_index):
-#         mock_find_property_price_index.return_value = pd.DataFrame({
-#             'suburb' : ['Bondi', 'Newtown'],
-#             'norm_affordability_index': [85.0, 60.5]
-#         })
+class TestLambdaHandler(unittest.TestCase) :
+    @patch('helpers.find_property_price_index')
+    def test_lambda_handler_sucess(self, mock_find_property_price_index):
+        mock_find_property_price_index.return_value = pd.DataFrame({
+            'suburb' : ['Bondi', 'Newtown'],
+            'norm_affordability_index': [85.0, 60.5]
+        })
         
-#         event = {
-#             "body": json.dumps({"id": "test_data_id"})
-#         }
-#         response = lambda_handler(event, None)
+        event = {
+            "body": json.dumps({"id": "test_data_id"})
+        }
+        response = lambda_handler(event, None)
         
-#         self.assertEqual(response["statusCode"], 200)
-#         self.assertIn("Bondi", response["body"])
-#         self.assertIn("Newtown", response["body"])
+        self.assertEqual(response["statusCode"], 200)
+        self.assertIn("Bondi", response["body"])
+        self.assertIn("Newtown", response["body"])
         
-#     def test_lambda_handler_missing_body(self):
-#         event = {}
-#         response = lambda_handler(event, None)
-#         self.assertEqual(response['statusCode'], 400)
-#         self.assertIn("Missing 'body' in event", response['body'])
+    def test_lambda_handler_missing_body(self):
+        event = {}
+        response = lambda_handler(event, None)
+        self.assertEqual(response['statusCode'], 400)
+        self.assertIn("Missing 'body' in event", response['body'])
     
-#     def test_lambda_handler_invalid_json(self):
-#         event = {"body": 1}
-#         response = lambda_handler(event, None)
-#         self.assertEqual(response["statusCode"], 400)
-#         self.assertIn("Unrecognized body format", response["body"])
+    def test_lambda_handler_invalid_json(self):
+        event = {"body": 1}
+        response = lambda_handler(event, None)
+        self.assertEqual(response["statusCode"], 400)
+        self.assertIn("Unrecognized body format", response["body"])
 
-#     def test_lambda_handler_missing_id(self):
-#         event = {"body": json.dumps({})}
-#         response = lambda_handler(event, None)
-#         self.assertEqual(response['statusCdoe'], 400)
-#         self.assertIn("Missing 'id' in body")
+    def test_lambda_handler_missing_id(self):
+        event = {"body": json.dumps({})}
+        response = lambda_handler(event, None)
+        self.assertEqual(response['statusCdoe'], 400)
+        self.assertIn("Missing 'id' in body")
         
 
-# # Ensures that the affordability index is calculated correctly nased on median price,
-# # size and income, and price per sqm 
-# class TestFindPropertyPriceIndex(unittest.TestCase):
-#     @patch('helpers.to_dataframe')
-#     def test_find_property_price_index(self, mock_to_dataframe):
-#         mock_to_dataframe.return_value = pd.DataFrame({
-#             'suburb': ['Bondi', 'Bondi', 'Newtown', 'Newtown'],
-#             'price': [1000000, 1200000, 950000, 1500000],
-#             'property_size': [150, 200, 120, 250],
-#             'suburb_median_income': [75000, 75000, 65000, 65000]
-#         })
+# Ensures that the affordability index is calculated correctly nased on median price,
+# size and income, and price per sqm 
+class TestFindPropertyPriceIndex(unittest.TestCase):
+    @patch('helpers.to_dataframe')
+    def test_find_property_price_index(self, mock_to_dataframe):
+        mock_to_dataframe.return_value = pd.DataFrame({
+            'suburb': ['Bondi', 'Bondi', 'Newtown', 'Newtown'],
+            'price': [1000000, 1200000, 950000, 1500000],
+            'property_size': [150, 200, 120, 250],
+            'suburb_median_income': [75000, 75000, 65000, 65000]
+        })
         
-#         result = find_property_price_index("test_data_id")
-#         self.assertEqual(len(result), 2)
-#         self.assertIn('suburb', result.columns)
-#         self.assertIn('norm_affordability_index', result.columns)
+        result = find_property_price_index("test_data_id")
+        self.assertEqual(len(result), 2)
+        self.assertIn('suburb', result.columns)
+        self.assertIn('norm_affordability_index', result.columns)
         
-#         # Check that the affordability index is computed correctly 
-#         self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
+        # Check that the affordability index is computed correctly 
+        self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
         
-#         @patch('helpers.to_dataframe')
-#         def test_find_property_price_index_empty_data(self, mock_to_dataframe):
-#             mock_to_dataframe.return_value = pd.DataFrame(columns=['suburb', 'price', 'property_size', 'suburb_median_income'])
+        @patch('helpers.to_dataframe')
+        def test_find_property_price_index_empty_data(self, mock_to_dataframe):
+            mock_to_dataframe.return_value = pd.DataFrame(columns=['suburb', 'price', 'property_size', 'suburb_median_income'])
         
-#             result = find_property_price_index("test_data_id")
-#             self.assertEqual(len(result), 0)  # Should return an empty DataFrame
+            result = find_property_price_index("test_data_id")
+            self.assertEqual(len(result), 0)  # Should return an empty DataFrame
 
