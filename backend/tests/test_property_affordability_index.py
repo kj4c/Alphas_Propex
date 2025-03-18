@@ -2,7 +2,9 @@ import unittest
 import pandas as pd 
 import json
 import sys
-sys.path.append('../..')
+import os 
+# sys.path.append('../..')
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from unittest.mock import patch, MagicMock
 from backend.property_affordability_index.handler import lambda_handler
 from backend.property_affordability_index.helpers import find_property_price_index
