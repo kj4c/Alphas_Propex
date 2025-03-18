@@ -21,7 +21,17 @@ def lambda_handler(event, context):
                 "body": json.dumps({"error": "No valid data provided."})
             }
         
-        ret = suburb_price_map(df)
+        query_params = event.get('queryStringParameters', {})
+        district = query_params.get('district')
+        property_type = query_params.get('type')
+
+        if not district or not property_type:
+            return {
+                "statusCode": 400,
+                "body": json.dumps({"error": "Missing 'district' or 'type' query parameter."})
+            }
+
+        ret = top_school_area(df, district, property_type)
 
         response = {
             "statusCode": 200,
