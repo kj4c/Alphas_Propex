@@ -26,8 +26,12 @@ class TestTopSchoolArea(unittest.TestCase):
         self.assertIn("avg_suburb_median_income", res)
     
     def test_top_school_error(self):
-        res = top_school_area(self.df, "ERROR", "South Eastern Sydney", 10)
-        self.assertEqual(res, "error: Invalid School Type")
-        res = top_school_area(self.df, "Secondary School", "South Eastern", 10)
-        self.assertEqual(res, "error: Invalid district")
+        with self.assertRaises(ValueError) as context:
+            top_school_area(self.df, "ERROR", "South Eastern Sydney", 10)
+        self.assertEqual(str(context.exception), "Invalid school type")
+
+        # Test for invalid district
+        with self.assertRaises(ValueError) as context:
+            top_school_area(self.df, "Secondary School", "South Eastern", 10)
+        self.assertEqual(str(context.exception), "Invalid district")
 

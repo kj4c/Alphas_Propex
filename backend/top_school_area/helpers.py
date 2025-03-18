@@ -22,9 +22,9 @@ def top_school_area(df, type, district, radius):
     ]
 
     if type != "Primary School" and type != "Secondary School" and type != "Infants School":
-        return "error: Invalid School Type"
+        raise ValueError("Invalid school type")
     if district not in districts:
-        return "error: Invalid district"
+        raise ValueError("Invalid district")
 
     df.columns = df.columns.str.strip()
     properties = df[['suburb_lat', 'suburb_lng', 'price', 'suburb_median_income']]
