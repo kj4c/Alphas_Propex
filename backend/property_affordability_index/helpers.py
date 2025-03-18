@@ -1,9 +1,8 @@
 import pandas as pd
 import json
-from general_helpers import fetch_data, to_dataframe
 
-def find_property_price_index(data_id):
-    data = to_dataframe(data_id)
+def find_property_price_index(data):
+   
     # Affordability Index = (Suburb Median Income * 100)/ (Price Per SQM)
     # where Price Per SQM = (Median Property Price/ Median Property Size)
 
