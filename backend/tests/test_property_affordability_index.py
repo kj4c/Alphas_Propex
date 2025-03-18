@@ -24,4 +24,3 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         
         # Check that the affordability index is computed correctly 
         self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
-
