@@ -190,7 +190,7 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
             'suburb_median_income': [75000, 75000, 65000, 65000]
         })
         
-        result = find_property_price_index(self.df.copy())
+        result = find_property_price_index(self.test_data)
         self.assertEqual(len(result), 2)
         self.assertIn('suburb', result.columns)
         self.assertIn('norm_affordability_index', result.columns)
