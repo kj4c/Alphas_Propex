@@ -22,17 +22,34 @@ def lambda_handler(event, context):
     @return:
     """
     try:
-        data_id = json.loads(event["body"])
+        body = event.get("body")
+        if not body:
+            raise ValueError("Missing 'body' in event")
+
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognized body format")
         
-        data = json.loads(fetch_data(data_id)['body'])
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
 
-        property_type = event["pathParameter"]["property_type"]
+        path_parameters = event.get("pathParameters", None)
 
-        if property_type not in PropertyType.__members__:
-            raise Exception
+        if path_parameters is None:
+            raise ValueError("No path parameter found")
+
+        property_type = path_parameters.get("property_type", None)
+
+        if property_type not in PropertyType.__members__: 
+            raise ValueError("Unrecognised property type")
         
         influence_factors = find_influence_factors(
-            df=to_dataframe(data),
+            df=to_dataframe(data["id"]),
             property_type=property_type   # passed through path parameters (../influence_factors/{property_type}})
         )
         
