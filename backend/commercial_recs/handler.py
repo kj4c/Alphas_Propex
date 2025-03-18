@@ -3,12 +3,6 @@ from helpers import find_commerical_recs
 from general_helpers import to_dataframe
 
 def lambda_handler(event, context):
-    """
-    Lambda function entry point.
-    @event:
-    @context:
-    @return:
-    """
     try:
         body = event.get("body")
         if not body:
@@ -27,7 +21,7 @@ def lambda_handler(event, context):
         
         return {
             "statusCode": 200,
-            "body": json.dumps({"recommendations": recommendations})
+            "body": json.dumps({"recommendations": recs})
         }
 
     except Exception as e:
