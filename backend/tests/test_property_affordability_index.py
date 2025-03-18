@@ -1,13 +1,13 @@
 # import unittest
 # import pandas as pd 
 # import json
-# from unittest.mock import patch
 # from backend.property_affordability_index.handler import lambda_handler
 # from backend.property_affordability_index.helpers import find_property_price_index
 
 import sys 
 sys.path.append('../..')
 import unittest
+from unittest.mock import patch
 import pandas as pd
 from backend.property_prices.helpers import avg_property_price
 from backend.property_affordability_index.helpers import find_property_price_index
@@ -183,6 +183,7 @@ from backend.property_affordability_index.helpers import find_property_price_ind
 # # Ensures that the affordability index is calculated correctly nased on median price,
 # # size and income, and price per sqm 
 class TestFindPropertyPriceIndex(unittest.TestCase):
+    @patch('helpers.to_dataframe')
     def test_find_property_price_index(self, mock_to_dataframe):
         mock_to_dataframe.return_value = pd.DataFrame({
             'suburb': ['Bondi', 'Bondi', 'Newtown', 'Newtown'],
@@ -199,6 +200,7 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         # Check that the affordability index is computed correctly 
         self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
         
+        @patch('helpers.to_dataframe')
         def test_find_property_price_index_empty_data(self, mock_to_dataframe):
             mock_to_dataframe.return_value = pd.DataFrame(columns=['suburb', 'price', 'property_size', 'suburb_median_income'])
         
