@@ -183,23 +183,18 @@ from backend.property_affordability_index.helpers import find_property_price_ind
 # # size and income, and price per sqm 
 class TestFindPropertyPriceIndex(unittest.TestCase):
     def test_find_property_price_index(self):
-        self.return_value = pd.DataFrame({
+        self.test_data = pd.DataFrame({
             'suburb': ['Bondi', 'Bondi', 'Newtown', 'Newtown'],
             'price': [1000000, 1200000, 950000, 1500000],
             'property_size': [150, 200, 120, 250],
             'suburb_median_income': [75000, 75000, 65000, 65000]
         })
         
-        result = find_property_price_index("76d3b838-5880-4320-b42f-8bd8273ab6a0")
+        result = find_property_price_index(self.df.copy())
         self.assertEqual(len(result), 2)
         self.assertIn('suburb', result.columns)
         self.assertIn('norm_affordability_index', result.columns)
         
         # Check that the affordability index is computed correctly 
         self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
-        
-        def test_find_property_price_index_empty_data(self):
-            self.return_value = pd.DataFrame(columns=['suburb', 'price', 'property_size', 'suburb_median_income'])
-            result = find_property_price_index("76d3b838-5880-4320-b42f-8bd8273ab6a0")
-            self.assertEqual(len(result), 0)  # Should return an empty DataFrame
 
