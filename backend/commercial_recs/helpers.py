@@ -1,38 +1,42 @@
 import pandas as pd
 import json
-from general_helpers import to_dataframe, fetch_data
 
-def find_commerical_recs(data_id,income_threshold=0.75, traffic_threshold=0.75, top_n=10):
+def find_commerical_recs(data,income_threshold=0.75, traffic_threshold=0.75, top_n=10):
 
     """
-    implementation of commercial_recs
+    calculates the top n recommeneded suburbs for commercial investment based on income and population density
+    
+    params:
+    - data_id (str): The identifier to fetch data.
+    - income_threshold (float): The percentile threshold for high-income suburbs.
+    - traffic_threshold (float): The percentile threshold for high-traffic suburbs.
+    - top_n (int): Number of top commercial recommendations.
+    
     """
-
-    data = json.loads(fetch_data(data_id)['body'])
-    data = to_dataframe(data['events'])
 
     data.columns = data.columns.str.strip()
 
-    required_columns = {'suburb', 'suburb_median_income', 'suburb_sqkm', 'suburb_population'}
-    if not required_columns.issubset(data.columns):
-        raise ValueError(f"Missing required columns: {required_columns - set(data.columns)}")
+    required_columns = ['suburb', 'suburb_median_income', 'suburb_sqkm', 'suburb_population']
+    if not all(col in data.columns for col in required_columns):
+        raise ValueError("Missing required columns")
 
-    # Calculate population density (people per sqkm)
+    # calculate population density (ppl per sqkm)
     data['population_density'] = data['suburb_population'] / data['suburb_sqkm']
 
-    # Compute threshold cutoffs
-    income_cutoff = data['suburb_median_income'].quantile(income_threshold)
-    traffic_cutoff = data['population_density'].quantile(traffic_threshold)
+    # calculate income and traffic cutoff
+    income_cut = data['suburb_median_income'].quantile(income_threshold)
+    traffic_cut = data['population_density'].quantile(traffic_threshold)
 
-    # Filter high-income and high-traffic suburbs
+    # filter high income and high traffic suburbs
     recommended_areas = data[
-        (data['suburb_median_income'] >= income_cutoff) &
-        (data['population_density'] >= traffic_cutoff)
+        (data['suburb_median_income'] >= income_cut) &
+        (data['population_density'] >= traffic_cut)
     ]
 
-    # Sort by income and population density, then get unique suburbs
+    # sort by income and pop density, get suburbs
     recommended_areas = recommended_areas.sort_values(
         by=['suburb_median_income', 'population_density'], ascending=[False, False]
     )[['suburb', 'suburb_median_income', 'population_density']].drop_duplicates()
 
+    # return top n recs
     return recommended_areas.head(top_n)
