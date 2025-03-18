@@ -1,5 +1,5 @@
 import json
-from helpers import top_school_area
+from helpers import suburb_price_map
 from general_helpers import to_dataframe
 
 def lambda_handler(event, context):
@@ -13,7 +13,7 @@ def lambda_handler(event, context):
     try:
         data = json.loads(event['body'])
 
-        df = to_dataframe(data)
+        df = to_dataframe(data) # convert to pandas dataframe
         
         if df.empty:
             return {

@@ -18,10 +18,11 @@ variable "lambda_functions" {
   }))
   # Auto-detected functions from backend/
   default = {
-    "investment_potential" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "upload_json" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "upload_json" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "suburb_price_map" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "investment_potential" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
   }
 }
