@@ -3,7 +3,6 @@ import json
 sys.path.append('../..')
 import unittest
 import pandas as pd
-from backend.property_affordability_index.handler import lambda_handler
 from backend.property_affordability_index.helpers import find_property_price_index
 
 # # Ensures that the affordability index is calculated correctly nased on median price,
