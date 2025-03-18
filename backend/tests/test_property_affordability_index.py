@@ -190,7 +190,7 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
             'suburb_median_income': [75000, 75000, 65000, 65000]
         })
         
-        result = find_property_price_index("test_data_id")
+        result = find_property_price_index("76d3b838-5880-4320-b42f-8bd8273ab6a0")
         self.assertEqual(len(result), 2)
         self.assertIn('suburb', result.columns)
         self.assertIn('norm_affordability_index', result.columns)
@@ -200,6 +200,6 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         
         def test_find_property_price_index_empty_data(self):
             self.return_value = pd.DataFrame(columns=['suburb', 'price', 'property_size', 'suburb_median_income'])
-            result = find_property_price_index("test_data_id")
+            result = find_property_price_index("76d3b838-5880-4320-b42f-8bd8273ab6a0")
             self.assertEqual(len(result), 0)  # Should return an empty DataFrame
 
