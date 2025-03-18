@@ -4,7 +4,7 @@ import branca
 from folium.plugins import HeatMap
 
 def suburb_price_map(df):
-    # get median price for each suburb
+    df.columns = df.columns.str.strip()
     data = df.groupby(['suburb', 'suburb_lat', 'suburb_lng'], as_index=False).agg({'price': 'median'})
     data.rename(columns={'price': 'median_price'}, inplace=True)
 
@@ -21,13 +21,13 @@ def suburb_price_map(df):
     # colouring suburbs
     for _, row in data.iterrows():
         folium.CircleMarker(
-            location=[row['suburb_lat'], row['suburb_lng']],
+            location=[row['suburb_lat'], row['suburb_lng']],  # Use latitude and longitude
             color=colormap(row['median_price']),
             fill=True,
             fill_color=colormap(row['median_price']),
             fill_opacity=0.6,
             tooltip=f"{row['suburb']}: ${row['median_price']}"
         ).add_to(sydney_map)
-    
-    return sydney_map._repr_html_()
 
+    # Return the HTML representation of the map
+    return sydney_map._repr_html_()
