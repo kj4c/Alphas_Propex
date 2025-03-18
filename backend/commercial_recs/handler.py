@@ -1,6 +1,6 @@
 import json
-from helpers import find_commerical_recs
-from general_helpers import to_dataframe
+from .helpers import find_commerical_recs
+from ..general_helpers import to_dataframe
 
 def lambda_handler(event, context):
     try:
@@ -21,7 +21,7 @@ def lambda_handler(event, context):
         
         return {
             "statusCode": 200,
-            "body": json.dumps({"recommendations": recs})
+            "body": json.dumps({"recommendations": recommendations})
         }
 
     except Exception as e:
