@@ -1,6 +1,7 @@
 import json
-from helpers import train_model
+from helpers import predict_price
 from general_helpers import to_dataframe
+from classes import PropertyType
 
 def lambda_handler(event, context):
     """
@@ -26,14 +27,28 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
         
-        avg_price = train_model(
-            df=to_dataframe(data["id"]),
-            property_type=event.get("queryStringParameters", None)
+        # Retriving path parameters
+        path_parameters = event.get("pathParameters", None)
+        if path_parameters is None:
+            raise ValueError("No path parameter found")
+        
+        # Retrieving property type from path params
+        property_type = path_parameters.get("property_type", None)
+        if property_type not in PropertyType.__members__: 
+            raise ValueError("Unrecognised property type")
+        
+        # Retrieving suburb from path params
+        suburb = path_parameters.get("suburb", None)
+
+        prediction_plot = model_prediction(
+            df=to_dataframe(data["id"]).copy(),
+            property_type=property_type,
+            suburb=suburb
         )
         
         return {
             "statusCode": 200,
-            "body": json.dumps({"avg_price": avg_price})
+            "body": json.dumps({"prediction_plot": prediction_plot})
         }
 
     except Exception as e:
