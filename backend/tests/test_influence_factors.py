@@ -1,12 +1,14 @@
 import sys
 sys.path.append('../..')
+import os
 import unittest
 import pandas as pd
 from backend.influence_factors.helpers import find_influence_factors
 
 class TestPropertyPrices(unittest.TestCase):
     def setUp(self):
-        self.df = pd.read_csv('test_data/domain_properties.csv')
+        file_path = os.path.join(os.path.dirname(__file__), 'test_data', 'domain_properties.csv')
+        self.df = pd.read_csv(file_path)
         self.df.columns = self.df.columns.str.strip()
         
     def test_house(self):
