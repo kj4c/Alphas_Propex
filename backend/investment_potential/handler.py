@@ -1,7 +1,6 @@
 import json
 from helpers import investment_potential
 from general_helpers import to_dataframe
-
 def lambda_handler(event, context):
     """
     Lambda function entry point.

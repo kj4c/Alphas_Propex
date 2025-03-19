@@ -1,10 +1,10 @@
 import sys
-sys.path.append('../..')
 import unittest
-import io
+import os
 import pandas as pd
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from backend.price_prediction.helpers import model_prediction
-
+# Add parent directory to sys.path so imports work
 class TestPricePrediction(unittest.TestCase):
     def setUp(self):
         self.df = pd.read_csv('test_data/domain_properties.csv')
