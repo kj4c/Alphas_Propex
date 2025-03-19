@@ -24,7 +24,7 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         # Check that the affordability index is computed correctly 
         self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
         
-     def test_find_property_price_index_income(self):
+    def test_find_property_price_index_income(self):
         self.test_data = pd.DataFrame({
             'suburb': ['Bondi', 'Bondi', 'Newtown', 'Newtown'],
             'price': [1000000, 1200000, 950000, 1500000],
