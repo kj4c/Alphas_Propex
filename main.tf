@@ -39,7 +39,8 @@ resource "aws_lambda_function" "multi_lambda" {
   handler       = each.value.handler
   runtime       = each.value.runtime
   role          = "arn:aws:iam::109471428046:role/LabRole"
-  timeout = 60
+  timeout       = 60
+  memory_size   = 256
 
   # makes lambda function redeploy for any changes
   source_code_hash = filebase64sha256("backend/${each.key}/lambda.zip")
