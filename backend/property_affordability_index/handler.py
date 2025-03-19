@@ -31,7 +31,11 @@ def lambda_handler(event, context):
             raise ValueError("Missing 'id' in body")
         
         data = to_dataframe(data['id'])
-        property_price_index = find_property_price_index(data).to_json(orient='records')
+        property_price_index = find_property_price_index(
+            data, 
+            filters=event.get("queryStringParameters", None)
+        ).to_json(orient='records')
+       
         return {
             "statusCode": 200,
             "body": property_price_index

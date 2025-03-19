@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 
-def find_property_price_index(data):
+def find_property_price_index(data, income):
    
     # Affordability Index = (Suburb Median Income * 100)/ (Price Per SQM)
     # where Price Per SQM = (Median Property Price/ Median Property Size)
@@ -10,6 +10,10 @@ def find_property_price_index(data):
 
     # calculate the median property price of each suburb
     median_price = data.groupby('suburb')['price'].median()
+    if income is not None:
+        median_price['price'] = income
+    
+    print(median_price.head(10))
     # calculate the median property size of each sububurb
     median_prop_size = data.groupby('suburb')['property_size'].median()
     # merging both dataframes to calculate price per sqm
