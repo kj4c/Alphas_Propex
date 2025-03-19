@@ -4,7 +4,6 @@ import unittest
 import io
 import pandas as pd
 from backend.price_prediction.helpers import model_prediction
-from backend.classes import PropertyType
 
 class TestPricePrediction(unittest.TestCase):
     def setUp(self):
@@ -12,6 +11,6 @@ class TestPricePrediction(unittest.TestCase):
         self.df["date_sold"] = pd.to_datetime(self.df["date_sold"], format='%d/%m/%y')
         
     def test_model_return(self):
-        result = model_prediction(df=self.df, property_type=PropertyType.HOUSE, suburb="North Rocks")
+        result = model_prediction(df=self.df, property_type="House", suburb="North Rocks")
 
         self.assertIsNotNone(result)

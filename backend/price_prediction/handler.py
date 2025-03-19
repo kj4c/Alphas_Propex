@@ -32,7 +32,7 @@ def lambda_handler(event, context):
         
         # Retrieving property type from path params
         property_type = data.get("property_type", None)
-        if property_type not in PropertyType.__members__: 
+        if property_type not in PropertyType:
             raise ValueError("Unrecognised property type")
         
         if "suburb" not in data:
