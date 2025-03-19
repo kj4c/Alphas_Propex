@@ -26,13 +26,11 @@ def lambda_handler(event, context):
         
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
+        
+        if "property_type" not in data:
+            raise ValueError("Missing 'property_type' in body")
 
-        path_parameters = event.get("pathParameters", None)
-
-        if path_parameters is None:
-            raise ValueError("No path parameter found")
-
-        property_type = path_parameters.get("property_type", None)
+        property_type = data.get("property_type", None)
 
         if property_type not in PropertyType.__members__: 
             raise ValueError("Unrecognised property type")
