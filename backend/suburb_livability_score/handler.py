@@ -39,14 +39,13 @@ def lambda_handler(event, context):
             raise ValueError("Missing weights")
         
         data = to_dataframe(data['id'])
-        # property_price_index = find_property_price_index(data, income).to_json(orient='records')
         
         suburb_affordability_scores = find_suburb_affordabilty_score(
             data,
             proximity_weight,
             property_size_weight,
             population_density_weight
-        )
+        ).to_json(orient='records')
        
         return {
             "statusCode": 200,
