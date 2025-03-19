@@ -1,6 +1,6 @@
 import json
-from helpers import find_commerical_recs
-from general_helpers import to_dataframe
+from .helpers import find_commerical_recs
+from ..general_helpers import to_dataframe
 
 def lambda_handler(event, context):
     try:
@@ -17,11 +17,20 @@ def lambda_handler(event, context):
         else:
             raise ValueError("Unrecognised body format.")
         
-        recommendations = find_commerical_recs(df=to_dataframe(data["id"]))
+        print("DEBUG Raw body:", body)
+        print("DEBUG Parsed data:", data)
+        print("DEBUG Type of data:", type(data))
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
+
+        data = to_dataframe(data['id'])
+        
+        recommendations = find_commerical_recs(data).to_json(orient='records')
         
         return {
             "statusCode": 200,
-            "body": json.dumps({"recommendations": recs})
+            "body": json.dumps({"recommendations": recommendations})
         }
 
     except Exception as e:
