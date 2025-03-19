@@ -1,43 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 const SuburbPriceMap = () => {
-    const [loaded, setLoaded] = useState(false)
-    const [map, setMap] = useState("")
-    const fetchData = async () => {
-        const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
-        };
-
-        const response = await axios.post(
-            "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_price_map",
-            requestBody,
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-        );
-        setLoaded(true)
-        setMap(response.data)
-    }
+    const [htmlContent, setHtmlContent] = useState("");
     useEffect(() => {
-        fetchData()
-    }, [])
-
+        const fetchHtml = async () => {
+          try {
+            const response = await fetch("../components/map.html"); // Adjust the path if necessary
+            const text = await response.text();
+            setHtmlContent(text);
+          } catch (error) {
+            console.error("Error fetching the HTML file:", error);
+          }
+        };
+    
+        fetchHtml();
+      }, []);
     return (
-        <div className="page">
-            <h1>Suburb Price Map</h1>
-            {
-                loaded ? (
-                    <div className="suburbMap">
-                        Suburb map:
-                        {map}
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )
-            }
-        </div>
+        <iframe
+          src="./map.html" // Assuming it's in the public folder
+          style={{ width: "100%", height: "60vh", border: "none" }}
+          title="HTML Content"
+        />
     )
 }
 

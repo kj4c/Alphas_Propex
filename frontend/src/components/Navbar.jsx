@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div className="nav-bar">
             <button className="nav-btn" onClick={() => navigate('/commercialrecs')}>Commercial recs</button>
-            {/* <button className="nav-btn" onClick={() => navigate('/incomeanalysis')}>Income analysis</button> */}
+            <button className="nav-btn" onClick={() => navigate('/influencefactor')}>Influence factor</button>
             <button className="nav-btn" onClick={() => navigate('/investmentpotential')}>Investment potential</button>
             <button className="nav-btn" onClick={() => navigate('/propertyprices')}>Property prices</button>
             {/* <button className="nav-btn" onClick={() => navigate('/studenthousing')}>Student housing</button> */}

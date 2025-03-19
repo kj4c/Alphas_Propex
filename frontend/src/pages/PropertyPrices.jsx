@@ -17,55 +17,41 @@ const PropertyPrices = () => {
     const [maxSize, setMaxSize] = useState(null)
     const [type, setType] = useState(null)
 
-
     const fetchPrice = async () => {
-        const filters = {};
-
-        if (minPrice !== null || maxPrice !== null) {
-            filters.price_range = {
-                min_price: minPrice,
-                max_price: maxPrice,
-            };
-        }
-
-        if (dateSoldAfter !== null || dateSoldBefore !== null) {
-            filters.date_range = {
-                date_sold_after: dateSoldAfter,
-                date_sold_before: dateSoldBefore,
-            };
-        }
-
-        if (suburb !== null) {
-            filters.suburb = suburb;
-        }
-
-        if (numBath !== null || numBed !== null || numParking !== null) {
-            filters.property_features = {
-                num_bath: numBath,
-                num_bed: numBed,
-                num_parking: numParking,
-            };
-        }
-
-        if (minSize !== null || maxSize !== null) {
-            filters.property_size = {
-                min_size: minSize,
-                max_size: maxSize,
-            };
-        }
-
-        if (type !== null) {
-            filters.property_type = type;
-        }
-        
-        
-        const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
-            ...(Object.keys(filters).length > 0 && { filters }),
+        setLoaded(false)
+        const filters = {
+          price_range: {
+            min_price: parseFloat(minPrice) || null,
+            max_price: parseFloat(maxPrice) || null,
+          },
+          date_range: {
+            date_sold_after: dateSoldAfter || null,
+            date_sold_before: dateSoldBefore || null,
+          },
+          suburb: suburb || null,
+          property_features: {
+            num_bath: parseInt(numBath) || null,
+            num_bed: parseInt(numBed) || null,
+            num_parking: parseInt(numParking) || null,
+          },
+          property_size: {
+            min_size: parseInt(minSize) || null,
+            max_size: parseInt(maxSize) || null,
+          },
+          property_type: type || null,
         };
-
-        setLoading(true)
-        const response = await axios.post(
+      
+        const requestBody = {
+          id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+          filters: filters, // Always include filters
+        };
+      
+        // Set loading state to true
+        setLoading(true);
+      
+        try {
+          // Send the POST request
+          const response = await axios.post(
             "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_prices",
             requestBody,
             {
@@ -73,12 +59,17 @@ const PropertyPrices = () => {
                 "Content-Type": "application/json",
               },
             }
-        );
-        setLoaded(true)
-        setLoading(false)
-        setPrice(response.data.avg_price)
-    }
-
+          );
+      
+          // Set the loaded state and handle response
+          setLoaded(true);
+          setLoading(false);
+          setPrice(response.data.avg_price);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setLoading(false);
+        }
+    };
     
 
     return (
@@ -166,6 +157,16 @@ const PropertyPrices = () => {
                         setMaxSize(e.target.value)
                     } else {
                         setMaxSize(null)
+                    }
+                }}/>
+            </div>
+            <div className="filter-field">
+                <p>Property type:</p>
+                <input type="text" name="min-size" placeholder="Type" onChange={e => {
+                    if (e.target.value !== "") {
+                        setType(e.target.value)
+                    } else {
+                        setType(null)
                     }
                 }}/>
             </div>
