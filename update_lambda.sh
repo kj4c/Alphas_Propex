@@ -29,7 +29,7 @@ for FUNCTION_DIR in "$BACKEND_DIR"/*; do
             echo "📦 Changes detected for $FUNCTION_NAME. Updating the zip"
             echo "📦 Zipping function: $FUNCTION_NAME..."
             cd "$FUNCTION_DIR" || exit
-            zip -r -X lambda.zip . helpers.py > /dev/null
+            zip -r -X lambda.zip handler.py helpers.py ../general_helpers.py > /dev/null
             cd - > /dev/null
             # stores the new CHECKSUM FILE
             echo "$NEW_CHECKSUM" | tee "$TEMP_CHECKSUM_FILE" > /dev/null
@@ -45,10 +45,7 @@ if [ "$CHANGED" -eq 1 ]; then
     echo "Updating variable names in variable.tf..."
     python3 update_variables.py
 
-    echo "🌍 Applying Terraform changes..."
-    terraform apply -auto-approve
-
-    echo "🎉 Deployment complete!"
+    echo "🎉 Ready for deployment! Run terraform apply only if you ready gang"
 else
     echo "🐻 No lambda functions updated, skipping terraform apply"
 fi

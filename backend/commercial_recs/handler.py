@@ -1,17 +1,32 @@
 import json
-from helpers import find_commerical_recs
+from .helpers import find_commerical_recs
+from ..general_helpers import to_dataframe
 
 def lambda_handler(event, context):
-    """
-    Lambda function entry point.
-    @event:
-    @context:
-    @return:
-    """
     try:
-        data = json.loads(event["body"])
+        body = event.get("body")
+        if not body:
+            raise ValueError("No data provided.")
+    
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognised body format.")
         
-        recommendations = find_commerical_recs(data)
+        print("DEBUG Raw body:", body)
+        print("DEBUG Parsed data:", data)
+        print("DEBUG Type of data:", type(data))
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
+
+        data = to_dataframe(data['id'])
+        
+        recommendations = find_commerical_recs(data).to_json(orient='records')
         
         return {
             "statusCode": 200,

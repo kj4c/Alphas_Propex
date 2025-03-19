@@ -1,3 +1,7 @@
+import json
+from helpers import top_school_area
+from general_helpers import to_dataframe
+
 def lambda_handler(event, context):
     """
     Lambda function entry point.
@@ -5,8 +9,41 @@ def lambda_handler(event, context):
     @context:
     @return:
     """
-    response = {
-        "statusCode": 200,
-        "body": '{"message": "Hello from Lambda this is Top school Area. 👋"}'
-    }
+
+    try:
+        body = event.get("body")
+        if not body:
+            raise ValueError("Missing 'body' in event")
+
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognized body format")
+        
+        query_params = event.get('queryStringParameters', {})
+        district = query_params.get('district')
+        school_type = query_params.get('school_type')
+
+        if not district or not school_type:
+            return {
+                "statusCode": 400,
+                "body": json.dumps({"error": "Missing 'district' or 'school_ype' query parameter."})
+            }
+
+        ret = top_school_area(df=to_dataframe(data["id"]), district=data.get("district", None), school_type=data.get("school_type", None))
+
+        response = {
+            "statusCode": 200,
+            "body": json.dumps({"top_school_area": ret})
+        }
+
+    except Exception as e:
+        response = {
+            "statusCode": 500,
+            "body": json.dumps({"error": str(e)})
+        }
     return response

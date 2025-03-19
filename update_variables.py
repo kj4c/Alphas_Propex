@@ -3,14 +3,27 @@ import os
 backend_dir = "backend"
 variables_file = "variables.tf"
 
-# Scan backend directory for new Lambda functions
 lambda_functions = {}
 for function in os.listdir(backend_dir):
     function_path = os.path.join(backend_dir, function)
-    if os.path.isdir(function_path) and os.path.exists(os.path.join(function_path, "handler.py")):
+    handler_file = os.path.join(function_path, "handler.py")
+    method_file = os.path.join(function_path, "method.txt")
+
+    if os.path.isdir(function_path) and os.path.exists(handler_file):
+        #Read HTTP method from method.txt (default to GET if missing)
+        method = "POST"
+        if os.path.exists(method_file):
+            with open(method_file, "r") as mf:
+                content = mf.read().strip().upper()
+                if content in ["GET", "POST", "PUT", "DELETE"]:
+                    method = content
+                else:
+                    print(f"⚠️  Invalid or empty method in {method_file}, defaulting to POST")
+
         lambda_functions[function] = {
             "handler": "handler.lambda_handler",
-            "runtime": "python3.9"
+            "runtime": "python3.9",
+            "method": method
         }
 
 # Generate updated variables.tf content
@@ -30,13 +43,14 @@ variable "lambda_functions" {{
   type = map(object({{
     handler  = string
     runtime  = string
+    method   = string
   }}))
   # Auto-detected functions from backend/
   default = {{
 """
 
 for func_name, config in lambda_functions.items():
-    variables_tf_content += f'    "{func_name}" = {{ handler = "{config["handler"]}", runtime = "{config["runtime"]}" }}\n'
+    variables_tf_content += f'    "{func_name}" = {{ handler = "{config["handler"]}", runtime = "{config["runtime"]}", method = "{config["method"]}" }}\n'
 
 variables_tf_content += "  }\n}"
 
@@ -44,4 +58,4 @@ variables_tf_content += "  }\n}"
 with open(variables_file, "w") as f:
     f.write(variables_tf_content)
 
-print("✅ Updated variables.tf with detected Lambda functions.")
+print("✅ Updated variables.tf with detected Lambda functions and methods.")
