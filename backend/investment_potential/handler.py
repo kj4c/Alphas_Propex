@@ -11,17 +11,20 @@ def lambda_handler(event, context):
     """
 
     try:
-        data = json.loads(event['body'])
 
-        df = to_dataframe(data) # convert to pandas dataframe
+        body = event.get('body')
+        if not body:
+            raise ValueError("Missing request body.")
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Invalid request body.")
         
-        if df.empty:
-            return {
-                "statusCode": 400,
-                "body": json.dumps({"error": "No valid data provided."})
-            }
-        
-        investment_potentials = investment_potential(df)
+        investment_potentials = investment_potential(df=to_dataframe(data["id"]))
 
         response = {
             "statusCode": 200,
