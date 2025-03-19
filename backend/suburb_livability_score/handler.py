@@ -31,9 +31,9 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
         
-        proximity_weight = data.get("proximity_weight")
-        property_size_weight = data.get("property_size_weight")
-        population_density_weight = data.get("population_density_weight")
+        proximity_weight = data.get("proximity_weight", None)
+        property_size_weight = data.get("property_size_weight", None)
+        population_density_weight = data.get("population_density_weight", None)
         
         if proximity_weight or property_size_weight or population_density_weight is None:
             raise ValueError("Missing weights")
