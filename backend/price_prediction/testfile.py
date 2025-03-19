@@ -1,7 +1,7 @@
 import json
 import sys
 import os
-from general_helpers import display_base64_image
+from backend.general_helpers import display_base64_image
 
 # Add parent directory to sys.path so imports work
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -25,5 +25,6 @@ response = lambda_handler(event, context)
 
 # Pretty print the result
 print(json.dumps(response, indent=2))
+body = json.loads(response["body"])
 
-display_base64_image(response["prediction_plot"])
+display_base64_image(body["prediction_plot"])

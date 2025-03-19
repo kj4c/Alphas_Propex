@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 # from statsmodels.tsa.statespace.sarimax import SARIMAX
 from statsmodels.tsa.arima.model import ARIMA
-from backend.general_helpers import plot_to_base64
+from general_helpers import plot_to_base64
 
 def apply_filters(df, property_type, suburb):
     filtered_df = df[(df['type'] == property_type) & (df['suburb'] == suburb)]

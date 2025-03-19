@@ -3,7 +3,8 @@ import json
 import boto3
 import io
 import base64
-import matplotlib as plt
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def to_dataframe(id):
     response = fetch_data(id)
@@ -70,16 +71,10 @@ def plot_to_base64(plot):
     return img_base64
 
 def display_base64_image(img_base64):
-    # Decode the base64 string back to binary data
     img_data = base64.b64decode(img_base64)
-
-    # Use BytesIO to read the image data
     img_buffer = io.BytesIO(img_data)
 
-    # Open the image using matplotlib
-    img = plt.imread(img_buffer, format='png')
+    img = mpimg.imread(img_buffer, format='png')
 
-    # Display the image
-    plt.imshow(img)
-    plt.axis('off')  # Hide axes
-    plt.show()
+    plt.imshow(img) 
+    plt.savefig("my_plot.png", format='png', bbox_inches='tight')
