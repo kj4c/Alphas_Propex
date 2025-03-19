@@ -3,6 +3,12 @@ import unittest
 import io
 import pandas as pd
 from backend.investment_potential.helpers import investment_potential
+from backend.investment_potential.handler import lambda_handler
+import os
+import json
+
+# Add parent directory to sys.path so imports work
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 class TestInvestmentPotential(unittest.TestCase):
     def setUp(self):
@@ -85,3 +91,20 @@ class TestInvestmentPotential(unittest.TestCase):
         self.assertEqual(len(result), len(df_tie))
         scores = result["investment_score"].values
         self.assertTrue(all(scores[i] >= scores[i + 1] for i in range(len(scores) - 1)))
+
+
+class TestLambda(unittest.TestCase):
+
+    # Simulate what AWS passes in a real event
+    event = {
+        "body": json.dumps({ "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0" }),  # 👈 this simulates what API Gateway sends
+    }
+
+    # Simulate a Lambda context object (optional if you don't use it)
+    context = {}
+
+    # Run the lambda locally
+    response = lambda_handler(event, context)
+
+    # Pretty print the result
+    print(json.dumps(response, indent=2))

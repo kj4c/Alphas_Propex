@@ -1,6 +1,6 @@
 import json
-from helpers import investment_potential
-from general_helpers import to_dataframe
+from .helpers import investment_potential
+from ..general_helpers import to_dataframe
 
 def lambda_handler(event, context):
     """
@@ -24,7 +24,16 @@ def lambda_handler(event, context):
         else:
             raise ValueError("Invalid request body.")
         
-        investment_potentials = investment_potential(df=to_dataframe(data["id"]))
+        print("DEBUG Raw body:", body)
+        print("DEBUG Parsed data:", data)
+        print("DEBUG Type of data:", type(data))
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
+
+        data = to_dataframe(data['id'])
+        
+        investment_potentials = investment_potential(data).to_json(orient='records')
 
         response = {
             "statusCode": 200,
