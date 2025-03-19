@@ -23,18 +23,22 @@ def lambda_handler(event, context):
             data = body
         else:
             raise ValueError("Unrecognized body format")
-        
-        query_params = event.get('queryStringParameters', {})
-        district = query_params.get('district')
-        school_type = query_params.get('school_type')
 
-        if not district or not school_type:
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
+        
+        # Now getting district and school_type from the body
+        district = data.get('district')
+        school_type = data.get('school_type')
+        radius = data.get('radius')
+
+        if not district or not school_type or not radius:
             return {
                 "statusCode": 400,
-                "body": json.dumps({"error": "Missing 'district' or 'school_ype' query parameter."})
+                "body": json.dumps({"error": "Missing 'district' or 'school_type' or radius in body."})
             }
 
-        ret = top_school_area(df=to_dataframe(data["id"]), district=data.get("district", None), school_type=data.get("school_type", None))
+        ret = top_school_area(df=to_dataframe(data["id"]), district=district, school_type=school_type, radius=radius)
 
         response = {
             "statusCode": 200,
