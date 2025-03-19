@@ -33,7 +33,7 @@ def lambda_handler(event, context):
         property_type = data.get("property_type", None)
 
         if property_type not in PropertyType.__members__: 
-            raise ValueError("Unrecognised property type")
+            raise ValueError(f"Unrecognised property type accepted property types: {PropertyType.__members__}")
         
         influence_factors = find_influence_factors(
             df=to_dataframe(data["id"]),
