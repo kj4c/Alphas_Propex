@@ -29,6 +29,9 @@ def lambda_handler(event, context):
 
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
+
+        if "filters" not in data:
+            raise ValueError("Missing 'filters' in body")
         
         avg_price = avg_property_price(
             df=to_dataframe(data["id"]),
