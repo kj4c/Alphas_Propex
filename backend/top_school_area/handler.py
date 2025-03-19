@@ -11,15 +11,18 @@ def lambda_handler(event, context):
     """
 
     try:
-        data = json.loads(event['body'])
+        body = event.get("body")
+        if not body:
+            raise ValueError("Missing 'body' in event")
 
-        df = to_dataframe(data)
-        
-        if df.empty:
-            return {
-                "statusCode": 400,
-                "body": json.dumps({"error": "No valid data provided."})
-            }
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognized body format")
         
         query_params = event.get('queryStringParameters', {})
         district = query_params.get('district')
@@ -31,7 +34,7 @@ def lambda_handler(event, context):
                 "body": json.dumps({"error": "Missing 'district' or 'school_ype' query parameter."})
             }
 
-        ret = top_school_area(df, district, school_type)
+        ret = top_school_area(df=to_dataframe(data["id"]), district=data.get("district", None), school_type=data.get("school_type", None))
 
         response = {
             "statusCode": 200,
