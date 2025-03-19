@@ -45,10 +45,7 @@ if [ "$CHANGED" -eq 1 ]; then
     echo "Updating variable names in variable.tf..."
     python3 update_variables.py
 
-    echo "🌍 Applying Terraform changes..."
-    terraform apply -auto-approve
-
-    echo "🎉 Deployment complete!"
+    echo "🎉 Ready for deployment! Run terraform apply only if you ready gang"
 else
     echo "🐻 No lambda functions updated, skipping terraform apply"
 fi
