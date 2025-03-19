@@ -23,6 +23,9 @@ def lambda_handler(event, context):
             data = body
         else:
             raise ValueError("Unrecognized body format")
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
         
         # Now getting district and school_type from the body
         district = data.get('district')
