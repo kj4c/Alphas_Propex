@@ -1,6 +1,6 @@
 import json
-from .helpers import find_commerical_recs
-from ..general_helpers import to_dataframe
+from helpers import find_commerical_recs
+from general_helpers import to_dataframe
 
 def lambda_handler(event, context):
     try:
