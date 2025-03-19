@@ -18,7 +18,7 @@ const InvestmentPotential = () => {
             }
         );
         setLoaded(true)
-        setInvestPotential(response.data.investment_potentials)
+        setInvestPotential(JSON.parse(response.data.investment_potentials))
     }
     useEffect(() => {
         fetchData()
@@ -30,8 +30,24 @@ const InvestmentPotential = () => {
             {
                 loaded ? (
                     <div className="investPotential">
-                        Investment potiential:
-                        {investPotential}
+                        <table className="table-auto border-collapse border border-gray-400">
+                            <thead>
+                            <tr>
+                                <th className="border border-gray-400 px-4 py-2">Suburb</th>
+                                <th className="border border-gray-400 px-4 py-2">Investment Score</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {investPotential.map((entry, index) => (
+                                <tr key={index}>
+                                <td className="border border-gray-400 px-4 py-2">{entry.suburb}</td>
+                                <td className="border border-gray-400 px-4 py-2">
+                                    {entry.investment_score.toFixed(2)}
+                                </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
                     </div>
                 ) : (
                     <p>Loading...</p>

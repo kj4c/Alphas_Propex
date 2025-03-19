@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 const TopSchoolArea = () => {
-    const [loaded, setLoaded] = useState(false)
-    const [schools, setSchools] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [schools, setSchools] = useState(null)
     const [option, setOption] = useState(0);
     const [option1, setOption1] = useState(0);
+    const [radius, setRadius] = useState(10);
     const fetchData = async () => {
+        setLoading(true)
         const requestBody = {
             id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            radius: parseInt(radius) || 10,
+            district: districts[option1],
+            school_type: schoolTypes[option]
         };
 
         const response = await axios.post(
@@ -19,12 +24,9 @@ const TopSchoolArea = () => {
               },
             }
         );
-        setLoaded(true)
-        setSchools(response.data.top_school_area)
+        setLoading(false)
+        setSchools(JSON.parse(response.data.top_school_area))
     }
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     const districts = [
         "Central Coast", 
@@ -43,6 +45,8 @@ const TopSchoolArea = () => {
         "Western NSW", 
         "Southern NSW"
     ]
+
+    const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
 
     return (
         <div className="page">
@@ -71,16 +75,50 @@ const TopSchoolArea = () => {
                     </option>
                 ))}
             </select>
+            <p>Radius(km):</p>
+            <input type="text" name="radius" placeholder="Radius" onChange={e => {
+                if (e.target.value !== "") {
+                    setRadius(e.target.value)
+                } 
+            }}/>
+            <button onClick={fetchData}>Fetch</button>
 
             {
-                loaded ? (
-                    <div className="schoolsArea">
-                        Top School Areas
-                        {schools}
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )
+                loading && <p>Loading...</p>
+            }
+
+            {
+                schools && 
+                <table className="table-auto border-collapse border border-gray-400">
+                    <thead>
+                    <tr>
+                        <th className="border border-gray-400 px-4 py-2">School</th>
+                        <th className="border border-gray-400 px-4 py-2">Number of Properties</th>
+                        <th className="border border-gray-400 px-4 py-2">Average Property Price</th>
+                        <th className="border border-gray-400 px-4 py-2">Average Suburb Median Income</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {schools.map((school, index) => (
+                        <tr key={index}>
+                        <td className="border border-gray-400 px-4 py-2">{school.school}</td>
+                        <td className="border border-gray-400 px-4 py-2">{school.num_properties}</td>
+                        <td className="border border-gray-400 px-4 py-2">
+                            {school.avg_property_price.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            })}
+                        </td>
+                        <td className="border border-gray-400 px-4 py-2">
+                            {school.avg_suburb_median_income.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            })}
+                        </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                 </table>
             }
         </div>
     )
