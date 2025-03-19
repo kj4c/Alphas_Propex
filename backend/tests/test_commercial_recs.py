@@ -1,16 +1,18 @@
 import io
+import sys
 import json
 import pandas as pd
 import unittest
 from unittest.mock import patch
-from backend.commercial_recs.helpers import find_commerical_recs
 from backend.commercial_recs.handler import lambda_handler
-import sys
+from backend.commercial_recs.helpers import find_commerical_recs
 import os
 
 # Add parent directory to sys.path so imports work
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+if ROOT_DIR not in sys.path:
+    sys.path.insert(0, ROOT_DIR)
+    
 class TestCommercialRecs(unittest.TestCase):
 
     def setUp(self):

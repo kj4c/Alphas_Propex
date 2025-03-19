@@ -1,5 +1,4 @@
 import sys
-sys.path.append('../..')
 import os
 import unittest
 import pandas as pd
