@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         property_size_weight = data.get("property_size_weight", None)
         population_density_weight = data.get("population_density_weight", None)
         
-        if proximity_weight or property_size_weight or population_density_weight is None:
+        if any(w is None for w in [proximity_weight, property_size_weight, population_density_weight]):
             raise ValueError("Missing weights")
         
         data = to_dataframe(data['id'])
