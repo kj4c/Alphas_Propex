@@ -4,15 +4,11 @@ import json
 import pandas as pd
 import unittest
 from unittest.mock import patch
-from backend.commercial_recs.handler import lambda_handler
+# from backend.commercial_recs.handler import lambda_handler
 from backend.commercial_recs.helpers import find_commerical_recs
 import os
 
-# Add parent directory to sys.path so imports work
-ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
-if ROOT_DIR not in sys.path:
-    sys.path.insert(0, ROOT_DIR)
-    
+
 class TestCommercialRecs(unittest.TestCase):
 
     def setUp(self):
@@ -111,21 +107,21 @@ class TestCommercialRecs(unittest.TestCase):
         
         self.assertEqual(str(e.exception), "Missing required columns")
 
-class TestLambda(unittest.TestCase):
+# class TestLambda(unittest.TestCase):
 
-    # Simulate what AWS passes in a real event
-    event = {
-        "body": json.dumps({ "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0" }),  # 👈 this simulates what API Gateway sends
-    }
+#     # Simulate what AWS passes in a real event
+#     event = {
+#         "body": json.dumps({ "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0" }),  # 👈 this simulates what API Gateway sends
+#     }
 
-    # Simulate a Lambda context object (optional if you don't use it)
-    context = {}
+#     # Simulate a Lambda context object (optional if you don't use it)
+#     context = {}
 
-    # Run the lambda locally
-    response = lambda_handler(event, context)
+#     # Run the lambda locally
+#     response = lambda_handler(event, context)
 
-    # Pretty print the result
-    print(json.dumps(response, indent=2))
+#     # Pretty print the result
+#     print(json.dumps(response, indent=2))
 
 
 if __name__ == "__main__":
