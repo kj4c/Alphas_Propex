@@ -19,6 +19,7 @@ variable "lambda_functions" {
   # Auto-detected functions from backend/
   default = {
     "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "suburb_livability_score" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "upload_json" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "student_housing" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "commercial_recs" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
