@@ -11,17 +11,20 @@ def lambda_handler(event, context):
     """
 
     try:
-        data = json.loads(event['body'])
+        body = event.get("body")
+        if not body:
+            raise ValueError("Missing 'body' in event")
 
-        df = to_dataframe(data) # convert to pandas dataframe
+        if isinstance(body, str):
+            data = json.loads(body)
+            if isinstance(data, str):
+                data = json.loads(data)
+        elif isinstance(body, dict):
+            data = body
+        else:
+            raise ValueError("Unrecognized body format")
         
-        if df.empty:
-            return {
-                "statusCode": 400,
-                "body": json.dumps({"error": "No valid data provided."})
-            }
-        
-        ret = suburb_price_map(df)
+        ret = suburb_price_map(df=to_dataframe(data["id"]))
 
         response = {
             "statusCode": 200,
