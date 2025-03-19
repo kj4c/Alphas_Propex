@@ -1,5 +1,5 @@
 import json
-from helpers import predict_price
+from helpers import model_prediction
 from general_helpers import to_dataframe
 from classes import PropertyType
 
@@ -27,18 +27,19 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
         
-        # Retriving path parameters
-        path_parameters = event.get("pathParameters", None)
-        if path_parameters is None:
-            raise ValueError("No path parameter found")
+        if "property_type" not in data:
+            raise ValueError("Missing 'property_type' in body")
         
         # Retrieving property type from path params
-        property_type = path_parameters.get("property_type", None)
+        property_type = data.get("property_type", None)
         if property_type not in PropertyType.__members__: 
             raise ValueError("Unrecognised property type")
         
+        if "suburb" not in data:
+            raise ValueError("Missing 'suburb' in body")
+        
         # Retrieving suburb from path params
-        suburb = path_parameters.get("suburb", None)
+        suburb = data.get("suburb", None)
 
         prediction_plot = model_prediction(
             df=to_dataframe(data["id"]).copy(),
