@@ -1,5 +1,5 @@
 import pandas as pd
-import json
+
 
 def find_property_price_index(data, income):
    
@@ -8,12 +8,12 @@ def find_property_price_index(data, income):
 
     # We calculated the price affordability index by fisrt considering the price per square meter
 
-    # calculate the median property price of each suburb
+    # calculate the median property price of each suburb 
     median_price = data.groupby('suburb')['price'].median()
+    # if income is provided, then result is based on provided income and not on suburb median income
     if income is not None:
-        median_price['price'] = income
-    
-    print(median_price.head(10))
+        median_price = median_price.transform(lambda x: income)
+        
     # calculate the median property size of each sububurb
     median_prop_size = data.groupby('suburb')['property_size'].median()
     # merging both dataframes to calculate price per sqm
