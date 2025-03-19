@@ -60,6 +60,12 @@ resource "aws_lambda_function" "multi_lambda" {
 resource "aws_apigatewayv2_api" "api" {
   name          = "alpha_api"
   protocol_type = "HTTP"
+
+  cors_configuration {
+    allow_headers = ["*"]
+    allow_methods = ["GET", "POST", "DELETE", "PUT", "OPTIONS"]
+    allow_origins = ["*"]
+  }
 }
 
 resource "aws_apigatewayv2_integration" "lambda_integration" {
