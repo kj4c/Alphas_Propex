@@ -7,3 +7,5 @@ six==1.17.0
 urllib3==1.26.6
 pandas
 folium
+scikit-learn
+matplotlib

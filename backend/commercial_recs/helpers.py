@@ -1,6 +1,3 @@
-import pandas as pd
-import json
-
 def find_commerical_recs(data,income_threshold=0.75, traffic_threshold=0.75, top_n=10):
 
     """
