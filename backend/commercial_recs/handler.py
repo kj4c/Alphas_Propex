@@ -17,7 +17,16 @@ def lambda_handler(event, context):
         else:
             raise ValueError("Unrecognised body format.")
         
-        recommendations = find_commerical_recs(df=to_dataframe(data["id"]))
+        print("DEBUG Raw body:", body)
+        print("DEBUG Parsed data:", data)
+        print("DEBUG Type of data:", type(data))
+
+        if "id" not in data:
+            raise ValueError("Missing 'id' in body")
+
+        data = to_dataframe(data['id'])
+        
+        recommendations = find_commerical_recs(data).to_json(orient='records')
         
         return {
             "statusCode": 200,

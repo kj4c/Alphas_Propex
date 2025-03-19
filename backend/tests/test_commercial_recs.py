@@ -1,9 +1,18 @@
 import io
+import json
 import pandas as pd
 import unittest
+from unittest.mock import patch
 from backend.commercial_recs.helpers import find_commerical_recs
+from backend.commercial_recs.handler import lambda_handler
+import sys
+import os
+
+# Add parent directory to sys.path so imports work
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 class TestCommercialRecs(unittest.TestCase):
+
     def setUp(self):
 
         # datafram for testing commericial reccomendations
@@ -22,6 +31,8 @@ class TestCommercialRecs(unittest.TestCase):
         """
 
         self.df = pd.read_csv(io.StringIO(self.test_data))
+
+    
     
     def test_basic_functionality(self):
 
@@ -98,6 +109,23 @@ class TestCommercialRecs(unittest.TestCase):
         
         self.assertEqual(str(e.exception), "Missing required columns")
 
+class TestLambda(unittest.TestCase):
+
+    # Simulate what AWS passes in a real event
+    event = {
+        "body": json.dumps({ "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0" }),  # 👈 this simulates what API Gateway sends
+    }
+
+    # Simulate a Lambda context object (optional if you don't use it)
+    context = {}
+
+    # Run the lambda locally
+    response = lambda_handler(event, context)
+
+    # Pretty print the result
+    print(json.dumps(response, indent=2))
+
 
 if __name__ == "__main__":
     unittest.main()
+
