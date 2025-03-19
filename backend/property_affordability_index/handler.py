@@ -30,8 +30,8 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
         
+        income = data.get("income", None)
         data = to_dataframe(data['id'])
-        income = body.get("income")
         property_price_index = find_property_price_index(data, income).to_json(orient='records')
        
         return {

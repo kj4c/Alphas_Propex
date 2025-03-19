@@ -11,17 +11,17 @@ def find_property_price_index(data, income):
     # if income is provided, then result is based on provided income and not on suburb median income
     if income is not None:
         median_price = median_price.transform(lambda x: income)
-
+        
     # calculate the median property size of each sububurb
     median_prop_size = data.groupby('suburb')['property_size'].median()
     # merging both dataframes to calculate price per sqm
     res = pd.merge(median_price, median_prop_size, on='suburb')
     res['price_per_sqm'] = res['price'] / res['property_size']
-
+    
     # calculate median income
     median_income = data[['suburb', 'suburb_median_income']].groupby('suburb')['suburb_median_income'].first()
     res = pd.merge(res, median_income, on='suburb')
-
+    
     # calculating raw affordability index
     res['affordability_index'] = (res['suburb_median_income'] * 100) / res['price_per_sqm']
 
