@@ -2,7 +2,7 @@ import pandas as pd
 import math
 import os
 
-def top_school_area(df, type, district, radius):
+def top_school_area(df, school_type, district, radius):
     districts = [
         "Central Coast", 
         "Hunter New England", 
@@ -21,7 +21,7 @@ def top_school_area(df, type, district, radius):
         "Southern NSW"
     ]
 
-    if type != "Primary School" and type != "Secondary School" and type != "Infants School":
+    if school_type != "Primary School" and school_type != "Secondary School" and school_type != "Infants School":
         raise ValueError("Invalid school type")
     if district not in districts:
         raise ValueError("Invalid district")
@@ -32,7 +32,7 @@ def top_school_area(df, type, district, radius):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     csv_path = os.path.join(current_dir, 'schools.csv')
     s = pd.read_csv(csv_path)
-    schools = s.loc[(s['Level_of_schooling'] == type) & (s["Local_health_district"] == district), ['School_name', 'Latitude', 'Longitude', 'Local_health_district', 'Selective_school']]
+    schools = s.loc[(s['Level_of_schooling'] == school_type) & (s["Local_health_district"] == district), ['School_name', 'Latitude', 'Longitude', 'Local_health_district', 'Selective_school']]
 
     #check if the 2 locations are within radius
     def in_range(lat1, lon1, lat2, lon2, radius):
