@@ -1,6 +1,7 @@
 import json
 import sys
 import os
+from general_helpers import display_base64_image
 
 # Add parent directory to sys.path so imports work
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -11,7 +12,7 @@ from handler import lambda_handler  # <-- replace with your real filename (no .p
 event = {
     "body": json.dumps({
         "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0",
-        "property_type": "HOUSE",
+        "property_type": "House",
         "suburb": "North Rocks"
     }),  # 👈 this simulates what API Gateway sends
 }
@@ -24,3 +25,5 @@ response = lambda_handler(event, context)
 
 # Pretty print the result
 print(json.dumps(response, indent=2))
+
+display_base64_image(response["prediction_plot"])
