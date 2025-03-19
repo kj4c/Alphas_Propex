@@ -24,5 +24,7 @@ variable "lambda_functions" {
     "top_school_area" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "investment_potential" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "property_affordability_index" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "suburb_price_map" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "investment_potential" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
   }
 }
