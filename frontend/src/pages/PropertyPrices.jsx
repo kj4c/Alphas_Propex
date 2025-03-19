@@ -74,7 +74,7 @@ const PropertyPrices = () => {
 
     return (
         <div className="page">
-            <h1>Property Prices</h1>
+            <h1>Average Property Prices</h1>
             <div className="filter-field">
                 <p>Price range:</p>
                 <input type="text" name="min-price" placeholder="Min price" onChange={e => {
@@ -177,7 +177,7 @@ const PropertyPrices = () => {
             {
                 loaded && 
                 <div className="avg-price"> 
-                    Average price: {price}
+                    <h2> Average price: {price}</h2>
                 </div>
             }
         </div>

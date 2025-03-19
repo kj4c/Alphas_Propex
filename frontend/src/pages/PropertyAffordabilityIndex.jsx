@@ -23,7 +23,6 @@ const PropertyAffordabilityIndex = () => {
               },
             }
         );
-        console.log(response)
         setLoading(false)
         setRet(response.data)
     }

@@ -50,7 +50,7 @@ const TopSchoolArea = () => {
 
     return (
         <div className="page">
-            <h1>TopSchoolArea</h1>
+            <h1>Properties near schools</h1>
             <select
                 id="type-dropdown"
                 value={option}
@@ -95,7 +95,6 @@ const TopSchoolArea = () => {
                         <th className="border border-gray-400 px-4 py-2">School</th>
                         <th className="border border-gray-400 px-4 py-2">Number of Properties</th>
                         <th className="border border-gray-400 px-4 py-2">Average Property Price</th>
-                        <th className="border border-gray-400 px-4 py-2">Average Suburb Median Income</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,12 +104,6 @@ const TopSchoolArea = () => {
                         <td className="border border-gray-400 px-4 py-2">{school.num_properties}</td>
                         <td className="border border-gray-400 px-4 py-2">
                             {school.avg_property_price.toLocaleString("en-US", {
-                            style: "currency",
-                            currency: "USD",
-                            })}
-                        </td>
-                        <td className="border border-gray-400 px-4 py-2">
-                            {school.avg_suburb_median_income.toLocaleString("en-US", {
                             style: "currency",
                             currency: "USD",
                             })}
