@@ -6,7 +6,7 @@ import CommercialRecs from './pages/CommercialRecs';
 import InfluenceFactor from './pages/InfluenceFactor';
 import InvestmentPotential from './pages/InvestmentPotential';
 import PropertyPrices from './pages/PropertyPrices';
-import StudentHousing from './pages/StudentHousing';
+import PropertyAffordabilityIndex from './pages/PropertyAffordabilityIndex';
 import SuburbPriceMap from './pages/SuburbPriceMap';
 import TopSchoolArea from './pages/TopSchoolArea';
 import UploadJson from './pages/UploadJson';
@@ -21,7 +21,7 @@ function App() {
         <Route path="/influencefactor" element={<InfluenceFactor />} />
         <Route path="/investmentpotential" element={<InvestmentPotential />} />
         <Route path="/propertyprices" element={<PropertyPrices />} />
-        <Route path="/studenthousing" element={<StudentHousing />} />
+        <Route path="/propertyaffordabilityindex" element={<PropertyAffordabilityIndex />} />
         <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
         <Route path="/topschoolarea" element={<TopSchoolArea />} />
         <Route path="/uploadjson" element={<UploadJson />} />
