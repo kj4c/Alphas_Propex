@@ -13,6 +13,10 @@ for FUNCTION_DIR in "$BACKEND_DIR"/*; do
             continue
         fi
 
+        if [ "$FUNCTION_NAME" = "price_prediction" ]; then
+            continue
+        fi
+
         ZIP_FILE="$FUNCTION_DIR/lambda.zip"
         TEMP_CHECKSUM_FILE="$FUNCTION_DIR/.checksum"
 

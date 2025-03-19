@@ -1,9 +1,6 @@
 import pandas as pd
 import json
 import boto3
-import io
-import base64
-import matplotlib as plt
 
 def to_dataframe(id):
     response = fetch_data(id)
@@ -57,29 +54,3 @@ def fetch_data(id):
             "statusCode": 500,
             "body": {"error": str(e)}
         }
-
-def plot_to_base64(plot):
-    # Save the plot to a BytesIO object
-    img_buffer = io.BytesIO()
-    plot.savefig(img_buffer, format='png')
-    img_buffer.seek(0)
-
-    # Convert the image to a base64 string
-    img_base64 = base64.b64encode(img_buffer.getvalue()).decode('utf-8')
-
-    return img_base64
-
-def display_base64_image(img_base64):
-    # Decode the base64 string back to binary data
-    img_data = base64.b64decode(img_base64)
-
-    # Use BytesIO to read the image data
-    img_buffer = io.BytesIO(img_data)
-
-    # Open the image using matplotlib
-    img = plt.imread(img_buffer, format='png')
-
-    # Display the image
-    plt.imshow(img)
-    plt.axis('off')  # Hide axes
-    plt.show()

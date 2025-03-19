@@ -50,6 +50,7 @@ variable "lambda_functions" {{
 """
 
 for func_name, config in lambda_functions.items():
+    if (func_name == "price_prediction"): continue
     variables_tf_content += f'    "{func_name}" = {{ handler = "{config["handler"]}", runtime = "{config["runtime"]}", method = "{config["method"]}" }}\n'
 
 variables_tf_content += "  }\n}"
