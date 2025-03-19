@@ -32,7 +32,7 @@ def lambda_handler(event, context):
         
         avg_price = avg_property_price(
             df=to_dataframe(data["id"]),
-            filters=event.get("queryStringParameters", None)
+            filters=data.get("filters", None)
         )
         
         return {
