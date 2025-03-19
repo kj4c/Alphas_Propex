@@ -10,6 +10,7 @@ const Navbar = () => {
             <button className="nav-btn" onClick={() => navigate('/propertyprices')}>Property prices</button>
             <button className="nav-btn" onClick={() => navigate('/propertyaffordabilityindex')}>Property affordability index</button>
             <button className="nav-btn" onClick={() => navigate('/suburbpricemap')}>Suburb price map</button>
+            <button className="nav-btn" onClick={() => navigate('/suburblivability')}>Suburb livability</button>
             <button className="nav-btn" onClick={() => navigate('/topschoolarea')}>Top school area</button>
             <button className="nav-btn" onClick={() => navigate('/uploadjson')}>Upload JSON</button>
         </div>

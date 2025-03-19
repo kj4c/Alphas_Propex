@@ -10,6 +10,7 @@ import PropertyAffordabilityIndex from './pages/PropertyAffordabilityIndex';
 import SuburbPriceMap from './pages/SuburbPriceMap';
 import TopSchoolArea from './pages/TopSchoolArea';
 import UploadJson from './pages/UploadJson';
+import SuburbLivability from './pages/SuburbLivability';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
         <Route path="/topschoolarea" element={<TopSchoolArea />} />
         <Route path="/uploadjson" element={<UploadJson />} />
+        <Route path="/suburblivability" element={<SuburbLivability />} />
 
       </Routes>
     </BrowserRouter>
