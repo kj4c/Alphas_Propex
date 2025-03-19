@@ -38,7 +38,8 @@ def lambda_handler(event, context):
                 "body": json.dumps({"error": "Missing 'district' or 'school_type' or radius in body."})
             }
 
-        ret = top_school_area(df=to_dataframe(data["id"]), district=district, school_type=school_type, radius=radius)
+        data = to_dataframe(data['id'])
+        ret = top_school_area(df=data, district=district, school_type=school_type, radius=radius).to_json(orient='records')
 
         response = {
             "statusCode": 200,
