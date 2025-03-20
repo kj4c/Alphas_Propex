@@ -34,21 +34,13 @@ const TopSchoolArea = () => {
     }
 
     const districts = [
-        "Central Coast", 
-        "Hunter New England", 
-        "Illawarra Shoalhaven", 
-        "Mid North Coast", 
-        "Murrumbidgee", 
-        "Northern NSW", 
+        "Central Coast",
         "Northern Sydney", 
         "South Eastern Sydney", 
         "South Western Sydney", 
         "Sydney", 
         "Western Sydney", 
-        "Nepean Blue Mountains", 
-        "Far West", 
-        "Western NSW", 
-        "Southern NSW"
+        "Nepean Blue Mountains"
     ]
 
     const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
