@@ -24,10 +24,13 @@ docker run -it --rm alphas-esg-backend
 ```
 
 ---
+## AWS BACKEND DEPLOYED ENDPOINT
+All endpoints should have **`https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/`** followed by the route name listed in the swagger document.
 
 ## 📤 Uploading Your Data
 
-You can upload your data using our `/upload_data` endpoint.  
+
+You can upload your data using our `/upload_data` endpoint (use frontend for ease).  
 Attach your JSON file during the request, and you'll receive a **dataset ID** in response.
 
 ## 📤 Uploading Data
