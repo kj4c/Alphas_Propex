@@ -31,11 +31,19 @@ def investment_potential(data):
         print("Missing required columns")
         return pd.DataFrame()
     
+    # group by suburb and calculate the mean for each component
+    data_grouped = data.groupby('suburb').agg({
+        'price': 'mean',  # calculate the average price for each suburb
+        'property_inflation_index': 'mean',  # calculate the average property inflation index for each suburb
+        'suburb_median_income': 'mean',  # calculate the average median income for each suburb
+        'km_from_cbd': 'mean'  # calculate the average km from CBD for each suburb
+    }).reset_index()
+    
     # calc raw values first
-    price_growth = data['property_inflation_index']
-    rental_yield = (data['suburb_median_income'] * 0.3 * 12) / data['price'] * 100
-    location_demand = 1 / (data['km_from_cbd'] + 1) * 100
-    affordability = data['suburb_median_income'] / data['price'] * 100
+    price_growth = data_grouped['property_inflation_index']
+    rental_yield = (data_grouped['suburb_median_income'] * 0.3 * 12) / data_grouped['price'] * 100
+    location_demand = 1 / (data_grouped['km_from_cbd'] + 1) * 100
+    affordability = data_grouped['suburb_median_income'] / data_grouped['price'] * 100
 
     # normalize each component to 0-100 
     price_growth_norm = normalize_to_100(price_growth)
