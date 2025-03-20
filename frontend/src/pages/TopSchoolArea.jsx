@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 const TopSchoolArea = () => {
-    const [loaded, setLoaded] = useState(false)
-    const [schools, setSchools] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [schools, setSchools] = useState(null)
     const [option, setOption] = useState(0);
     const [option1, setOption1] = useState(0);
+    const [radius, setRadius] = useState(10);
+    const [id, setId] = useState(null)
     const fetchData = async () => {
+        if (id == null) {
+            alert("missing id")
+            return 
+        }
+        setLoading(true)
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            id: id,
+            radius: parseInt(radius) || 10,
+            district: districts[option1],
+            school_type: schoolTypes[option]
         };
 
         const response = await axios.post(
@@ -19,12 +29,9 @@ const TopSchoolArea = () => {
               },
             }
         );
-        setLoaded(true)
-        setSchools(response.data.top_school_area)
+        setLoading(false)
+        setSchools(JSON.parse(response.data.top_school_area))
     }
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     const districts = [
         "Central Coast", 
@@ -44,9 +51,21 @@ const TopSchoolArea = () => {
         "Southern NSW"
     ]
 
+    const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
+
     return (
         <div className="page">
-            <h1>TopSchoolArea</h1>
+            <h1>Properties near schools
+            </h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
+            <p>School level:</p>
             <select
                 id="type-dropdown"
                 value={option}
@@ -58,6 +77,7 @@ const TopSchoolArea = () => {
                 <option value="1">Primary School</option>
                 <option value="2">Infant School</option>
             </select>
+            <p>District:</p>
             <select
                 id="district-dropdown"
                 value={option1}
@@ -71,16 +91,43 @@ const TopSchoolArea = () => {
                     </option>
                 ))}
             </select>
+            <p>Radius(km):</p>
+            <input type="text" name="radius" placeholder="Radius" onChange={e => {
+                if (e.target.value !== "") {
+                    setRadius(e.target.value)
+                } 
+            }}/>
+            <button onClick={fetchData}>Fetch</button>
 
             {
-                loaded ? (
-                    <div className="schoolsArea">
-                        Top School Areas
-                        {schools}
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )
+                loading && <p>Loading...</p>
+            }
+
+            {
+                schools && 
+                <table>
+                    <thead>
+                    <tr>
+                        <th>School</th>
+                        <th>Number of Properties</th>
+                        <th>Average Property Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {schools.map((school, index) => (
+                        <tr key={index}>
+                        <td>{school.school}</td>
+                        <td>{school.num_properties}</td>
+                        <td>
+                            {school.avg_property_price.toLocaleString("en-US", {
+                            style: "currency",
+                            currency: "USD",
+                            })}
+                        </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                 </table>
             }
         </div>
     )

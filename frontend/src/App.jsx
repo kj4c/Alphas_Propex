@@ -3,13 +3,14 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom'
 import Landing from './pages/Landing';
 import Navbar from './components/Navbar';
 import CommercialRecs from './pages/CommercialRecs';
-import IncomeAnalysis from './pages/IncomeAnalysis';
+import InfluenceFactor from './pages/InfluenceFactor';
 import InvestmentPotential from './pages/InvestmentPotential';
 import PropertyPrices from './pages/PropertyPrices';
-import StudentHousing from './pages/StudentHousing';
+import PropertyAffordabilityIndex from './pages/PropertyAffordabilityIndex';
 import SuburbPriceMap from './pages/SuburbPriceMap';
 import TopSchoolArea from './pages/TopSchoolArea';
 import UploadJson from './pages/UploadJson';
+import SuburbLivability from './pages/SuburbLivability';
 
 function App() {
   return (
@@ -18,13 +19,14 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/commercialrecs" element={<CommercialRecs />} />
-        <Route path="/incomeanalysis" element={<IncomeAnalysis />} />
+        <Route path="/influencefactor" element={<InfluenceFactor />} />
         <Route path="/investmentpotential" element={<InvestmentPotential />} />
         <Route path="/propertyprices" element={<PropertyPrices />} />
-        <Route path="/studenthousing" element={<StudentHousing />} />
+        <Route path="/propertyaffordabilityindex" element={<PropertyAffordabilityIndex />} />
         <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
         <Route path="/topschoolarea" element={<TopSchoolArea />} />
         <Route path="/uploadjson" element={<UploadJson />} />
+        <Route path="/suburblivability" element={<SuburbLivability />} />
 
       </Routes>
     </BrowserRouter>

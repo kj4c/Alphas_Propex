@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 const PropertyPrices = () => {
-    const[loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [loaded, setLoaded] = useState(false)
     const [price, setPrice] = useState("")
+    const [id, setId] = useState(null)
 
     const [minPrice, setMinPrice] = useState(null)
     const [maxPrice, setMaxPrice] = useState(null)
@@ -17,55 +18,43 @@ const PropertyPrices = () => {
     const [maxSize, setMaxSize] = useState(null)
     const [type, setType] = useState(null)
 
-
     const fetchPrice = async () => {
-        const filters = {};
-
-        if (minPrice !== null || maxPrice !== null) {
-            filters.price_range = {
-                min_price: minPrice,
-                max_price: maxPrice,
-            };
+        if (id == null){
+            alert("missing id")
+            return
         }
-
-        if (dateSoldAfter !== null || dateSoldBefore !== null) {
-            filters.date_range = {
-                date_sold_after: dateSoldAfter,
-                date_sold_before: dateSoldBefore,
-            };
-        }
-
-        if (suburb !== null) {
-            filters.suburb = suburb;
-        }
-
-        if (numBath !== null || numBed !== null || numParking !== null) {
-            filters.property_features = {
-                num_bath: numBath,
-                num_bed: numBed,
-                num_parking: numParking,
-            };
-        }
-
-        if (minSize !== null || maxSize !== null) {
-            filters.property_size = {
-                min_size: minSize,
-                max_size: maxSize,
-            };
-        }
-
-        if (type !== null) {
-            filters.property_type = type;
-        }
-        
-        
+        setLoaded(false)
+        const filters = {
+          price_range: {
+            min_price: parseFloat(minPrice) || null,
+            max_price: parseFloat(maxPrice) || null,
+          },
+          date_range: {
+            date_sold_after: dateSoldAfter || null,
+            date_sold_before: dateSoldBefore || null,
+          },
+          suburb: suburb || null,
+          property_features: {
+            num_bath: parseInt(numBath) || null,
+            num_bed: parseInt(numBed) || null,
+            num_parking: parseInt(numParking) || null,
+          },
+          property_size: {
+            min_size: parseInt(minSize) || null,
+            max_size: parseInt(maxSize) || null,
+          },
+          property_type: type || null,
+        };
+      
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
-            ...(Object.keys(filters).length > 0 && { filters }),
+          id: id,
+          filters: filters,
         };
 
-        setLoading(true)
-        const response = await axios.post(
+        setLoading(true);
+      
+        try {
+          const response = await axios.post(
             "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_prices",
             requestBody,
             {
@@ -73,17 +62,29 @@ const PropertyPrices = () => {
                 "Content-Type": "application/json",
               },
             }
-        );
-        setLoaded(true)
-        setLoading(false)
-        setPrice(response.data.avg_price)
-    }
+          );
 
+          setLoaded(true);
+          setLoading(false);
+          setPrice(response.data.avg_price);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setLoading(false);
+        }
+    };
     
 
     return (
         <div className="page">
-            <h1>Property Prices</h1>
+            <h1>Average Property Prices</h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
             <div className="filter-field">
                 <p>Price range:</p>
                 <input type="text" name="min-price" placeholder="Min price" onChange={e => {
@@ -169,6 +170,16 @@ const PropertyPrices = () => {
                     }
                 }}/>
             </div>
+            <div className="filter-field">
+                <p>Property type:</p>
+                <input type="text" name="min-size" placeholder="Type" onChange={e => {
+                    if (e.target.value !== "") {
+                        setType(e.target.value)
+                    } else {
+                        setType(null)
+                    }
+                }}/>
+            </div>
             <button onClick={fetchPrice}>Search</button>
             {
                 loading && <div className="loading">loading...</div>
@@ -176,7 +187,7 @@ const PropertyPrices = () => {
             {
                 loaded && 
                 <div className="avg-price"> 
-                    Average price: {price}
+                    <h2> Average price: {price}</h2>
                 </div>
             }
         </div>
