@@ -50,7 +50,8 @@ const TopSchoolArea = () => {
 
     return (
         <div className="page">
-            <h1>Properties near schools</h1>
+            <h1>Properties near schools
+            </h1>
             <select
                 id="type-dropdown"
                 value={option}
