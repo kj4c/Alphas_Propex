@@ -4,21 +4,13 @@ import os
 
 def top_school_area(df, school_type, district, radius):
     districts = [
-        "Central Coast", 
-        "Hunter New England", 
-        "Illawarra Shoalhaven", 
-        "Mid North Coast", 
-        "Murrumbidgee", 
-        "Northern NSW", 
+        "Central Coast",
         "Northern Sydney", 
         "South Eastern Sydney", 
         "South Western Sydney", 
         "Sydney", 
         "Western Sydney", 
-        "Nepean Blue Mountains", 
-        "Far West", 
-        "Western NSW", 
-        "Southern NSW"
+        "Nepean Blue Mountains"
     ]
 
     if school_type != "Primary School" and school_type != "Secondary School" and school_type != "Infants School":
