@@ -1,12 +1,8 @@
 import io
-import sys
-import json
 import pandas as pd
 import unittest
-from unittest.mock import patch
 # from backend.commercial_recs.handler import lambda_handler
 from backend.commercial_recs.helpers import find_commerical_recs
-import os
 
 
 class TestCommercialRecs(unittest.TestCase):

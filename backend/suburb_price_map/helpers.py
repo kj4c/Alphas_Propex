@@ -1,7 +1,5 @@
-import pandas as pd
 import folium
 import branca
-from folium.plugins import HeatMap
 
 def suburb_price_map(df):
     df.columns = df.columns.str.strip()

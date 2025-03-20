@@ -2,7 +2,6 @@ import sys
 sys.path.append('../..')
 import os
 import unittest
-import io
 import pandas as pd
 from backend.suburb_price_map.helpers import suburb_price_map
 
