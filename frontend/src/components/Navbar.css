@@ -1,0 +1,30 @@
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #282c34;
+    padding: 10px 20px;
+    gap: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn {
+    background-color: #61dafb;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+    background-color: #21a1f1;
+    transform: scale(1.05);
+}
+
+.nav-btn:active {
+    background-color: #1b87d1;
+    transform: scale(0.95);
+}

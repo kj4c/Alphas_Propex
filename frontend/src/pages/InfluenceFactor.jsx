@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 const InfluenceFactor = () => {
-    const [loaded, setLoaded] = useState(false)
-    const [factor, setFactor] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [factor, setFactor] = useState(null)
+    const [id, setId] = useState(null)
     const fetchData = async () => {
-        setLoaded(false)
+        if (id === null) {
+            alert("missing id")
+            return
+        }
+        setLoading(false)
         const requestBody = {
             id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
         };
@@ -18,25 +23,28 @@ const InfluenceFactor = () => {
               },
             }
         );
-        setLoaded(true)
+        setLoading(true)
         setFactor(JSON.parse(response.data.recommendations))
     }
 
-    useEffect(() => {
-        fetchData()
-    }, [])
     return (
         <div className="page">
+            <h1>Commercial Recommendations</h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
+            <button onClick={fetchData}>Submit</button>
             <h1>Influence Factor</h1>
             {
-                loaded ? (
-                    <div className="investPotential">
-                        Investment potiential:
-                        {factor}
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )
+                loading && <p>Loading...</p>
+            }
+            {
+                factor !== null && {factor}
             }
         </div>
     )

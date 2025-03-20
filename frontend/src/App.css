@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.page {
+  padding: 2vh 2vw;
+}
+
+button {
+  margin: 5px 0;
+  display: block;
+  background-color: #61dafb;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}

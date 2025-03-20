@@ -5,12 +5,17 @@ const PropertyAffordabilityIndex = () => {
     const [fetched, setFetched] = useState(false)
     const [income, setIncome] = useState("32292")
     const [ret, setRet] = useState(null)
+    const [id, setId] = useState(null)
 
     const fetchData = async () => {
+        if (id == null) {
+          alert("missing id")
+          return
+        }
         setLoading(true)
         setFetched(true)
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            id: id,
             income: parseInt(income)
         };
 
@@ -33,6 +38,14 @@ const PropertyAffordabilityIndex = () => {
             {loading && <p>Loading...</p>}
             {
                 !fetched && <>
+                    <p>Id:</p>
+                    <input type="text" name="id" placeholder="Id" onChange={e => {
+                        if (e.target.value !== "") {
+                            setId(e.target.value)
+                        } else {
+                            setId(null)
+                        }
+                    }}/>
                     <p>Income:</p>
                     <input type="text" name="income" placeholder="Income" onChange={e => {
                         if (e.target.value !== "") {
@@ -45,18 +58,18 @@ const PropertyAffordabilityIndex = () => {
             {
                ret !== null && (
                 <div className="ret">
-                  <table className="table-auto w-full border-collapse">
+                  <table>
                     <thead>
                       <tr>
-                        <th className="border px-4 py-2">Suburb</th>
-                        <th className="border px-4 py-2">Normalized Affordability Index</th>
+                        <th>Suburb</th>
+                        <th>Normalized Affordability Index</th>
                       </tr>
                     </thead>
                     <tbody>
                       {ret.map((recommendation, index) => (
                         <tr key={index}>
-                          <td className="border px-4 py-2">{recommendation.suburb}</td>
-                          <td className="border px-4 py-2">{recommendation.norm_affordability_index}</td>
+                          <td>{recommendation.suburb}</td>
+                          <td>{recommendation.norm_affordability_index}</td>
                         </tr>
                       ))}
                     </tbody>

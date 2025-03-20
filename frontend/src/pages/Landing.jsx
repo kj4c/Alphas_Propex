@@ -1,7 +1,7 @@
 const Landing = () => {
     return (
         <div className="page">
-            Propex
+            <h1>Welcome to Propex :D</h1>
         </div>
     )
 }

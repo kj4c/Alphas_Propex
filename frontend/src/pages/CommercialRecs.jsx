@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 const CommercialRecs = () => {
-    const [loaded, setLoaded] = useState(false)
-    const [recs, setRecs] = useState("")
+    const [id, setId] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [recs, setRecs] = useState(null)
     const fetchPrice = async () => {
-        setLoaded(false)
+        if (id == null) {
+            alert("no id given")
+            return
+        }
+
+        setLoading(true)
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            id: id,
         };
 
         const response = await axios.post(
@@ -18,41 +24,45 @@ const CommercialRecs = () => {
               },
             }
         );
-        setLoaded(true)
+        setLoading(false)
         setRecs(JSON.parse(response.data.recommendations))
     }
-
-    useEffect(() => {
-        fetchPrice()
-    }, [])
     return (
         <div className="page">
             <h1>Commercial Recommendations</h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
+            <button onClick={fetchPrice}>Submit</button>
             {
-                loaded ? (
-                    <div className="recs">
-                        <table className="table-auto w-full border-collapse">
-                            <thead>
-                            <tr>
-                                <th className="border px-4 py-2">Suburb</th>
-                                <th className="border px-4 py-2">Median Income</th>
-                                <th className="border px-4 py-2">Population Density</th>
+                recs !== null && <div className="recs">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Suburb</th>
+                            <th>Median Income</th>
+                            <th>Population Density</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {recs.map((recommendation, index) => (
+                            <tr key={index}>
+                            <td>{recommendation.suburb}</td>
+                            <td>{recommendation.suburb_median_income}</td>
+                            <td>{recommendation.population_density}</td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            {recs.map((recommendation, index) => (
-                                <tr key={index}>
-                                <td className="border px-4 py-2">{recommendation.suburb}</td>
-                                <td className="border px-4 py-2">{recommendation.suburb_median_income}</td>
-                                <td className="border px-4 py-2">{recommendation.population_density}</td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </div>
-                ) : (
-                    <p>Loading...</p>
-                )
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            }
+            {
+                loading && <p>Loading...</p>
             }
         </div>
     )

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 const PropertyPrices = () => {
-    const[loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [loaded, setLoaded] = useState(false)
     const [price, setPrice] = useState("")
+    const [id, setId] = useState(null)
 
     const [minPrice, setMinPrice] = useState(null)
     const [maxPrice, setMaxPrice] = useState(null)
@@ -18,6 +19,10 @@ const PropertyPrices = () => {
     const [type, setType] = useState(null)
 
     const fetchPrice = async () => {
+        if (id == null){
+            alert("missing id")
+            return
+        }
         setLoaded(false)
         const filters = {
           price_range: {
@@ -42,15 +47,13 @@ const PropertyPrices = () => {
         };
       
         const requestBody = {
-          id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
-          filters: filters, // Always include filters
+          id: id,
+          filters: filters,
         };
-      
-        // Set loading state to true
+
         setLoading(true);
       
         try {
-          // Send the POST request
           const response = await axios.post(
             "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_prices",
             requestBody,
@@ -60,8 +63,7 @@ const PropertyPrices = () => {
               },
             }
           );
-      
-          // Set the loaded state and handle response
+
           setLoaded(true);
           setLoading(false);
           setPrice(response.data.avg_price);
@@ -75,6 +77,14 @@ const PropertyPrices = () => {
     return (
         <div className="page">
             <h1>Average Property Prices</h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
             <div className="filter-field">
                 <p>Price range:</p>
                 <input type="text" name="min-price" placeholder="Min price" onChange={e => {

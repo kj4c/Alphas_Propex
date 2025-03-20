@@ -7,10 +7,15 @@ const SuburbLivability = () => {
     const [weight, setWeight] = useState(0.5);
     const [sizeWeight, setSizeWeight] = useState(0.3);
     const [density, setDensity] = useState(0.2);
+    const [id, setId] = useState(null)
     const fetchData = async () => {
+        if (id == null) {
+            alert("missing id")
+            return
+        }
         setLoading(true)
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            id: id,
             proximity_weight: parseFloat(weight) || 0.5,
             property_size_weight: parseFloat(sizeWeight) || 0.3,
             population_density_weight: parseFloat(density) ||0.2
@@ -36,6 +41,14 @@ const SuburbLivability = () => {
             <h1>Suburb Livability Score</h1>
             {
                 !loaded ? (<div className="input-form">
+                    <p>Id:</p>
+                    <input type="text" name="id" placeholder="Id" onChange={e => {
+                        if (e.target.value !== "") {
+                            setId(e.target.value)
+                        } else {
+                            setId(null)
+                        }
+                    }}/>
                     <p>Proximity weight:</p>
                     <input type="text" name="weight" placeholder="Proximity weight" onChange={e => {
                         if (e.target.value !== "") {
@@ -56,18 +69,18 @@ const SuburbLivability = () => {
                     }}/>
                     <button onClick={fetchData}>Submit</button>
                 </div>):(
-                    <table className="table-auto border-collapse border border-gray-400">
+                    <table>
                         <thead>
                         <tr>
-                            <th className="border border-gray-400 px-4 py-2">Suburb</th>
-                            <th className="border border-gray-400 px-4 py-2">Livability Score</th>
+                            <th>Suburb</th>
+                            <th>Livability Score</th>
                         </tr>
                         </thead>
                         <tbody>
                         {ret.map((entry, index) => (
                             <tr key={index}>
-                            <td className="border border-gray-400 px-4 py-2">{entry.suburb}</td>
-                            <td className="border border-gray-400 px-4 py-2">
+                            <td>{entry.suburb}</td>
+                            <td>
                                 {entry.livability_score.toFixed(2)}
                             </td>
                             </tr>

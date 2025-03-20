@@ -6,10 +6,15 @@ const TopSchoolArea = () => {
     const [option, setOption] = useState(0);
     const [option1, setOption1] = useState(0);
     const [radius, setRadius] = useState(10);
+    const [id, setId] = useState(null)
     const fetchData = async () => {
+        if (id == null) {
+            alert("missing id")
+            return 
+        }
         setLoading(true)
         const requestBody = {
-            id: "76d3b838-5880-4320-b42f-8bd8273ab6a0",
+            id: id,
             radius: parseInt(radius) || 10,
             district: districts[option1],
             school_type: schoolTypes[option]
@@ -52,6 +57,15 @@ const TopSchoolArea = () => {
         <div className="page">
             <h1>Properties near schools
             </h1>
+            <p>Id:</p>
+            <input type="text" name="id" placeholder="Id" onChange={e => {
+                if (e.target.value !== "") {
+                    setId(e.target.value)
+                } else {
+                    setId(null)
+                }
+            }}/>
+            <p>School level:</p>
             <select
                 id="type-dropdown"
                 value={option}
@@ -63,6 +77,7 @@ const TopSchoolArea = () => {
                 <option value="1">Primary School</option>
                 <option value="2">Infant School</option>
             </select>
+            <p>District:</p>
             <select
                 id="district-dropdown"
                 value={option1}
@@ -90,20 +105,20 @@ const TopSchoolArea = () => {
 
             {
                 schools && 
-                <table className="table-auto border-collapse border border-gray-400">
+                <table>
                     <thead>
                     <tr>
-                        <th className="border border-gray-400 px-4 py-2">School</th>
-                        <th className="border border-gray-400 px-4 py-2">Number of Properties</th>
-                        <th className="border border-gray-400 px-4 py-2">Average Property Price</th>
+                        <th>School</th>
+                        <th>Number of Properties</th>
+                        <th>Average Property Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     {schools.map((school, index) => (
                         <tr key={index}>
-                        <td className="border border-gray-400 px-4 py-2">{school.school}</td>
-                        <td className="border border-gray-400 px-4 py-2">{school.num_properties}</td>
-                        <td className="border border-gray-400 px-4 py-2">
+                        <td>{school.school}</td>
+                        <td>{school.num_properties}</td>
+                        <td>
                             {school.avg_property_price.toLocaleString("en-US", {
                             style: "currency",
                             currency: "USD",
