@@ -27,30 +27,31 @@ for function in os.listdir(backend_dir):
         }
 
 # Generate updated variables.tf content
-variables_tf_content = f"""# AWS Region
-variable "aws_region" {{
+variables_tf_content = """# AWS Region
+variable "aws_region" {
   description = "The AWS region to deploy resources in"
   default     = "us-east-1"
-}}
+}
 
-variable "lambda_bucket_name" {{
+variable "lambda_bucket_name" {
   description = "The name of the existing S3 bucket where Lambda ZIPs will be stored"
   default     = "alphas-lambda-bucket"
-}}
+}
 
-variable "lambda_functions" {{
+variable "lambda_functions" {
   description = "Map of Lambda function configurations"
-  type = map(object({{
+  type = map(object({
     handler  = string
     runtime  = string
     method   = string
-  }}))
+  }))
   # Auto-detected functions from backend/
-  default = {{
+  default = {
 """
 
 for func_name, config in lambda_functions.items():
-    if (func_name == "price_prediction"): continue
+    if (func_name == "price_prediction"): 
+      continue
     variables_tf_content += f'    "{func_name}" = {{ handler = "{config["handler"]}", runtime = "{config["runtime"]}", method = "{config["method"]}" }}\n'
 
 variables_tf_content += "  }\n}"

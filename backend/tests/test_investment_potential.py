@@ -5,7 +5,6 @@ import pandas as pd
 from backend.investment_potential.helpers import investment_potential
 # from backend.investment_potential.handler import lambda_handler
 import os
-import json
 
 # Add parent directory to sys.path so imports work
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
