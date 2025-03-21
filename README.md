@@ -1,6 +1,6 @@
-# 🏠 Alphas ESG API — Propex
+# 🏠 Team Alphas
 
-Welcome to the **Alphas ESG API**, a property data analysis service built as part of the **SENG3011 project**.
+Welcome to the **Propex**, a property data analysis service built as part of the **SENG3011 project**.
 
 ## 📊 Introducing Propex  
 **Propex** is a powerful property analysis API that takes in event stream data (in JSON format) and provides meaningful insights to help users understand market trends, property affordability, commercial viability, and livability across suburbs.
