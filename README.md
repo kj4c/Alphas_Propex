@@ -30,12 +30,12 @@ All endpoints should have **`https://q50eubtwpj.execute-api.us-east-1.amazonaws.
 ## 📤 Uploading Your Data
 
 
-You can upload your data using our `/upload_data` endpoint (use frontend for ease).  
-Attach your JSON file during the request, and you'll receive a **dataset ID** in response.
+You can upload your data using our `/upload_data` endpoint.  
+`/upload_data` does not upload it immediately, it will generate a URL and a dataset ID for you, take that URL and do a PUT request and place your data in the body.
+Please take not of this Data Set ID as it is the ID used to run the analysis functions.
 
-## 📤 Uploading Data
-
-To use our analysis services, you must first upload your dataset by calling the `/upload_data` endpoint and attaching your JSON file.
+## IF YOU DO NOT HAVE A DATA SET TO PROVIDE
+Please use this id: `76d3b838-5880-4320-b42f-8bd8273ab6a0` to see the analysis!
 
 The uploaded data **must follow this format** where every event is an entry for a property:
 ```json
@@ -97,6 +97,12 @@ Our API offers a variety of powerful analysis endpoints, including:
 
 - ✅ **`commercial_recs`**  
   Recommend optimal areas for businesses to set up based on commercial property trends.
+
+- 🛀🛀🛀**`influence_factors`**
+  Will analyse which factors of a property influence the price of the property the most.
+
+- 🌌**`investment_potential`**
+  Which suburb has the highest investment potential based on the average price growth, rental yield, location demand, affordability
 
 - 💰 **`property_affordability_index`**  
   Analyze affordability across suburbs to find the most cost-effective areas.
