@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import seaborn as sns
 
 def plot_commercial_suburbs(recommended_df):
     """
