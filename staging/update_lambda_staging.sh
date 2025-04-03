@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BACKEND_DIR="./backend"
-DOCKER_IMAGE_NAME="docker-lambda"
+BACKEND_DIR="../backend"
+DOCKER_IMAGE_NAME="test-lambda"
 AWS_REGION="us-east-1"
 ECR_URL="109471428046.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE_NAME"
 
@@ -25,7 +25,7 @@ if [ "$NEW_CHECKSUM" != "$OLD_CHECKSUM" ]; then
     echo "📦 Changes detected in Lambda functions (excluding tests & price_prediction). Rebuilding Docker image..."
     
     # Build the Docker image
-    docker build --platform linux/amd64 -t $DOCKER_IMAGE_NAME .
+    docker build --platform linux/amd64 -t $DOCKER_IMAGE_NAME ..
 
     # Authenticate with ECR
     aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URL
@@ -43,8 +43,24 @@ else
 fi
 
 if [ "$CHANGED" -eq 1 ]; then
-    echo "🎉 Docker image updated!"
-    echo "🎉 Ready for deployment! Run terraform apply only if you ready gang"
+    echo "Updating variable names in staging/variable.tf..."
+    python3 update_variables_staging.py
+    echo "🎉 Docker image updated and pushed to Staging ECR!"
 else
     echo "🚀 No updates needed for Terraform."
+fi
+
+IMAGE_DIGEST=$(aws ecr describe-images --repository-name test-lambda --region us-east-1 --query 'sort_by(imageDetails,&imagePushedAt)[-1].imageDigest' --output text)
+
+if [ -n "$IMAGE_DIGEST" ]; then
+    echo "🔄 Updating Terraform Lambda Staging image URI... in Staging main.tf"
+    awk -v region="$AWS_REGION" -v digest="$IMAGE_DIGEST" '
+    {
+        gsub(/image_uri[[:space:]]*=[[:space:]]*"[^"]*"/, "image_uri = \"109471428046.dkr.ecr." region ".amazonaws.com/test-lambda@" digest "\"")
+        print
+    }' main.tf > temp.tf && mv temp.tf main.tf
+    echo "✅ Terraform staging configuration updated with new image: $IMAGE_DIGEST"
+    echo "🎉 Ready for staging deployment! Run terraform init then terraform apply only if you ready gang"
+else
+    echo "❌ Failed to fetch latest image digest!"
 fi

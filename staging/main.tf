@@ -9,18 +9,18 @@ resource "aws_s3_bucket" "lambda_bucket" {
 }
 
 # S3 Bucket for RAW DATA
-resource "aws_s3_bucket" "raw_data_bucket" {
-  bucket = "alpha-raw-data-bucket"
-
-  tags = {
-    Name        = "JSON Raw Data Storage Bucket"
-    Environment = "Dev"
-  }
-}
+#resource "aws_s3_bucket" "raw_data_bucket" {
+#  bucket = "alpha-raw-data-bucket"
+#
+#  tags = {
+#    Name        = "JSON Raw Data Storage Bucket"
+#    Environment = "Dev"
+#  }
+#}
 
 # Create ECR Repository for Lambda Docker Images
 #resource "aws_ecr_repository" "lambda_repo" {
-#  name = "docker-lambda"
+#  name = "test-lambda"
 #}
 
 # AWS Lambda Function using Docker Image
@@ -29,7 +29,7 @@ resource "aws_lambda_function" "multi_lambda" {
 
   function_name = each.key
   package_type  = "Image"
-  image_uri     = "109471428046.dkr.ecr.us-east-1.amazonaws.com/test-lambda:latest"
+  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/test-lambda@sha256:f969b4b4cb6e415a11cfb77650305d433f205634eac34321f6a1b480f381fefa"
   role          = "arn:aws:iam::109471428046:role/LabRole"
   timeout       = 60
   memory_size   = 256

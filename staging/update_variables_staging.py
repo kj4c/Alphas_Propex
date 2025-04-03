@@ -1,6 +1,6 @@
 import os
 
-backend_dir = "backend"
+backend_dir = "../backend"
 variables_file = "variables.tf"
 
 lambda_functions = {}
@@ -35,7 +35,7 @@ variable "aws_region" {
 
 variable "lambda_bucket_name" {
   description = "The name of the existing S3 bucket where Lambda ZIPs will be stored"
-  default     = "alphas-lambda-bucket"
+  default     = "alphas-staging-lambda-bucket"
 }
 
 variable "lambda_functions" {
