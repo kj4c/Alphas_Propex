@@ -44,5 +44,3 @@ def lambda_handler(event, context):
             "statusCode": 400,
             "body": json.dumps({"error": str(e)})
         }
-
-    return response
