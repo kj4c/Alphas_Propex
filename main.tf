@@ -17,43 +17,27 @@ resource "aws_s3_bucket" "raw_data_bucket" {
   }
 }
 
-# Upload Lambda ZIP file to S3
-resource "aws_s3_object" "lambda_zips" {
-  for_each = var.lambda_functions
+# Create ECR Repository for Lambda Docker Images
+#resource "aws_ecr_repository" "lambda_repo" {
+#  name = "docker-lambda"
+#}
 
-  bucket = var.lambda_bucket_name
-  key    = "lambdas/${each.key}.zip"
-  source = "backend/${each.key}/lambda.zip"
-  
-  # forces terraform to detect any zip changes for S3 bucket
-  etag = filemd5("backend/${each.key}/lambda.zip")
-}
-
-# Lambda Function
+# AWS Lambda Function using Docker Image
 resource "aws_lambda_function" "multi_lambda" {
   for_each = var.lambda_functions
 
   function_name = each.key
-  s3_bucket     = var.lambda_bucket_name
-  s3_key        = aws_s3_object.lambda_zips[each.key].key
-  handler       = each.value.handler
-  runtime       = each.value.runtime
+  package_type  = "Image"
+  image_uri     = "109471428046.dkr.ecr.us-east-1.amazonaws.com/docker-lambda:latest"
   role          = "arn:aws:iam::109471428046:role/LabRole"
   timeout       = 60
   memory_size   = 256
-
-  # makes lambda function redeploy for any changes
-  source_code_hash = filebase64sha256("backend/${each.key}/lambda.zip")
 
   environment {
     variables = {
       FUNCTION_NAME = each.key
     }
   }
-  
-  layers = [
-    "arn:aws:lambda:us-east-1:336392948345:layer:AWSSDKPandas-Python39:28"
-  ]
 }
 
 # API Gateway
@@ -102,7 +86,6 @@ resource "aws_lambda_permission" "api_gateway_invoke" {
   principal     = "apigateway.amazonaws.com"
   source_arn    = "${aws_apigatewayv2_api.api.execution_arn}/*/*"
 }
-
 
 terraform {
   backend "s3" {

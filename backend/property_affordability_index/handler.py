@@ -1,6 +1,10 @@
 import json
-from helpers import find_property_price_index
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.property_affordability_index.helpers as helpers
+# from helpers import find_property_price_index
+import backend.general_helpers as general_helpers
+# from general_helpers import to_dataframe
 def lambda_handler(event, context):
     """
     Lambda function entry point.
@@ -31,8 +35,8 @@ def lambda_handler(event, context):
             raise ValueError("Missing 'id' in body")
         
         income = data.get("income", None)
-        data = to_dataframe(data['id'])
-        property_price_index = find_property_price_index(data, income).to_json(orient='records')
+        data = general_helpers.to_dataframe(data['id'])
+        property_price_index = helpers.find_property_price_index(data, income).to_json(orient='records')
        
         return {
             "statusCode": 200,
