@@ -1,6 +1,9 @@
 import json
-from helpers import investment_potential
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.investment_potential.helpers as helpers
+import backend.general_helpers as general_helpers
+
 def lambda_handler(event, context):
     """
     Lambda function entry point.
@@ -30,9 +33,9 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
 
-        data = to_dataframe(data['id'])
+        data = general_helpers.to_dataframe(data['id'])
         
-        investment_potentials = investment_potential(data).to_json(orient='records')
+        investment_potentials = helpers.investment_potential(data).to_json(orient='records')
 
         response = {
             "statusCode": 200,

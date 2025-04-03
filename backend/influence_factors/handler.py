@@ -1,6 +1,8 @@
 import json
-from helpers import find_influence_factors
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.influence_factors.helpers as helpers
+import backend.general_helpers as general_helpers
 from classes import PropertyType
 
 def lambda_handler(event, context):
@@ -35,8 +37,8 @@ def lambda_handler(event, context):
         if property_type not in PropertyType.__members__: 
             raise ValueError(f"Unrecognised property type accepted property types: {PropertyType.__members__}")
         
-        influence_factors = find_influence_factors(
-            df=to_dataframe(data["id"]),
+        influence_factors = helpers.find_influence_factors(
+            df=general_helpers.to_dataframe(data["id"]),
             property_type=property_type   # passed through path parameters (../influence_factors/{property_type}})
         )
         

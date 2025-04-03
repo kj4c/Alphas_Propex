@@ -1,6 +1,8 @@
 import json
-from helpers import model_prediction
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.price_prediction.helpers as helpers
+import backend.general_helpers as general_helpers
 from classes import PropertyType
 
 def lambda_handler(event, context):
@@ -41,8 +43,8 @@ def lambda_handler(event, context):
         # Retrieving suburb from path params
         suburb = data.get("suburb", None)
 
-        prediction_plot = model_prediction(
-            df=to_dataframe(data["id"]).copy(),
+        prediction_plot = helpers.model_prediction(
+            df=general_helpers.to_dataframe(data["id"]).copy(),
             property_type=property_type,
             suburb=suburb
         )

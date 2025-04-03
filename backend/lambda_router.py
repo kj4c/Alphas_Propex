@@ -3,7 +3,7 @@ import os
 import importlib
 import sys
 sys.path.append('.')
-import backend.property_affordability_index.handler as lh
+
 def lambda_handler(event, context):
     """
     Routes incoming Lambda requests to the appropriate handler function.
@@ -23,16 +23,11 @@ def lambda_handler(event, context):
             "body": json.dumps("Missing function_name in event payload")
         }
     
-    # Define the base backend directory
-    backend_dir = "backend"
-    
     try:
         # Dynamically import the handler module for the function
-        # handler_module = importlib.import_module(f"{backend_dir}.{function_name}.handler")
-        
+        handler_module = importlib.import_module(f"backend.{function_name}.handler")
         # Call the handler function
-        # response = handler_module.lambda_handler(event, context)
-        response = lh.lambda_handler(event, context)
+        response = handler_module.lambda_handler(event, context)
         
         return response
     
