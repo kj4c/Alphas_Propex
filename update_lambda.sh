@@ -43,8 +43,24 @@ else
 fi
 
 if [ "$CHANGED" -eq 1 ]; then
-    echo "🎉 Docker image updated!"
-    echo "🎉 Ready for deployment! Run terraform apply only if you ready gang"
+    echo "Updating variable names in variable.tf..."
+    python3 update_variables.py
+    echo "🎉 Docker image updated and pushed to ECR!"
 else
     echo "🚀 No updates needed for Terraform."
+fi
+
+IMAGE_DIGEST=$(aws ecr describe-images --repository-name docker-lambda --region us-east-1 --query 'sort_by(imageDetails,&imagePushedAt)[-1].imageDigest' --output text)
+
+if [ -n "$IMAGE_DIGEST" ]; then
+    echo "🔄 Updating Terraform Lambda image URI... in main.tf"
+    awk -v region="$AWS_REGION" -v digest="$IMAGE_DIGEST" '
+    {
+        gsub(/image_uri[[:space:]]*=[[:space:]]*"[^"]*"/, "image_uri = \"109471428046.dkr.ecr." region ".amazonaws.com/docker-lambda@" digest "\"")
+        print
+    }' main.tf > temp.tf && mv temp.tf main.tf
+    echo "✅ Terraform configuration updated with new image: $IMAGE_DIGEST"
+    echo "🎉 Ready for deployment! Run terraform init then terraform apply only if you ready gang"
+else
+    echo "❌ Failed to fetch latest image digest!"
 fi

@@ -1,6 +1,8 @@
 import json 
-from helpers import find_suburb_affordabilty_score
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.suburb_livability_score.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     """
@@ -38,9 +40,9 @@ def lambda_handler(event, context):
         if any(w is None for w in [proximity_weight, property_size_weight, population_density_weight]):
             raise ValueError("Missing weights")
         
-        data = to_dataframe(data['id'])
+        data = general_helpers.to_dataframe(data['id'])
         
-        suburb_affordability_scores = find_suburb_affordabilty_score(
+        suburb_affordability_scores = helpers.find_suburb_affordabilty_score(
             data,
             proximity_weight,
             property_size_weight,

@@ -2,9 +2,8 @@ import json
 import sys
 sys.path.append('../')
 import backend.property_affordability_index.helpers as helpers
-# from helpers import find_property_price_index
 import backend.general_helpers as general_helpers
-# from general_helpers import to_dataframe
+
 def lambda_handler(event, context):
     """
     Lambda function entry point.

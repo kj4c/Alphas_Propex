@@ -1,6 +1,8 @@
 import json
-from helpers import top_school_area
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.top_school_area.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     """
@@ -38,8 +40,8 @@ def lambda_handler(event, context):
                 "body": json.dumps({"error": "Missing 'district' or 'school_type' or radius in body."})
             }
 
-        data = to_dataframe(data['id'])
-        ret = top_school_area(df=data, district=district, school_type=school_type, radius=radius).to_json(orient='records')
+        data = general_helpers.to_dataframe(data['id'])
+        ret = helpers.top_school_area(df=data, district=district, school_type=school_type, radius=radius).to_json(orient='records')
 
         response = {
             "statusCode": 200,

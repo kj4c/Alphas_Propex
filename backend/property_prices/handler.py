@@ -1,6 +1,9 @@
 import json
-from helpers import avg_property_price
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.property_prices.helpers as helpers
+import backend.general_helpers as general_helpers
+
 
 def lambda_handler(event, context):
     """
@@ -33,8 +36,8 @@ def lambda_handler(event, context):
         if "filters" not in data:
             raise ValueError("Missing 'filters' in body")
         
-        avg_price = avg_property_price(
-            df=to_dataframe(data["id"]),
+        avg_price = helpers.avg_property_price(
+            df=general_helpers.to_dataframe(data["id"]),
             filters=data.get("filters", None)
         )
         

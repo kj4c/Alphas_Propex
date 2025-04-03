@@ -1,6 +1,8 @@
 import json
-from helpers import find_commerical_recs
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.commercial_recs.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     try:
@@ -24,9 +26,9 @@ def lambda_handler(event, context):
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
 
-        data = to_dataframe(data['id'])
+        data = general_helpers.to_dataframe(data['id'])
         
-        recommendations = find_commerical_recs(data).to_json(orient='records')
+        recommendations = helpers.find_commerical_recs(data).to_json(orient='records')
         
         return {
             "statusCode": 200,
