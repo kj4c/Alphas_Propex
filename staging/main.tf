@@ -1,3 +1,4 @@
+// FOR STAGING BRANCH
 provider "aws" {
   region = var.aws_region
 }
@@ -28,7 +29,7 @@ resource "aws_lambda_function" "multi_lambda" {
 
   function_name = each.key
   package_type  = "Image"
-  image_uri     = "109471428046.dkr.ecr.us-east-1.amazonaws.com/docker-lambda:latest"
+  image_uri     = "109471428046.dkr.ecr.us-east-1.amazonaws.com/test-lambda:latest"
   role          = "arn:aws:iam::109471428046:role/LabRole"
   timeout       = 60
   memory_size   = 256
@@ -42,7 +43,7 @@ resource "aws_lambda_function" "multi_lambda" {
 
 # API Gateway
 resource "aws_apigatewayv2_api" "api" {
-  name          = "alpha_api"
+  name          = "alpha_api_staging"
   protocol_type = "HTTP"
 
   cors_configuration {
@@ -89,10 +90,10 @@ resource "aws_lambda_permission" "api_gateway_invoke" {
 
 terraform {
   backend "s3" {
-    bucket = "seng3011-alpha-terraform-state"
+    bucket = "seng3011-alpha-terraform-staging-state"
     key = "terraform.tfstate"
     region = "us-east-1"
     encrypt = true
-    dynamodb_table = "terraform-lock"
+    dynamodb_table = "terraform-staging-lock"
   }
 }
