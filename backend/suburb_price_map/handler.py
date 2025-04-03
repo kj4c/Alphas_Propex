@@ -10,6 +10,7 @@ def lambda_handler(event, context):
     @return:
     """
 
+
     try:
         body = event.get("body")
         if not body:

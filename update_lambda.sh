@@ -1,59 +1,50 @@
 #!/bin/bash
 
 BACKEND_DIR="./backend"
+DOCKER_IMAGE_NAME="docker-lambda"
+AWS_REGION="us-east-1"
+ECR_URL="109471428046.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE_NAME"
+
 CHANGED=0
 
-echo "🚀 Starting Lambda ZIP process..."
+echo "🚀 Checking for changes in Lambda functions..."
 echo ""
 
-for FUNCTION_DIR in "$BACKEND_DIR"/*; do
-    if [ -d "$FUNCTION_DIR" ]; then
-        FUNCTION_NAME=$(basename "$FUNCTION_DIR")
-        if [ "$FUNCTION_NAME" = "tests" ]; then
-            continue
-        fi
+# Calculate new checksum, ignoring 'tests/' and 'price_prediction/' directories
+NEW_CHECKSUM=$(find "$BACKEND_DIR" -type d \( -name "tests" -o -name "price_prediction" \) -prune -o -type f -name "*.py" -print0 | sort -z | xargs -0 md5sum | md5sum | awk '{print $1}')
 
-        if [ "$FUNCTION_NAME" = "price_prediction" ]; then
-            continue
-        fi
+CHECKSUM_FILE=".docker_checksum"
 
-        ZIP_FILE="$FUNCTION_DIR/lambda.zip"
-        TEMP_CHECKSUM_FILE="$FUNCTION_DIR/.checksum"
+if [ ! -f "$CHECKSUM_FILE" ]; then
+    touch "$CHECKSUM_FILE"
+fi
 
-        NEW_CHECKSUM=$(md5sum "$FUNCTION_DIR"/handler.py "$FUNCTION_DIR"/helpers.py 2>/dev/null | md5sum | awk '{print $1}')
+OLD_CHECKSUM=$(cat "$CHECKSUM_FILE")
 
+if [ "$NEW_CHECKSUM" != "$OLD_CHECKSUM" ]; then
+    echo "📦 Changes detected in Lambda functions (excluding tests & price_prediction). Rebuilding Docker image..."
+    
+    # Build the Docker image
+    docker build --platform linux/amd64 -t $DOCKER_IMAGE_NAME .
 
-        if [ ! -f "$TEMP_CHECKSUM_FILE" ]; then
-            touch "$TEMP_CHECKSUM_FILE"
-        fi
+    # Authenticate with ECR
+    aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_URL
 
-        OLD_CHECKSUM=$(cat "$TEMP_CHECKSUM_FILE")
+    # Tag and push the image to ECR
+    docker tag $DOCKER_IMAGE_NAME:latest $ECR_URL:latest
+    docker push $ECR_URL:latest
 
-        if [ "$NEW_CHECKSUM" != "$OLD_CHECKSUM" ]; then
-            echo "📦 Changes detected for $FUNCTION_NAME. Updating the zip"
-            echo "📦 Zipping function: $FUNCTION_NAME..."
-            cd "$FUNCTION_DIR" || exit
-            if [ "$FUNCTION_NAME" = "top_school_area" ]; then
-                zip -r -X lambda.zip handler.py helpers.py ../general_helpers.py schools.csv > /dev/null
-            else
-                zip -r -X lambda.zip handler.py helpers.py ../general_helpers.py > /dev/null
-            fi
-            cd - > /dev/null
-            # stores the new CHECKSUM FILE
-            echo "$NEW_CHECKSUM" | tee "$TEMP_CHECKSUM_FILE" > /dev/null
-            echo "✅ Created: $ZIP_FILE"
-            CHANGED=1
-        else 
-            echo "🐼 No change detected for $FUNCTION_NAME, skipping da zip!"
-        fi
-    fi
-done
+    # Store new checksum
+    echo "$NEW_CHECKSUM" > "$CHECKSUM_FILE"
+
+    CHANGED=1
+else
+    echo "🐻 No changes detected in Lambda functions, skipping Docker build."
+fi
 
 if [ "$CHANGED" -eq 1 ]; then
-    echo "Updating variable names in variable.tf..."
-    python3 update_variables.py
-
+    echo "🎉 Docker image updated!"
     echo "🎉 Ready for deployment! Run terraform apply only if you ready gang"
 else
-    echo "🐻 No lambda functions updated, skipping terraform apply"
+    echo "🚀 No updates needed for Terraform."
 fi
