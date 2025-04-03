@@ -10,3 +10,4 @@ folium
 scikit-learn
 matplotlib
 statsmodels
+requests
