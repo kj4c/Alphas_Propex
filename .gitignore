@@ -12,3 +12,4 @@ terraform.tfvars.json
 *.tfvars
 *.tfplan
 .venv
+*.tf
