@@ -1,6 +1,8 @@
 import json
-from helpers import suburb_price_map
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.suburb_price_map.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     """
@@ -25,7 +27,7 @@ def lambda_handler(event, context):
         else:
             raise ValueError("Unrecognized body format")
         
-        ret = suburb_price_map(df=to_dataframe(data["id"]))
+        ret = helpers.suburb_price_map(df=general_helpers.to_dataframe(data["id"]))
 
         response = {
             "statusCode": 200,
