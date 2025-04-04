@@ -5,8 +5,7 @@ from urllib.parse import quote
 def safety_scores(df, suburb):
     """
     Calculates a scaled safety score for a given suburb based on
-    weighted crime rate per 100,000 people. A crime rate of 186257.43
-    maps to a score of 50. Lower crime = higher score.
+    weighted crime rate per 100,000 people. Lower crime = higher score.
     """
 
     # Weighted crime severity according to public safety canada
@@ -66,7 +65,7 @@ def safety_scores(df, suburb):
     # Crime rate per 100,000 people
     crime_rate_per_100k = (weighted_crimes / suburb_population) * 100000
 
-    # Scale so that 500000 = 50
+    # Scale so that 500000 = 50 (around the median score according to self testing)
     scaled_score = 100 - ((crime_rate_per_100k / 500000) * 50)
     scaled_score = round(max(0, min(scaled_score, 100)), 2)
 
