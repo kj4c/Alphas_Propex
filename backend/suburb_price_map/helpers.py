@@ -1,7 +1,7 @@
 import folium
 import branca
 
-def suburb_price_map(df, output_path="index.html"):
+def suburb_price_map(df):
     df.columns = df.columns.str.strip()
     data = df.groupby(['suburb', 'suburb_lat', 'suburb_lng'], as_index=False).agg({'price': 'median'})
     data.rename(columns={'price': 'median_price'}, inplace=True)
@@ -20,9 +20,8 @@ def suburb_price_map(df, output_path="index.html"):
         vmin=q0,
         vmax=q5
     )
-    colormap.caption = 'Median Property Price'
 
-    # Center the map
+    # Make it zoon to the right place
     avg_lat = data['suburb_lat'].mean()
     avg_lng = data['suburb_lng'].mean()
     mapped = folium.Map(location=[avg_lat, avg_lng], zoom_start=10)
