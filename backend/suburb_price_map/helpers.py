@@ -6,17 +6,27 @@ def suburb_price_map(df):
     data = df.groupby(['suburb', 'suburb_lat', 'suburb_lng'], as_index=False).agg({'price': 'median'})
     data.rename(columns={'price': 'median_price'}, inplace=True)
 
-    # make map to zoom into sydney
-    sydney_map = folium.Map(location=[-33.8688, 151.2093], zoom_start=10)
-
-    # mapping numbers to colours
+    # Compute quantiles
+    q0 = data['median_price'].quantile(0.0)
+    q1 = data['median_price'].quantile(0.2)
+    q2 = data['median_price'].quantile(0.4)
+    q3 = data['median_price'].quantile(0.6)
+    q4 = data['median_price'].quantile(0.8)
+    q5 = data['median_price'].quantile(1.0)
+    # Create colormap
     colormap = branca.colormap.LinearColormap(
-        colors=['green', 'yellow', 'orange', 'red', 'purple', '#03257b', 'black'],
-        index=[500000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000],
-        vmin=0, vmax=4000000
+        colors=['green', 'yellow', 'orange', 'red', 'purple', 'black'],
+        index=[q0, q1, q2, q3, q4, q5],
+        vmin=q0,
+        vmax=q5
     )
 
-    # colouring suburbs
+    # Make it zoon to the right place
+    avg_lat = data['suburb_lat'].mean()
+    avg_lng = data['suburb_lng'].mean()
+    mapped = folium.Map(location=[avg_lat, avg_lng], zoom_start=10)
+
+    # Add markers
     for _, row in data.iterrows():
         folium.CircleMarker(
             location=[row['suburb_lat'], row['suburb_lng']],
@@ -24,7 +34,10 @@ def suburb_price_map(df):
             fill=True,
             fill_color=colormap(row['median_price']),
             fill_opacity=0.6,
-            tooltip=f"{row['suburb']}: ${row['median_price']}"
-        ).add_to(sydney_map)
+            tooltip=f"{row['suburb']}: ${row['median_price']:,.0f}"
+        ).add_to(mapped)
 
-    return sydney_map._repr_html_()
+    # Add colormap to the map
+    colormap.add_to(mapped)
+    # Return HTML for testing
+    return mapped._repr_html_()
