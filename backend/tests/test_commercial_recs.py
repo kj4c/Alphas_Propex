@@ -1,15 +1,13 @@
 import io
 import pandas as pd
 import unittest
+import numpy as np
 # from backend.commercial_recs.handler import lambda_handler
 from backend.commercial_recs.helpers import find_commerical_recs
 
-
 class TestCommercialRecs(unittest.TestCase):
-
     def setUp(self):
-
-        # datafram for testing commericial reccomendations
+        # dataframe for testing commericial reccomendations
         self.test_data = """
         suburb,suburb_median_income,suburb_sqkm,suburb_population
         Bensville,36764,4.925,2545
@@ -23,20 +21,17 @@ class TestCommercialRecs(unittest.TestCase):
         Ingleburn,33124,12.454,15039
         Penrith,32240,12.202,13295
         """
-
         self.df = pd.read_csv(io.StringIO(self.test_data))
 
-    
-    
     def test_basic_functionality(self):
 
         # test if the function works lol
-
         result = find_commerical_recs(self.df.copy())
         self.assertIsInstance(result, pd.DataFrame)
-        self.assertIn("suburb", result)
-        self.assertIn("suburb_median_income", result)
-        self.assertIn("population_density", result)
+
+        required_columns = ["suburb", "suburb_median_income", "population_density", "composite_score"]
+
+        self.assertTrue(all(col in result.columns for col in required_columns))
         self.assertGreater(len(result), 0)
 
     def test_ranking_order(self):
@@ -44,17 +39,36 @@ class TestCommercialRecs(unittest.TestCase):
         # tests whether the commercial recommendations are ranked correctly.
 
         result = find_commerical_recs(self.df.copy())
-        scores = result["suburb_median_income"].values
-        self.assertTrue(all(scores[i] >= scores[i + 1] for i in range(len(scores) - 1)))
+        scores = result['composite_score'].values
+        
+        self.assertTrue(all(scores[i] >= scores[i + 1] 
+                            for i in range(len(scores) - 1)))
+
+    def test_threshold_filter(self):
+        # tests whether the function filters suburbs below a certain threshold
+
+        default_res = find_commerical_recs(self.df.copy())
+        
+        # return less suburbs if the threshold is higher
+        high_threshold_res = find_commerical_recs(self.df.copy(), income_threshold=0.8, traffic_threshold=0.8)
+        self.assertLess(len(high_threshold_res), len(default_res))
     
+    def test_weight(self):
+        # test that weight affect the ranks properly
+        income_heavy = find_commerical_recs(self.df.copy(), income_weight=0.9, traffic_weight=0.1)
+        traffic_heavy = find_commerical_recs(self.df.copy(), income_weight=0.1, traffic_weight=0.9)
+
+        income_scores = income_heavy['composite_score'].values
+        traffic_scores = traffic_heavy['composite_score'].values
+        self.assertTrue(all(income_scores[i] >= traffic_scores[i] for i in range(len(income_scores))))
+
     def test_handle_missing_values(self):
 
         # tests whether the function can handle missing values
 
         df_missing = self.df.copy()
-        df_missing.loc[0, "suburb_median_income"] = None
+        df_missing.loc[0, "suburb_median_income"] = np.nan
         result = find_commerical_recs(df_missing)
-        self.assertIsInstance(result, pd.DataFrame)
         self.assertGreater(len(result), 0)
 
     def test_empty_dataframe(self):
@@ -72,27 +86,8 @@ class TestCommercialRecs(unittest.TestCase):
         df_zero_sqkm = self.df.copy()
         df_zero_sqkm.loc[0, "suburb_sqkm"] = 0
         result = find_commerical_recs(df_zero_sqkm)
-        self.assertIsInstance(result, pd.DataFrame)
         self.assertGreater(len(result), 0)
-
-    def test_normalization_effect(self):
-        
-        # tests whether the function normalizes the scores correctly
-
-        result = find_commerical_recs(self.df.copy())
-        self.assertFalse(any(result["suburb_median_income"] == 100))
-        self.assertFalse(any(result["suburb_median_income"] == 0))
-    
-    def test_tiebreaker_handling(self):
-
-        # tests how the function handles cases where two suburbs have the same score
-
-        df_tiebreaker = self.df.copy()
-        df_tiebreaker.loc[0, "suburb_median_income"] = 100
-        df_tiebreaker.loc[1, "suburb_median_income"] = 100
-        result = find_commerical_recs(df_tiebreaker)
-        self.assertIsInstance(result, pd.DataFrame)
-        self.assertGreater(len(result), 0)
+        self.assertTrue(np.isinf(result.loc[0, "population_density"]))
     
     def test_missing_columns(self):
 
@@ -103,21 +98,11 @@ class TestCommercialRecs(unittest.TestCase):
         
         self.assertEqual(str(e.exception), "Missing required columns")
 
-# class TestLambda(unittest.TestCase):
-
-#     # Simulate what AWS passes in a real event
-#     event = {
-#         "body": json.dumps({ "id": "76d3b838-5880-4320-b42f-8bd8273ab6a0" }),  # 👈 this simulates what API Gateway sends
-#     }
-
-#     # Simulate a Lambda context object (optional if you don't use it)
-#     context = {}
-
-#     # Run the lambda locally
-#     response = lambda_handler(event, context)
-
-#     # Pretty print the result
-#     print(json.dumps(response, indent=2))
+    def test_top_n_param(self):
+        # tests whether the top_n parameter works as expected
+        for i in [1, 2, 3]:
+            result = find_commerical_recs(self.df.copy(), top_n=i)
+            self.assertEqual(len(result), i)
 
 
 if __name__ == "__main__":
