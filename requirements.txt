@@ -11,3 +11,4 @@ scikit-learn
 matplotlib
 statsmodels
 requests
+pytest
