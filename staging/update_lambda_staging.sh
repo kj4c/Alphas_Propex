@@ -11,7 +11,7 @@ echo "🚀 Checking for changes in Lambda functions..."
 echo ""
 
 # Calculate new checksum, ignoring 'tests/' and 'price_prediction/' directories
-NEW_CHECKSUM=$(find "$BACKEND_DIR" -type d \( -name "tests" -o -name "price_prediction" \) -prune -o -type f -name "*.py" -print0 | sort -z | xargs -0 md5sum | md5sum | awk '{print $1}')
+NEW_CHECKSUM=$(find "$BACKEND_DIR" -type d \( -name "tests" -o -name "price_prediction" -o -name "route_tests" \) -prune -o -type f -name "*.py" -print0 | sort -z | xargs -0 md5sum | md5sum | awk '{print $1}')
 
 CHECKSUM_FILE=".docker_checksum"
 
