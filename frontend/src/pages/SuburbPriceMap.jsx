@@ -1,12 +1,60 @@
+import { useState } from "react";
+import axios from "axios";
 const SuburbPriceMap = () => {
+    const [loading, setLoading] = useState(false);
+    const [ret, setRet] = useState(null);
+    const [id, setId] = useState(null)
+    const fetchData = async () => {
+        if (id == null) {
+            alert("missing id")
+            return
+        }
+        setLoading(true)
+        const requestBody = {
+            id: id,
+            function_name: "suburb_price_map",
+        };
+
+        const response = await axios.post(
+            "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_price_map",
+            requestBody,
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+        );
+        setLoading(false)
+        console.log(response)
+        setRet(response.data)
+    }
+
     return (
       <div className="page">
         <h1>Median price by suburb</h1>
-        <iframe
-          src="./map.html"
-          style={{ width: "100%", height: "60vh", border: "none" }}
-          title="HTML Content"
-        />
+        {
+            loading && <p>Loading...</p>
+        }
+        {
+            !ret ? (
+                <>
+                    <p>Id:</p>
+                    <input type="text" name="id" placeholder="Id" onChange={e => {
+                        if (e.target.value !== "") {
+                            setId(e.target.value)
+                        } else {
+                            setId(null)
+                        }
+                    }}/>
+                    <button onClick={fetchData}>Submit</button>
+                </>
+            ): (
+                <div
+                dangerouslySetInnerHTML={{__html: ret}}
+                />
+            )
+        }
+        
       </div>
     )
 }
