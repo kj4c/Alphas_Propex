@@ -6,14 +6,18 @@ def suburb_price_map(df):
     data = df.groupby(['suburb', 'suburb_lat', 'suburb_lng'], as_index=False).agg({'price': 'median'})
     data.rename(columns={'price': 'median_price'}, inplace=True)
 
-    # make map to zoom into sydney
+    # Find the minimum and maximum median price
+    min_price = data['median_price'].min()
+    max_price = data['median_price'].max()
+
+    # Make map to zoom into Sydney
     sydney_map = folium.Map(location=[-33.8688, 151.2093], zoom_start=10)
 
-    # mapping numbers to colours
+    # Mapping numbers to colors dynamically based on median price
     colormap = branca.colormap.LinearColormap(
         colors=['green', 'yellow', 'orange', 'red', 'purple', '#03257b', 'black'],
-        index=[500000, 1000000, 1500000, 2000000, 2500000, 3000000, 4000000],
-        vmin=0, vmax=4000000
+        index=[min_price, max_price * 0.25, max_price * 0.5, max_price * 0.75, max_price],
+        vmin=min_price, vmax=max_price
     )
 
     # colouring suburbs
