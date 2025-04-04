@@ -19,13 +19,15 @@ variable "lambda_functions" {
   # Auto-detected functions from backend/
   default = {
     "influence_factors_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "property_prices_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "suburb_livability_score_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "upload_json_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "commercial_recs_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "suburb_price_map_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "top_school_area_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "investment_potential_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "upload_json_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "property_affordability_index_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "safety_scores_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "suburb_price_map_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "suburb_livability_score_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "property_prices_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "commercial_recs_chart_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "top_school_area_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "commercial_recs_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
   }
 }
