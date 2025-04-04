@@ -19,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9" 
+          python-version: "3.9"
 
       - name: Install Dependencies
         run: |
@@ -30,36 +30,37 @@ jobs:
       - name: Run Tests
         run: |
           export PYTHONPATH=$(pwd)/backend
-          python -m unittest discover backend/tests
-
+          python -m unittest discover backend/tests > test_output.txt
+          
       - name: Run route tests with pytest
         run: |
           export PYTHONPATH=$(pwd)/backend
-          pytest backend/route_tests
+          pytest backend/route_tests > route_test_output.txt
           
       - name: Run Coverage Check
         run: |
           export PYTHONPATH=$(pwd)/backend
           coverage run -m unittest discover backend/tests
-          coverage report -m
+          coverage report -m > coverage_report.txt
           coverage xml
-  
-      - name: Linitng with flake8
-        run: |
-          flake8 backend --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 backend --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics
 
-      - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: coverage.xml
-          
+      - name: Linting with flake8
+        run: |
+          flake8 backend --count --select=E9,F63,F7,F82 --show-source --statistics > flake8_output.txt
+          flake8 backend --count --exit-zero --max-complexity=10 --max-line-length=120 --statistics >> flake8_output.txt
+
       - name: Upload Test Logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-logs
           path: |
-            **/test-output*.xml
-            **/logs
+            test_output.txt
+            route_test_output.txt
+            flake8_output.txt
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage_report.txt
