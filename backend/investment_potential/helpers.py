@@ -8,7 +8,7 @@ def normalize_to_100(series):
         return series.map(lambda x: 50)  # return mid value if all values are the same
     return ((series - min_val) / (max_val - min_val)) * 100
 
-def investment_potential(data):
+def investment_potential(data, top_n=20):
     """
     Calculates an investment potential score for each property and returns the top 20 suburbs with the highest potential.
     All components are normalized to 0-100 scale, with the following weights:
@@ -57,7 +57,6 @@ def investment_potential(data):
                               WEIGHT_LOCATION_DEMAND * location_demand_norm + 
                               WEIGHT_AFFORDABILITY * affordability_norm)
             
-    top_suburbs = data.sort_values(by="investment_score", ascending=False).head(20)[["suburb", "investment_score"]]
+    top_suburbs = data.sort_values(by="investment_score", ascending=False).head(top_n)[["suburb", "investment_score"]]
     top_suburbs = top_suburbs.reset_index(drop=True)
-
     return top_suburbs

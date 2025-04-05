@@ -1,4 +1,5 @@
 import requests
+from unittest.mock import patch
 
 # THESE TEST THE DEPLOYED LINK
 ENDPOINT = "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/investment_potential"
@@ -10,6 +11,8 @@ def test_working():
     })
 
     assert response.status_code == 200
+    # assert len(response.json()["investment_potentials"]) == 20
+
 
 def test_missing_id():
     response = requests.post(ENDPOINT, json = {
@@ -18,4 +21,3 @@ def test_missing_id():
 
     assert response.status_code == 400
     assert response.json()["error"] == "Missing 'id' in body"
-    
