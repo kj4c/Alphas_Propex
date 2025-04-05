@@ -52,6 +52,15 @@ class TestInvestmentPotential(unittest.TestCase):
         result = investment_potential(df_missing)
         self.assertIsInstance(result, pd.DataFrame)
         self.assertGreater(len(result), 0)
+
+    def test_top_n_parameter(self):
+        # tests whether the function respects the top_n parameter
+
+        result = investment_potential(self.df.copy(), top_n=3)
+        self.assertEqual(len(result), 3)
+        self.assertIn("suburb", result)
+        self.assertIn("investment_score", result)
+        self.assertEqual(len(result), 3)
     
     def test_empty_dataframe(self):
 

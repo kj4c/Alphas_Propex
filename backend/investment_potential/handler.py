@@ -32,10 +32,24 @@ def lambda_handler(event, context):
 
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
+        
+        top_n = data.get("top_n", 20)
+        print(f"DEBUG: Using top_n = {top_n}")
 
         data = general_helpers.to_dataframe(data['id'])
+        print(f"DEBUG: Input DataFrame shape: {data.shape}")
         
-        investment_potentials = helpers.investment_potential(data).to_json(orient='records')
+        # Get the filtered DataFrame first
+        filtered_df = helpers.investment_potential(data, top_n=top_n)
+        print(f"DEBUG: Filtered DataFrame shape: {filtered_df.shape}")
+        
+        # Convert to list of dictionaries and ensure we only have top_n results
+        investment_potentials = json.loads(filtered_df.to_json(orient='records'))
+        print(f"DEBUG: Number of investment potentials before truncation: {len(investment_potentials)}")
+        
+        # Explicitly truncate to top_n results
+        investment_potentials = investment_potentials[:top_n]
+        print(f"DEBUG: Number of investment potentials after truncation: {len(investment_potentials)}")
 
         response = {
             "statusCode": 200,
@@ -48,3 +62,15 @@ def lambda_handler(event, context):
             "body": json.dumps({"error": str(e)})
         }
     return response
+
+# if __name__ == "__main__":
+#     # Test the lambda_handler function locally
+#     event = {
+#         "body": json.dumps({
+#             "id": "34c762a2-e1cd-44a7-a9ea-56f22d64989e",
+#             "top_n": 11
+#         })
+#     }
+#     context = {}
+#     response = lambda_handler(event, context)
+#     print(response)
