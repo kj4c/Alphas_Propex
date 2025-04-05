@@ -28,7 +28,7 @@ def lambda_handler(event, context):
         
         print("DEBUG Raw body:", body)
         print("DEBUG Parsed data:", data)
-        print("DEBUG Type of data:", type(data))
+        print("DEBUG Typeof data:", type(data))
 
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
