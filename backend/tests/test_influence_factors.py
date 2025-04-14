@@ -48,3 +48,6 @@ class TestPropertyPrices(unittest.TestCase):
         result = find_influence_factors(df=self.df.copy(), property_type="Duplex")
 
         self.assertTrue(isinstance(result, dict))
+
+if __name__ == "__main__":
+    unittest.main()

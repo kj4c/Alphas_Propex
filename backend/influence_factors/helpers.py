@@ -20,12 +20,30 @@ def find_influence_factors(
     filter_value: str = None,
     drop_columns: list = None
 ):
-    df = df[df["type"].apply(lambda x: bool(re.search(f".*{property_type}.*", x, re.IGNORECASE)))]
-    df = df.drop(columns=["date_sold", "suburb", "type"])
+    # Optional filter
+    if filter_column and filter_value:
+        df = df[df[filter_column].astype(str).str.contains(filter_value, case=False, na=False)]
 
-    X, y = df.drop('price', axis=1), df['price']
+    # Drop irrelevant or specified columns
+    if drop_columns:
+        df = df.drop(columns=drop_columns, errors="ignore")
 
-    if len(df) < 2:
+    # Drop rows with missing values
+    df = df.dropna()
+
+    # Check if target exists
+    if target_column not in df.columns:
+        raise ValueError(f"Target column '{target_column}' not found in dataframe.")
+
+    # Separate features and target
+    X = df.drop(columns=[target_column])
+    y = df[target_column]
+
+    # Convert categorical variables to dummy/one-hot encoding
+    X = pd.get_dummies(X, drop_first=True)
+
+    # Check if we have enough data to train
+    if len(X) < 2 or X.shape[1] == 0:
         return {}
 
     # Train the model using Linear Regression
@@ -38,7 +56,7 @@ def find_influence_factors(
     return dict(
         sorted(
             feature_importance.itertuples(index=True, name=None), 
-            key=lambda x: x[1], 
+            key=lambda x: abs(x[1]),    # Sort by absolute importance
             reverse=True
         )
     )
