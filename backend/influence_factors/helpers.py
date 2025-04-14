@@ -2,7 +2,24 @@ import re
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 
-def find_influence_factors(df, property_type):
+"""
+Args:
+    df (pd.DataFrame): Input DataFrame.
+    target_column (str): Column name of the target variable (e.g., "price").
+    filter_column (str, optional): Column to apply filtering on (e.g., "type").
+    filter_value (str, optional): Substring to match in filter_column (e.g., "House").
+    drop_columns (list, optional): Columns to exclude from the model.
+
+Returns:
+    dict: Sorted dictionary of feature importances.
+"""
+def find_influence_factors(
+    df: pd.DataFrame,
+    target_column: str,
+    filter_column: str = None,
+    filter_value: str = None,
+    drop_columns: list = None
+):
     df = df[df["type"].apply(lambda x: bool(re.search(f".*{property_type}.*", x, re.IGNORECASE)))]
     df = df.drop(columns=["date_sold", "suburb", "type"])
 
