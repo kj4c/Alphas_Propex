@@ -1,9 +1,9 @@
 import sys
-sys.path.append('../..')
+sys.path.append('..')
 import unittest
 import io
 import pandas as pd
-from backend.property_prices.helpers import avg_property_price
+from property_prices.helpers import avg_property_price
 
 class TestPropertyPrices(unittest.TestCase):
     def setUp(self):
@@ -27,7 +27,7 @@ class TestPropertyPrices(unittest.TestCase):
         result = avg_property_price(self.df.copy(), None)
         
         # Expected average calculation
-        expected_avg = float(1000000 + 800000 + 1200000 + 950000 + 1500000 + 750000) / 6
+        expected_avg = self.df["price"].mean()
         
         # Assert that the result matches expected average
         self.assertEqual(result, expected_avg)
@@ -35,12 +35,10 @@ class TestPropertyPrices(unittest.TestCase):
     def test_price_range_filter(self):
         # Filter by price range
         filters = {
-            "price_range": {"min_price": 1000000, "max_price": 1500000},
-            "date_range": None,
-            "suburb": None,
-            "property_features": None,
-            "property_size": None,
-            "property_type": None
+            "price": {
+                "min": 1000000, 
+                "max": 1500000
+            }
         }
         
         # Call function with filters
@@ -55,12 +53,7 @@ class TestPropertyPrices(unittest.TestCase):
     def test_suburb_filter(self):
         # Filter by suburb
         filters = {
-            "price_range": None,
-            "date_range": None,
             "suburb": "Bondi",
-            "property_features": None,
-            "property_size": None,
-            "property_type": None
         }
         
         # Call function with filters
@@ -75,12 +68,18 @@ class TestPropertyPrices(unittest.TestCase):
     def test_property_features_filter(self):
         # Filter by property features
         filters = {
-            "price_range": None,
-            "date_range": None,
-            "suburb": None,
-            "property_features": {"num_bath": 2, "num_bed": 3, "num_parking": 1},
-            "property_size": None,
-            "property_type": None
+            "num_bath": {
+                "min": 2,
+                "max": None
+            },
+            "num_bed": {
+                "min": 3,
+                "max": None
+            },
+            "num_parking": {
+                "min": 1,
+                "max": None
+            }
         }
         
         # Call function with filters
@@ -94,12 +93,7 @@ class TestPropertyPrices(unittest.TestCase):
     def test_property_type_filter(self):
         # Filter by property type
         filters = {
-            "price_range": None,
-            "date_range": None,
-            "suburb": None,
-            "property_features": None,
-            "property_size": None,
-            "property_type": "House"
+            "type": "House"
         }
         
         # Call function with filters
@@ -117,12 +111,15 @@ class TestPropertyPrices(unittest.TestCase):
     def test_multiple_filters(self):
         # Apply multiple filters
         filters = {
-            "price_range": {"min_price": 900000, "max_price": None},
-            "date_range": None,
-            "suburb": None,
-            "property_features": {"num_bath": 2, "num_bed": None, "num_parking": None},
-            "property_size": None,
-            "property_type": "House"
+            "price": {
+                "min": 900000, 
+                "max": None
+            },
+            "num_bath": {
+                "min": 2,
+                "max": None
+            },
+            "type": "House"
         }
         
         # Call function with filters
@@ -137,12 +134,10 @@ class TestPropertyPrices(unittest.TestCase):
     def test_empty_result(self):
         # Apply filters that should return empty result
         filters = {
-            "price_range": {"min_price": 2000000, "max_price": None},
-            "date_range": None,
-            "suburb": None,
-            "property_features": None,
-            "property_size": None,
-            "property_type": None
+            "price": {
+                "min": 2000000, 
+                "max": None
+            }
         }
         
         result = avg_property_price(self.df.copy(), filters)
@@ -152,13 +147,19 @@ class TestPropertyPrices(unittest.TestCase):
     def test_date_range_filter(self):
         # Filter by date range
         filters = {
-            "price_range": None,
-            "date_range": {"date_sold_after": "2023/03/01", "date_sold_before": "2023/05/31"},
-            "suburb": None,
-            "property_features": None,
-            "property_size": None,
-            "property_type": None
+            "date_sold": {
+                "min": "2023/03/01", 
+                "max": "2023/05/31"
+            }
         }
+
+        # Example input if we switch date to DateTime Object in the future
+        # filters = {
+        #     "date_sold": {
+        #         "min": pd.to_datetime("2023/03/01", format='%Y/%m/%d'), 
+        #         "max": pd.to_datetime("2023/05/31", format='%Y/%m/%d')
+        #     }
+        # }
         
         # Call function with filters
         result = avg_property_price(self.df.copy(), filters)
@@ -168,3 +169,6 @@ class TestPropertyPrices(unittest.TestCase):
         
         # Assert that the result matches expected average
         self.assertEqual(result, expected_avg)
+
+if __name__ == "__main__":
+    unittest.main()

@@ -26,6 +26,30 @@ def to_dataframe(id):
 
     return df
 
+# converts the adage 3.0 data into a pandas dataframe
+# 
+# params: data(dict): the adage 3.0 data
+# returns: DataFrame: a pandas dataframe containing the flattened events
+def adage_to_dataframe(data):
+    rows = []
+
+    for event in data['events']:
+        row = {
+            'timestamp': event['time_object']['timestamp'],
+            'timezone': event['time_object']['timezone'],
+            'event_type': event['event_type'],
+        }
+
+        row.update(event['attribute'])
+
+        rows.append(row)
+    if not rows:
+        raise ValueError("No property sale events found in the data.")
+    
+    df = pd.DataFrame(rows)
+    
+    return df
+
 BUCKET_NAME = "alpha-raw-data-bucket"
 s3 = boto3.client('s3')
 
