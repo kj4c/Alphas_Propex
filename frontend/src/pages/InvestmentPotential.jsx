@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
+import Panel from "@/components/Blocks";
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
@@ -31,22 +32,25 @@ const InvestmentPotential = () => {
   };
 
   return (
-    <div className="page">
-      <h1>Investment Potential</h1>
-      <p>Id:</p>
-      <BasicInput
-        type="text"
-        name="id"
-        placeholder="Id"
-        onChange={(e) => {
-          if (e.target.value !== "") {
-            setId(e.target.value);
-          } else {
-            setId(null);
-          }
-        }}
-      />
-      <RunButton text="Submit" onClick={fetchData}/>
+    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+      <Panel
+        title="Investment Potential"
+        description={"Which suburbs yield the highest investment potential"}
+      >
+        <BasicInput
+          type="text"
+          name="id"
+          placeholder="Id"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setId(e.target.value);
+            } else {
+              setId(null);
+            }
+          }}
+        />
+        <RunButton text="Submit" onClick={fetchData}/>
+      </Panel>
       {investPotential !== null && (
         <div className="investPotential">
           <table>
