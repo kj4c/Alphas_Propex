@@ -15,20 +15,21 @@ import SuburbLivability from './pages/SuburbLivability';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/commercialrecs" element={<CommercialRecs />} />
-        <Route path="/influencefactor" element={<InfluenceFactor />} />
-        <Route path="/investmentpotential" element={<InvestmentPotential />} />
-        <Route path="/propertyprices" element={<PropertyPrices />} />
-        <Route path="/propertyaffordabilityindex" element={<PropertyAffordabilityIndex />} />
-        <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
-        <Route path="/topschoolarea" element={<TopSchoolArea />} />
-        <Route path="/uploadjson" element={<UploadJson />} />
-        <Route path="/suburblivability" element={<SuburbLivability />} />
-
-      </Routes>
+      <div className="min-h-screen bg-[#010314] text-white">
+        <Navbar/>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/commercialrecs" element={<CommercialRecs />} />
+          <Route path="/influencefactor" element={<InfluenceFactor />} />
+          <Route path="/investmentpotential" element={<InvestmentPotential />} />
+          <Route path="/propertyprices" element={<PropertyPrices />} />
+          <Route path="/propertyaffordabilityindex" element={<PropertyAffordabilityIndex />} />
+          <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
+          <Route path="/topschoolarea" element={<TopSchoolArea />} />
+          <Route path="/uploadjson" element={<UploadJson />} />
+          <Route path="/suburblivability" element={<SuburbLivability />} />
+        </Routes>
+      </div>  
     </BrowserRouter>
   )
 

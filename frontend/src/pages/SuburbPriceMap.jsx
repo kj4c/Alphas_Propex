@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 const SuburbPriceMap = () => {
     const [loading, setLoading] = useState(false);
     const [ret, setRet] = useState(null);
@@ -39,14 +41,14 @@ const SuburbPriceMap = () => {
             !ret ? (
                 <>
                     <p>Id:</p>
-                    <input type="text" name="id" placeholder="Id" onChange={e => {
+                    <BasicInput type="text" name="id" placeholder="Id" onChange={e => {
                         if (e.target.value !== "") {
                             setId(e.target.value)
                         } else {
                             setId(null)
                         }
                     }}/>
-                    <button onClick={fetchData}>Submit</button>
+                    <RunButton onClick={fetchData} text={"Submit"}></RunButton>
                 </>
             ): (
                 <div
