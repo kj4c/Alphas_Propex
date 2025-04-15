@@ -45,7 +45,7 @@ def lambda_handler(event, context):
         
         data = general_helpers.to_dataframe(data['id'])
         
-        suburb_affordability_scores = helpers.find_suburb_affordabilty_score(
+        suburb_affordability_scores = helpers.find_suburb_livability_score(
             data,
             proximity_weight,
             property_size_weight,
