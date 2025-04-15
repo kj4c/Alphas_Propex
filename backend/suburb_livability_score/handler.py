@@ -36,8 +36,11 @@ def lambda_handler(event, context):
         proximity_weight = data.get("proximity_weight", None)
         property_size_weight = data.get("property_size_weight", None)
         population_density_weight = data.get("population_density_weight", None)
+        crime_risk_weight = data.get("crime_risk_weight", None)
+        weather_risk_weight = data.get("weather_risk_weight", None)
         
-        if any(w is None for w in [proximity_weight, property_size_weight, population_density_weight]):
+        
+        if any(w is None for w in [proximity_weight, property_size_weight, population_density_weight, crime_risk_weight, weather_risk_weight]):
             raise ValueError("Missing weights")
         
         data = general_helpers.to_dataframe(data['id'])
@@ -46,7 +49,9 @@ def lambda_handler(event, context):
             data,
             proximity_weight,
             property_size_weight,
-            population_density_weight
+            population_density_weight,
+            crime_risk_weight,
+            weather_risk_weight
         ).to_json(orient='records')
        
         return {
