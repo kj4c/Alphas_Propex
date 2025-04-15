@@ -10,6 +10,9 @@ def test_working():
         "proximity_weight": 0.2,
         "property_size_weight": 0.5,
         "population_density_weight": 0.3
+        "crime_risk_weight":0.2,
+        "weather_risk_weight":0.2,
+        ""
     })
 
     assert response.status_code == 200
