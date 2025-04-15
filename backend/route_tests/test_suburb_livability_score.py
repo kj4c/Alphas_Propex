@@ -9,10 +9,9 @@ def test_working():
         "id": "34c762a2-e1cd-44a7-a9ea-56f22d64989e",
         "proximity_weight": 0.2,
         "property_size_weight": 0.5,
-        "population_density_weight": 0.3
+        "population_density_weight": 0.3,
         "crime_risk_weight":0.2,
         "weather_risk_weight":0.2,
-        ""
     })
 
     assert response.status_code == 200
