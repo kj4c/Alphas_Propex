@@ -74,7 +74,52 @@ def get_suburb_crime_data(suburb):
     API_KEY = 'eZMJkb6iFe2TjWr9AZ7z44q3oQNzb6Bp2LkylkhC'
     BASE_URL = 'https://m42dj4mgj8.execute-api.ap-southeast-2.amazonaws.com/prod/crime/'
     
-    nullSuburbs = ['Acacia Gardens', 'Alfords Point', 'Allambie Heights', 'Avalon Beach', 'Avoca Beach', 'Balgowlah Heights', 'Balmain East', 'Bardwell Park', 'Bardwell Valley', 'Bass Hill', 'Bateau Bay', 'Baulkham Hills', 'Beacon Hill', 'Beaumont Hills', 'Bella Vista', 'Bellevue Hill', 'Berkeley Vale', 'Berowra Heights', 'Beverley Park', 'Beverly Hills', 'Bexley North', 'Bilgola Beach', 'Bilgola Plateau', 'Blair Athol', 'Bligh Park', 'Blue Bay', 'Blue Haven', 'Bondi Beach', 'Bondi Junction', 'Bonnet Bay', 'Bonnyrigg Heights', 'Booker Bay', 'Bossley Park', 'Bow Bowing', 'Breakfast Point', 'Buff Point', 'Burwood Heights', 'Cabramatta West', 'Cambridge Gardens', 'Cambridge Park', 'Camden Park', 'Camden South', 'Canada Bay', 'Canley Heights', 'Canley Vale', 'Canton Beach', 'Caringbah South', 'Carnes Hill', 'Carss Park', 'Castle Cove', 'Castle Hill', 'Cecil Hills', 'Centennial Park', 'Chain Valley Bay', 'Chatswood West', 'Chester Hill', 'Chipping Norton', 'Chittaway Bay', 'Chittaway Point', 'Church Point', 'Claremont Meadows', 'Clemton Park', 'Collaroy Plateau', 'Concord West', 'Condell Park', 'Connells Point', 'Constitution Hill', 'Cremorne Point', 'Crows Nest', 'Curl Curl', 'Currans Hill', 'Daleys Point', 'Darling Point', 'Darlington', 'Dean Park', 'Dee Why', 'Denham Court', 'Denistone East', 'Denistone West', 'Dolans Bay', 'Dolls Point', 'Dover Heights', 'Duffys Forest', 'Dulwich Hill', 'Dundas Valley', 'Eagle Vale', 'East Gosford', 'East Hills', 'East Killara', 'East Lindfield', 'East Ryde', 'Eastern Creek', 'Edensor Park', 'Edmondson Park', 'Elanora Heights', 'Elderslie', 'Elizabeth Hills', 'Ellis Lane', 'Empire Bay', 'Emu Heights', 'Emu Plains', 'Enmore', 'Erina Heights', 'Erskine Park', 'Ettalong Beach', 'Fairfield East', 'Fairfield Heights', 'Fairfield West', 'Five Dock', 'Forest Lodge', 'Forresters Beach', 'Frenchs Forest', 'Georges Hall', 'Gledswood Hills', 'Glen Alpine', 'Glenmore Park', 'Grays Point', 'Green Point', 'Green Valley', 'Greenfield Park', 'Greenhills Beach', 'Gregory Hills', 'Guildford West', 'Gymea Bay', 'Hamlyn Terrace', 'Hardys Bay', 'Harrington Park', 'Harris Park', 'Hawkesbury Heights', 'Homebush West', 'Horningsea Park', 'Hornsby Heights', 'Horsfield Bay', 'Horsley Park', 'Hunters Hill', 'Huntleys Cove', 'Huntleys Point', 'Hurlstone Park', 'Hurstville Grove', 'Jordan Springs', 'Kangaroo Point', 'Kellyville Ridge', 'Killarney Heights', 'Killarney Vale', 'Killcare Heights', 'Kincumber South', 'Kings Langley', 'Kings Park', 'Kingswood', 'Kogarah Bay', 'Kurraba Point', 'Kyle Bay', 'La Perouse', 'Lake Haven', 'Lake Munmorah', 'Lalor Park', 'Lane Cove', 'Lane Cove North', 'Lavender Bay', 'Lethbridge Park', 'Liberty Grove', 'Lilli Pilli', 'Linley Point', 'Little Bay', 'Long Jetty', 'Long Point', 'Macmasters Beach', 'Macquarie Fields', 'Macquarie Links', 'Macquarie Park', 'Manly Vale', 'Mannering Park', 'Marsden Park', 'Mays Hill', 'McGraths Hill', 'Melrose Park', 'Merrylands West', 'Middle Cove', 'Middleton Grange', 'Millers Point', 'Milsons Point', 'Mona Vale', 'Mount Annan', 'Mount Colah', 'Mount Druitt', 'Mount Kuring-Gai', 'Mount Lewis', 'Mount Pritchard', 'Mount Riverview', 'Mount Vernon', 'Narellan Vale', 'Neutral Bay', 'Niagara Park', 'Norah Head', 'North Avoca', 'North Balgowlah', 'North Bondi', 'North Curl Curl', 'North Epping', 'North Gosford', 'North Manly', 'North Narrabeen', 'North Parramatta', 'North Rocks', 'North Ryde', 'North Strathfield', 'North Sydney', 'North Turramurra', 'North Willoughby', 'Old Guildford', 'Old Toongabbie', 'Oran Park', 'Oxley Park', 'Oyster Bay', 'Padstow Heights', 'Palm Beach', 'Peakhurst Heights', 'Pearl Beach', 'Pendle Hill', 'Pennant Hills', 'Phegans Bay', 'Phillip Bay', 'Picnic Point', 'Pleasure Point', 'Point Clare', 'Point Frederick', 'Point Piper', 'Port Hacking', 'Potts Hill', 'Potts Point', 'Pretty Beach', 'Punchbowl', 'Quakers Hill', 'Queens Park', 'Ramsgate Beach', 'Regents Park', 'Revesby Heights', 'Rodd Point', 'Rooty Hill', 'Ropes Crossing', 'Rose Bay', 'Roseville Chase', 'Rouse Hill', 'Rushcutters Bay', 'Russell Lea', 'San Remo', 'Sandy Point', 'Sans Souci', 'Scotland Island', 'Seven Hills', 'Shelly Beach', 'Silverwater', 'South Coogee', 'South Granville', 'South Hurstville', 'South Penrith', 'South Turramurra', 'South Wentworthville', 'South Windsor', 'Spring Farm', 'Springfield', 'St Andrews', 'St Clair', 'St Huberts Island', 'St Ives', 'St Ives Chase', 'St Johns Park', 'St Leonards', 'St Marys', 'St Peters', 'Stanhope Gardens', 'Strathfield South', 'Summer Hill', 'Surry Hills', 'Sydney Olympic Park', 'Sylvania Waters', 'Tacoma South', 'Taren Point', 'Tennyson Point', 'Terrey Hills', 'The Entrance', 'The Entrance North', 'The Ponds', 'Toowoon Bay', 'Tumbi Umbi', 'Umina Beach', 'Valley Heights', 'Voyager Point', 'Warwick Farm', 'Watsons Bay', 'Wattle Grove', 'Wentworth Point', 'Werrington County', 'Werrington Downs', 'West Gosford', 'West Hoxton', 'West Pennant Hills', 'West Pymble', 'West Ryde', 'Wetherill Park', 'Whale Beach', 'Wheeler Heights', 'Wiley Park', 'Windsor Downs', 'Winston Hills', 'Wolli Creek', 'Woronora Heights', 'Woy Woy', 'Yellow Rock', 'Yowie Bay']
+    nullSuburbs = ['Acacia Gardens', 'Alfords Point', 'Allambie Heights', 'Avalon Beach', 'Avoca Beach', 'Balgowlah Heights', 
+                   'Balmain East', 'Bardwell Park', 'Bardwell Valley', 'Bass Hill', 'Bateau Bay', 'Baulkham Hills', 'Beacon Hill', 
+                   'Beaumont Hills', 'Bella Vista', 'Bellevue Hill', 'Berkeley Vale', 'Berowra Heights', 'Beverley Park', 
+                   'Beverly Hills', 'Bexley North', 'Bilgola Beach', 'Bilgola Plateau', 'Blair Athol', 'Bligh Park', 'Blue Bay', 
+                   'Blue Haven', 'Bondi Beach', 'Bondi Junction', 'Bonnet Bay', 'Bonnyrigg Heights', 'Booker Bay', 'Bossley Park', 
+                   'Bow Bowing', 'Breakfast Point', 'Buff Point', 'Burwood Heights', 'Cabramatta West', 'Cambridge Gardens', 
+                   'Cambridge Park', 'Camden Park', 'Camden South', 'Canada Bay', 'Canley Heights', 'Canley Vale', 'Canton Beach', 
+                   'Caringbah South', 'Carnes Hill', 'Carss Park', 'Castle Cove', 'Castle Hill', 'Cecil Hills', 'Centennial Park', 
+                   'Chain Valley Bay', 'Chatswood West', 'Chester Hill', 'Chipping Norton', 'Chittaway Bay', 'Chittaway Point', 
+                   'Church Point', 'Claremont Meadows', 'Clemton Park', 'Collaroy Plateau', 'Concord West', 'Condell Park', 
+                   'Connells Point', 'Constitution Hill', 'Cremorne Point', 'Crows Nest', 'Curl Curl', 'Currans Hill', 'Daleys Point', 
+                   'Darling Point', 'Darlington', 'Dean Park', 'Dee Why', 'Denham Court', 'Denistone East', 'Denistone West', 
+                   'Dolans Bay', 'Dolls Point', 'Dover Heights', 'Duffys Forest', 'Dulwich Hill', 'Dundas Valley', 'Eagle Vale', 
+                   'East Gosford', 'East Hills', 'East Killara', 'East Lindfield', 'East Ryde', 'Eastern Creek', 'Edensor Park', 
+                   'Edmondson Park', 'Elanora Heights', 'Elderslie', 'Elizabeth Hills', 'Ellis Lane', 'Empire Bay', 'Emu Heights', 
+                   'Emu Plains', 'Enmore', 'Erina Heights', 'Erskine Park', 'Ettalong Beach', 'Fairfield East', 'Fairfield Heights', 
+                   'Fairfield West', 'Five Dock', 'Forest Lodge', 'Forresters Beach', 'Frenchs Forest', 'Georges Hall', 'Gledswood Hills', 
+                   'Glen Alpine', 'Glenmore Park', 'Grays Point', 'Green Point', 'Green Valley', 'Greenfield Park', 'Greenhills Beach', 
+                   'Gregory Hills', 'Guildford West', 'Gymea Bay', 'Hamlyn Terrace', 'Hardys Bay', 'Harrington Park', 'Harris Park', 
+                   'Hawkesbury Heights', 'Homebush West', 'Horningsea Park', 'Hornsby Heights', 'Horsfield Bay', 'Horsley Park', 
+                   'Hunters Hill', 'Huntleys Cove', 'Huntleys Point', 'Hurlstone Park', 'Hurstville Grove', 'Jordan Springs', 
+                   'Kangaroo Point', 'Kellyville Ridge', 'Killarney Heights', 'Killarney Vale', 'Killcare Heights', 'Kincumber South', 
+                   'Kings Langley', 'Kings Park', 'Kingswood', 'Kogarah Bay', 'Kurraba Point', 'Kyle Bay', 'La Perouse', 'Lake Haven', 
+                   'Lake Munmorah', 'Lalor Park', 'Lane Cove', 'Lane Cove North', 'Lavender Bay', 'Lethbridge Park', 'Liberty Grove', 
+                   'Lilli Pilli', 'Linley Point', 'Little Bay', 'Long Jetty', 'Long Point', 'Macmasters Beach', 'Macquarie Fields', 
+                   'Macquarie Links', 'Macquarie Park', 'Manly Vale', 'Mannering Park', 'Marsden Park', 'Mays Hill', 'McGraths Hill', 
+                   'Melrose Park', 'Merrylands West', 'Middle Cove', 'Middleton Grange', 'Millers Point', 'Milsons Point', 'Mona Vale', 
+                   'Mount Annan', 'Mount Colah', 'Mount Druitt', 'Mount Kuring-Gai', 'Mount Lewis', 'Mount Pritchard', 'Mount Riverview', 
+                   'Mount Vernon', 'Narellan Vale', 'Neutral Bay', 'Niagara Park', 'Norah Head', 'North Avoca', 'North Balgowlah', 
+                   'North Bondi', 'North Curl Curl', 'North Epping', 'North Gosford', 'North Manly', 'North Narrabeen', 'North Parramatta', 
+                   'North Rocks', 'North Ryde', 'North Strathfield', 'North Sydney', 'North Turramurra', 'North Willoughby', 'Old Guildford', 
+                   'Old Toongabbie', 'Oran Park', 'Oxley Park', 'Oyster Bay', 'Padstow Heights', 'Palm Beach', 'Peakhurst Heights', 
+                   'Pearl Beach', 'Pendle Hill', 'Pennant Hills', 'Phegans Bay', 'Phillip Bay', 'Picnic Point', 'Pleasure Point', 
+                   'Point Clare', 'Point Frederick', 'Point Piper', 'Port Hacking', 'Potts Hill', 'Potts Point', 'Pretty Beach', 'Punchbowl', 
+                   'Quakers Hill', 'Queens Park', 'Ramsgate Beach', 'Regents Park', 'Revesby Heights', 'Rodd Point', 'Rooty Hill', 
+                   'Ropes Crossing', 'Rose Bay', 'Roseville Chase', 'Rouse Hill', 'Rushcutters Bay', 'Russell Lea', 'San Remo', 'Sandy Point', 
+                   'Sans Souci', 'Scotland Island', 'Seven Hills', 'Shelly Beach', 'Silverwater', 'South Coogee', 'South Granville', 
+                   'South Hurstville', 'South Penrith', 'South Turramurra', 'South Wentworthville', 'South Windsor', 'Spring Farm', 
+                   'Springfield', 'St Andrews', 'St Clair', 'St Huberts Island', 'St Ives', 'St Ives Chase', 'St Johns Park', 'St Leonards', 
+                   'St Marys', 'St Peters', 'Stanhope Gardens', 'Strathfield South', 'Summer Hill', 'Surry Hills', 'Sydney Olympic Park', 
+                   'Sylvania Waters', 'Tacoma South', 'Taren Point', 'Tennyson Point', 'Terrey Hills', 'The Entrance', 'The Entrance North', 
+                   'The Ponds', 'Toowoon Bay', 'Tumbi Umbi', 'Umina Beach', 'Valley Heights', 'Voyager Point', 'Warwick Farm', 'Watsons Bay', 
+                   'Wattle Grove', 'Wentworth Point', 'Werrington County', 'Werrington Downs', 'West Gosford', 'West Hoxton', 'West Pennant Hills', 
+                   'West Pymble', 'West Ryde', 'Wetherill Park', 'Whale Beach', 'Wheeler Heights', 'Wiley Park', 'Windsor Downs', 'Winston Hills', 
+                   'Wolli Creek', 'Woronora Heights', 'Woy Woy', 'Yellow Rock', 'Yowie Bay'
+                ]
     
     if suburb in nullSuburbs:
         # print(f"Suburb {suburb} not found in crime data.")
@@ -105,7 +150,9 @@ def get_suburb_weather_data(suburb):
     API_KEY = 'eZMJkb6iFe2TjWr9AZ7z44q3oQNzb6Bp2LkylkhC'
     url = 'https://m42dj4mgj8.execute-api.ap-southeast-2.amazonaws.com/prod/data/weather/suburb'
     
-    yesWeatherData = ['Bankstown', 'Blacktown', 'Burwood', 'Camden', 'Campbelltown', 'Canada Bay', 'Canterbury', 'Fairfield', 'Hornsby', 'Hunters Hill', 'Lane Cove', 'Liverpool', 'Mosman', 'North Sydney', 'Parramatta', 'Penrith', 'Randwick', 'Ryde', 'Strathfield', 'Sutherland', 'Sydney', 'Waverley', 'Willoughby', 'Woollahra']
+    yesWeatherData = ['Bankstown', 'Blacktown', 'Burwood', 'Camden', 'Campbelltown', 'Canada Bay', 'Canterbury', 'Fairfield', 
+                      'Hornsby', 'Hunters Hill', 'Lane Cove', 'Liverpool', 'Mosman', 'North Sydney', 'Parramatta', 'Penrith', 
+                      'Randwick', 'Ryde', 'Strathfield', 'Sutherland', 'Sydney', 'Waverley', 'Willoughby', 'Woollahra']
     
     if suburb not in yesWeatherData:
         return 0
