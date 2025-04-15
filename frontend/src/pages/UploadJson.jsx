@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 
 const UploadJson = () => {
   const [file, setFile] = useState(null);
@@ -44,15 +46,12 @@ const UploadJson = () => {
     <div className="page">
         <h1>Upload JSON file</h1>
         <input
+            className="cursor-pointer"
             type="file"
             accept=".json"
             onChange={handleFileChange}
         />
-        <button
-            onClick={handleUpload}
-        >
-            Upload JSON
-        </button>
+        <RunButton text="Upload" onClick={handleUpload}/>
         {
             loading && <p>Loading...</p>
         }

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
+
 const PropertyAffordabilityIndex = () => {
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
@@ -40,7 +43,7 @@ const PropertyAffordabilityIndex = () => {
       {!fetched && (
         <>
           <p>Id:</p>
-          <input
+          <BasicInput
             type="text"
             name="id"
             placeholder="Id"
@@ -53,7 +56,7 @@ const PropertyAffordabilityIndex = () => {
             }}
           />
           <p>Income:</p>
-          <input
+          <BasicInput
             type="text"
             name="income"
             placeholder="Income"
@@ -63,7 +66,7 @@ const PropertyAffordabilityIndex = () => {
               }
             }}
           />
-          <button onClick={fetchData}>Fetch</button>
+          <RunButton text="Fetch" onClick={fetchData}/>
         </>
       )}
       {ret !== null && (

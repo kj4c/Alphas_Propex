@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
@@ -32,7 +34,7 @@ const InvestmentPotential = () => {
     <div className="page">
       <h1>Investment Potential</h1>
       <p>Id:</p>
-      <input
+      <BasicInput
         type="text"
         name="id"
         placeholder="Id"
@@ -44,7 +46,7 @@ const InvestmentPotential = () => {
           }
         }}
       />
-      <button onClick={fetchData}>Submit</button>
+      <RunButton text="Submit" onClick={fetchData}/>
       {investPotential !== null && (
         <div className="investPotential">
           <table>
