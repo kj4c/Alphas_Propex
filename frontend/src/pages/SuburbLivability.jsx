@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 const SuburbLivability = () => {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -42,7 +44,7 @@ const SuburbLivability = () => {
       {!loaded ? (
         <div className="input-form">
           <p>Id:</p>
-          <input
+          <BasicInput
             type="text"
             name="id"
             placeholder="Id"
@@ -55,7 +57,7 @@ const SuburbLivability = () => {
             }}
           />
           <p>Proximity weight:</p>
-          <input
+          <BasicInput
             type="text"
             name="weight"
             placeholder="Proximity weight"
@@ -66,7 +68,7 @@ const SuburbLivability = () => {
             }}
           />
           <p>Property size weight:</p>
-          <input
+          <BasicInput
             type="text"
             name="weight"
             placeholder="Property size weight"
@@ -77,7 +79,7 @@ const SuburbLivability = () => {
             }}
           />
           <p>Population density weight:</p>
-          <input
+          <BasicInput
             type="text"
             name="weight"
             placeholder="Population density weiggt"
@@ -87,7 +89,7 @@ const SuburbLivability = () => {
               }
             }}
           />
-          <button onClick={fetchData}>Submit</button>
+          <RunButton onClick={fetchData} text={"Submit"}></RunButton>
         </div>
       ) : (
         <table>

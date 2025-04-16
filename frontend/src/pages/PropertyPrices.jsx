@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 const PropertyPrices = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -78,7 +80,7 @@ const PropertyPrices = () => {
     <div className="page">
       <h1>Average Property Prices</h1>
       <p>Id:</p>
-      <input
+      <BasicInput
         type="text"
         name="id"
         placeholder="Id"
@@ -92,7 +94,7 @@ const PropertyPrices = () => {
       />
       <div className="filter-field">
         <p>Price range:</p>
-        <input
+        <BasicInput
           type="text"
           name="min-price"
           placeholder="Min price"
@@ -104,7 +106,7 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <input
+        <BasicInput
           type="text"
           name="max-price"
           placeholder="Max price"
@@ -119,7 +121,7 @@ const PropertyPrices = () => {
       </div>
       <div className="filter-field">
         <p>Date range:</p>
-        <input
+        <BasicInput
           type="text"
           name="sold-after"
           placeholder="Date sold after"
@@ -131,7 +133,7 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <input
+        <BasicInput
           type="text"
           name="sold-before"
           placeholder="Date sold before"
@@ -146,7 +148,7 @@ const PropertyPrices = () => {
       </div>
       <div className="filter-field">
         <p>Suburb:</p>
-        <input
+        <BasicInput
           type="text"
           name="sold-after"
           placeholder="Suburb"
@@ -161,7 +163,7 @@ const PropertyPrices = () => {
       </div>
       <div className="filter-field">
         <p>Property feature:</p>
-        <input
+        <BasicInput
           type="text"
           name="num-bath"
           placeholder="Bathrooms"
@@ -173,7 +175,7 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <input
+        <BasicInput
           type="text"
           name="num-bed"
           placeholder="Bedrooms"
@@ -185,7 +187,7 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <input
+        <BasicInput
           type="text"
           name="num-parking"
           placeholder="Parking"
@@ -200,7 +202,7 @@ const PropertyPrices = () => {
       </div>
       <div className="filter-field">
         <p>Property size:</p>
-        <input
+        <BasicInput
           type="text"
           name="min-size"
           placeholder="Min size"
@@ -212,7 +214,7 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <input
+        <BasicInput
           type="text"
           name="max-size"
           placeholder="Max size"
@@ -227,7 +229,7 @@ const PropertyPrices = () => {
       </div>
       <div className="filter-field">
         <p>Property type:</p>
-        <input
+        <BasicInput
           type="text"
           name="min-size"
           placeholder="Type"
@@ -240,7 +242,7 @@ const PropertyPrices = () => {
           }}
         />
       </div>
-      <button onClick={fetchPrice}>Search</button>
+      <RunButton text={"Search"} onClick={fetchPrice}>Search</RunButton>
       {loading && <div className="loading">loading...</div>}
       {loaded && (
         <div className="avg-price">

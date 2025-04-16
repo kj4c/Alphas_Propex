@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
 const TopSchoolArea = () => {
   const [loading, setLoading] = useState(false);
   const [schools, setSchools] = useState(null);
@@ -50,7 +52,7 @@ const TopSchoolArea = () => {
     <div className="page">
       <h1>Properties near schools</h1>
       <p>Id:</p>
-      <input
+      <BasicInput
         type="text"
         name="id"
         placeholder="Id"
@@ -89,7 +91,7 @@ const TopSchoolArea = () => {
         ))}
       </select>
       <p>Radius(km):</p>
-      <input
+      <BasicInput
         type="text"
         name="radius"
         placeholder="Radius"
@@ -99,7 +101,7 @@ const TopSchoolArea = () => {
           }
         }}
       />
-      <button onClick={fetchData}>Fetch</button>
+      <RunButton text="Fetch" onClick={fetchData}/>
 
       {loading && <p>Loading...</p>}
 
