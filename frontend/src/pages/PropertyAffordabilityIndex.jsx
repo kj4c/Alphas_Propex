@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
+import Panel from "@/components/Blocks";
+
 const PropertyAffordabilityIndex = () => {
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
@@ -34,38 +38,35 @@ const PropertyAffordabilityIndex = () => {
   };
 
   return (
-    <div className="page">
-      <h1>Property Affordability Index</h1>
-      {loading && <p>Loading...</p>}
-      {!fetched && (
-        <>
-          <p>Id:</p>
-          <input
-            type="text"
-            name="id"
-            placeholder="Id"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setId(e.target.value);
-              } else {
-                setId(null);
-              }
-            }}
-          />
-          <p>Income:</p>
-          <input
-            type="text"
-            name="income"
-            placeholder="Income"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setIncome(e.target.value);
-              }
-            }}
-          />
-          <button onClick={fetchData}>Fetch</button>
-        </>
-      )}
+    <div>
+      <Panel
+        title="Property Affordability Index"
+        description={"How affordable each suburb is based on given income"}
+      >
+        <BasicInput
+          type="text"
+          name="id"
+          placeholder="Id"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setId(e.target.value);
+            } else {
+              setId(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="income"
+          placeholder="Income"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setIncome(e.target.value);
+            }
+          }}
+        />
+        <RunButton text="Fetch" onClick={fetchData}/>
+      </Panel>
       {ret !== null && (
         <div className="ret">
           <table>

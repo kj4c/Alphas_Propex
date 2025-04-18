@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import RunButton from "../components/Buttons";
 import axios from "axios";
+import BasicInput from "../components/Inputs";
 const InfluenceFactor = () => {
   const [loading, setLoading] = useState(false);
   const [factor, setFactor] = useState(null);
@@ -32,7 +34,7 @@ const InfluenceFactor = () => {
     <div className="page">
       <h1>Dashboard</h1>
       <p>Id:</p>
-      <input
+      <BasicInput
         type="text"
         name="id"
         placeholder="Id"
@@ -44,7 +46,7 @@ const InfluenceFactor = () => {
           }
         }}
       />
-      <button onClick={fetchData}>Submit</button>
+      <RunButton text={"Submit"} onClick={fetchData}/>
       <h1>Influence Factor</h1>
       {loading && <p>Loading...</p>}
       {factor !== null && { factor }}

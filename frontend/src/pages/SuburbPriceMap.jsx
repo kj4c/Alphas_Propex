@@ -1,5 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
+import Panel from "@/components/Blocks";
 const SuburbPriceMap = () => {
     const [loading, setLoading] = useState(false);
     const [ret, setRet] = useState(null);
@@ -30,31 +33,34 @@ const SuburbPriceMap = () => {
     }
 
     return (
-      <div className="page">
-        <h1>Median price by suburb</h1>
-        {
-            loading && <p>Loading...</p>
-        }
-        {
-            !ret ? (
-                <>
-                    <p>Id:</p>
-                    <input type="text" name="id" placeholder="Id" onChange={e => {
-                        if (e.target.value !== "") {
-                            setId(e.target.value)
-                        } else {
-                            setId(null)
-                        }
-                    }}/>
-                    <button onClick={fetchData}>Submit</button>
-                </>
-            ): (
-                <div
-                dangerouslySetInnerHTML={{__html: ret}}
-                />
-            )
-        }
-        
+      <div>
+        <Panel
+            title="Suburb Median Prices"
+            description={"Heatmap of the median prices of properties in each Sydney Suburb"}
+        >
+            {
+                loading && <p>Loading...</p>
+            }
+            {
+                !ret ? (
+                    <>
+                        <BasicInput type="text" name="id" placeholder="Id" onChange={e => {
+                            if (e.target.value !== "") {
+                                setId(e.target.value)
+                            } else {
+                                setId(null)
+                            }
+                        }}/>
+                        <RunButton onClick={fetchData} text={"Submit"}></RunButton>
+                    </>
+                ): (
+                    <div
+                    className="w-[80%] h-fit overflow-auto border rounded-lg shadow p-10 bg-[#1e1a36]"
+                    dangerouslySetInnerHTML={{__html: ret}}
+                    />
+                )
+            }
+        </Panel>
       </div>
     )
 }

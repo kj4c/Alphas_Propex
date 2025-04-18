@@ -1,9 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
+import RunButton from "../components/Buttons";
+import BasicInput from "../components/Inputs";
+import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/utils";
+import Panel from "@/components/Blocks";
+
 const CommercialRecs = () => {
   const [id, setId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
   const fetchPrice = async () => {
     if (id == null) {
       alert("no id given");
@@ -28,23 +37,22 @@ const CommercialRecs = () => {
     setLoading(false);
     setRecs(JSON.parse(response.data.recommendations));
   };
+
   return (
-    <div className="page">
-      <h1>Commercial Recommendations</h1>
-      <p>Id:</p>
-      <input
-        type="text"
-        name="id"
-        placeholder="Id"
-        onChange={(e) => {
-          if (e.target.value !== "") {
-            setId(e.target.value);
-          } else {
-            setId(null);
-          }
-        }}
-      />
-      <button onClick={fetchPrice}>Submit</button>
+    <div>
+      <Panel
+        title={"Commercial Recommendations"}
+        description={"Find the best suburbs for commercial use"}
+      >
+        <BasicInput
+          type="text"
+          name="id"
+          placeholder="Id"
+          onChange={(e) => setId(e.target.value || null)}
+        />
+        <RunButton text={"Submit"} onClick={fetchPrice} />
+      </Panel>
+
       {recs !== null && (
         <div className="recs">
           <table>
