@@ -40,7 +40,7 @@ const SuburbLivability = () => {
   };
 
   return (
-    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+    <div>
       <Panel
         title="Suburb Livability Score"
         description="Calculates livability score given weightings of proximity to CBD, property size, and population density"

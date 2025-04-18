@@ -38,7 +38,7 @@ const PropertyAffordabilityIndex = () => {
   };
 
   return (
-    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+    <div>
       <Panel
         title="Property Affordability Index"
         description={"How affordable each suburb is based on given income"}

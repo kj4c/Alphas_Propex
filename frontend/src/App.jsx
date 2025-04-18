@@ -11,6 +11,8 @@ import SuburbPriceMap from './pages/SuburbPriceMap';
 import TopSchoolArea from './pages/TopSchoolArea';
 import UploadJson from './pages/UploadJson';
 import SuburbLivability from './pages/SuburbLivability';
+import ForBusinesses from './pages/ForBusinesses';
+import ForIndividuals from './pages/ForIndividuals';
 
 function App() {
   return (
@@ -19,15 +21,8 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/commercialrecs" element={<CommercialRecs />} />
-          <Route path="/influencefactor" element={<InfluenceFactor />} />
-          <Route path="/investmentpotential" element={<InvestmentPotential />} />
-          <Route path="/propertyprices" element={<PropertyPrices />} />
-          <Route path="/propertyaffordabilityindex" element={<PropertyAffordabilityIndex />} />
-          <Route path="/suburbpricemap" element={<SuburbPriceMap />} />
-          <Route path="/topschoolarea" element={<TopSchoolArea />} />
-          <Route path="/uploadjson" element={<UploadJson />} />
-          <Route path="/suburblivability" element={<SuburbLivability />} />
+          <Route path="/businesses" element={<ForBusinesses />} />
+          <Route path="/individuals" element={<ForIndividuals/>} />
         </Routes>
       </div>  
     </BrowserRouter>
