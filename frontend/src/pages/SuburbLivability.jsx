@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
+import Panel from "@/components/Blocks";
 const SuburbLivability = () => {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -39,78 +40,78 @@ const SuburbLivability = () => {
   };
 
   return (
-    <div className="page">
-      <h1>Suburb Livability Score</h1>
-      {!loaded ? (
-        <div className="input-form">
-          <p>Id:</p>
-          <BasicInput
-            type="text"
-            name="id"
-            placeholder="Id"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setId(e.target.value);
-              } else {
-                setId(null);
-              }
-            }}
-          />
-          <p>Proximity weight:</p>
-          <BasicInput
-            type="text"
-            name="weight"
-            placeholder="Proximity weight"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setWeight(e.target.value);
-              }
-            }}
-          />
-          <p>Property size weight:</p>
-          <BasicInput
-            type="text"
-            name="weight"
-            placeholder="Property size weight"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setSizeWeight(e.target.value);
-              }
-            }}
-          />
-          <p>Population density weight:</p>
-          <BasicInput
-            type="text"
-            name="weight"
-            placeholder="Population density weiggt"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setDensity(e.target.value);
-              }
-            }}
-          />
-          <RunButton onClick={fetchData} text={"Submit"}></RunButton>
-        </div>
-      ) : (
-        <table>
-          <thead>
-            <tr>
-              <th>Suburb</th>
-              <th>Livability Score</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ret.map((entry, index) => (
-              <tr key={index}>
-                <td>{entry.suburb}</td>
-                <td>{entry.livability_score.toFixed(2)}</td>
+    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+      <Panel
+        title="Suburb Livability Score"
+        description="Calculates livability score given weightings of proximity to CBD, property size, and population density"
+      >
+        {!loaded ? (
+          <div>
+            <BasicInput
+              type="text"
+              name="id"
+              placeholder="Id"
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  setId(e.target.value);
+                } else {
+                  setId(null);
+                }
+              }}
+            />
+            <BasicInput
+              type="text"
+              name="weight"
+              placeholder="Proximity weight"
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  setWeight(e.target.value);
+                }
+              }}
+            />
+            <BasicInput
+              type="text"
+              name="weight"
+              placeholder="Property size weight"
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  setSizeWeight(e.target.value);
+                }
+              }}
+            />
+            <BasicInput
+              type="text"
+              name="weight"
+              placeholder="Population density weight"
+              onChange={(e) => {
+                if (e.target.value !== "") {
+                  setDensity(e.target.value);
+                }
+              }}
+            />
+            <RunButton onClick={fetchData} text={"Submit"}></RunButton>
+          </div>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Suburb</th>
+                <th>Livability Score</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
+            </thead>
+            <tbody>
+              {ret.map((entry, index) => (
+                <tr key={index}>
+                  <td>{entry.suburb}</td>
+                  <td>{entry.livability_score.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
 
-      {loading && <p>Loading...</p>}
+        {loading && <p>Loading...</p>}
+      </Panel>
     </div>
   );
 };
