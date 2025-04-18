@@ -78,7 +78,7 @@ const PropertyPrices = () => {
   };
 
   return (
-    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+    <div>
       <Panel
         title="Average Property Prices"
         description="Find average property prices given optional filters"

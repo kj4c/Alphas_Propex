@@ -33,7 +33,7 @@ const SuburbPriceMap = () => {
     }
 
     return (
-      <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+      <div>
         <Panel
             title="Suburb Median Prices"
             description={"Heatmap of the median prices of properties in each Sydney Suburb"}

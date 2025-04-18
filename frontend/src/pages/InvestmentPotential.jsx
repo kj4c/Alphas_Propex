@@ -32,7 +32,7 @@ const InvestmentPotential = () => {
   };
 
   return (
-    <div className="page mx-auto w-full max-w-[95vw] px-6 py-10 flex flex-col gap-6">
+    <div>
       <Panel
         title="Investment Potential"
         description={"Which suburbs yield the highest investment potential"}
