@@ -58,13 +58,21 @@ const UploadJson = () => {
 
   return (
     <div className="page">
-        <h1>Upload JSON file</h1>
-        <input
-            className="cursor-pointer"
+        <label
+          htmlFor="json-upload"
+          className="inline-block cursor-pointer rounded-md border border-[#c8c8c8] bg-[#010314] text-[#c8c8c8] px-4 py-2 transition hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-[#466fba]"
+        >
+          Upload JSON File
+          <input
+            id="json-upload"
             type="file"
             accept=".json"
             onChange={handleFileChange}
-        />
+            className="hidden"
+          />
+        </label>
+        <br>
+        </br>
         <RunButton text="Upload" onClick={handleUpload}/>
         {
             loading && <p>Loading...</p>

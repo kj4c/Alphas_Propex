@@ -21,6 +21,7 @@ function App() {
         <Navbar/>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/uploadjson" element={<UploadJson />} />
           <Route path="/businesses" element={<ForBusinesses />} />
           <Route path="/individuals" element={<ForIndividuals/>} />
         </Routes>
