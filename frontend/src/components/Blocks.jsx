@@ -4,13 +4,7 @@ import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
 import RunButton from "./Buttons";
 
-
-export default function Panel({
-  title,
-  description,
-  children,
-  runbutton
-}) {
+export default function Panel({ title, description, children, runbutton }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -37,14 +31,16 @@ export default function Panel({
 
       <div
         style={{
-          maxHeight: isOpen ? "1000px" : "0",
+          maxHeight: isOpen ? "10000px" : "0",
           opacity: isOpen ? "1" : "0",
           overflow: "hidden",
           transition: "max-height 400ms ease-in-out, opacity 400ms ease-in-out",
         }}
         className="flex flex-col gap-4 items-center py-5"
       >
-        <div className="w-full flex flex-col gap-4 items-center">{children}</div>
+        <div className="w-full flex flex-col gap-4 items-center">
+          {children}
+        </div>
         <div>{runbutton}</div>
       </div>
     </div>

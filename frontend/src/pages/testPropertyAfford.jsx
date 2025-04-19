@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const PropertyAffordabilityIndex = () => {
+const TestPropertyAfford = () => {
   const [loading, setLoading] = useState(false);
   const [fetched, setFetched] = useState(false);
   const [income, setIncome] = useState("32292");
@@ -55,7 +55,7 @@ const PropertyAffordabilityIndex = () => {
   return (
     <div>
       <Panel
-        title="Property Affordability Index"
+        title="Test Property Affordability Index"
         description={"How affordable each suburb is based on given income"}
       >
         <BasicInput
@@ -87,7 +87,7 @@ const PropertyAffordabilityIndex = () => {
         {!loading && affordabilityData !== null && (
           <div className="ret w-full ">
             <div className="ret max-h-96 overflow-auto border border-white/30 rounded-md mt-4">
-              <table className="ml-4">
+              <table className="">
                 <thead>
                   <tr>
                     <th>Suburb</th>
@@ -105,7 +105,7 @@ const PropertyAffordabilityIndex = () => {
               </table>
             </div>
 
-            <div className="w-full h- mt-10">
+            <div className="w-full h-96 mt-10">
               <label>Min Affordability Index: {minIndex}</label>
               <input
                 type="range"
@@ -114,13 +114,13 @@ const PropertyAffordabilityIndex = () => {
                 value={minIndex}
                 onChange={(e) => setMinIndex(Number(e.target.value))}
               />
-              <ResponsiveContainer className="mt-4">
+              <ResponsiveContainer>
                 <BarChart data={filteredRet}>
                   <XAxis
                     dataKey="suburb"
                     angle={-45}
                     textAnchor="end"
-                    height={100}
+                    height={80}
                   />
                   <YAxis />
                   <Tooltip />
@@ -140,4 +140,4 @@ const PropertyAffordabilityIndex = () => {
   );
 };
 
-export default PropertyAffordabilityIndex;
+export default TestPropertyAfford;

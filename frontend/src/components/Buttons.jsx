@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const RunButton = ({ text, onClick }) => {
   return (
@@ -13,6 +13,5 @@ const RunButton = ({ text, onClick }) => {
     </button>
   );
 };
-
 
 export default RunButton;
