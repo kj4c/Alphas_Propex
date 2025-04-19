@@ -27,10 +27,11 @@ class TestCommercialRecsTargeted(unittest.TestCase):
         input_data = [{"suburb": "Bondi"}]
 
         # Call the function
-        result = find_commercial_recs_targeted(input_data)
+        top_n = 1
+        result = find_commercial_recs_targeted(input_data, 1)
 
         # Assertions
-        self.assertEqual(len(result), 1)
+        self.assertEqual(len(result), top_n)
         self.assertEqual(result[0]["suburb"], "Bondi")
         self.assertIn("persona", result[0])
         self.assertIn("business_recommendations", result[0])

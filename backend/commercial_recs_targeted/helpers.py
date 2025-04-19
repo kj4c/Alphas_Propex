@@ -13,7 +13,7 @@ trait_to_business = {
 }
 
 # main function that accepts top_n suburbs from commercial_recs, 
-def find_commercial_recs_targeted(recs):
+def find_commercial_recs_targeted(recs, top_n=10):
     target_results = []
     for rec in recs:
         suburb = rec['suburb']

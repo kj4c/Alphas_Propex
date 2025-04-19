@@ -27,8 +27,10 @@ def lambda_handler(event, context):
             raise ValueError("Missing 'id' in body")
 
         data = general_helpers.to_dataframe(data['id'])
+
+        top_n = data.get('top_n', 10)  # Default to 10 if not provided
         
-        recommendations = helpers.find_commerical_recs(data).to_json(orient='records')
+        recommendations = helpers.find_commerical_recs(data, top_n=top_n).to_json(orient='records')
         
         return {
             "statusCode": 200,
