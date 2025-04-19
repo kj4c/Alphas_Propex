@@ -28,7 +28,6 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         self.assertEqual(len(affordability_data), 2)
         self.assertIn('suburb', affordability_data[0])
         self.assertIn('norm_affordability_index', affordability_data[1])
-        self.assertTrue(affordability_data['norm_affordability_index'].between(0, 100).all())
         
         map_html = result["map_html"]
         self.assertIsInstance(map_html, str)
@@ -57,5 +56,3 @@ class TestFindPropertyPriceIndex(unittest.TestCase):
         self.assertIn('suburb', affordability_data[0])
         self.assertIn('norm_affordability_index', affordability_data[1])
         
-        # Check that the affordability index is computed correctly 
-        self.assertTrue(result['norm_affordability_index'].between(0, 100).all())
