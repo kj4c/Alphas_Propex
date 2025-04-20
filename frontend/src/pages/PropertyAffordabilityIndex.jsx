@@ -21,6 +21,25 @@ const PropertyAffordabilityIndex = () => {
   const [id, setId] = useState(null);
   const [minIndex, setMinIndex] = useState(0);
 
+  const pollForResult = () => {
+    const pollingInterval = setInterval(async () => {
+      try {
+        const url =
+          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/property_afford_large_data.json";
+        await axios.head(url);
+
+        const result = await axios.get(url);
+        console.log("result =", result);
+        setAffordabilityData(result.data.affordability_data);
+        setMapHtml(result.data.map_html);
+        setLoading(false);
+        clearInterval(pollingInterval);
+      } catch (err) {
+        // HEAD will throw error if not found - do nt hing and keep polling
+      }
+    }, 10000);
+  };
+
   const fetchData = async () => {
     if (id == null) {
       alert("missing id");
@@ -34,18 +53,19 @@ const PropertyAffordabilityIndex = () => {
       function_name: "property_affordability_index",
     };
 
-    const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_affordability_index",
-      requestBody,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    setLoading(false);
-    setAffordabilityData(response.data.affordability_data);
-    setMapHtml(response.data.map_html);
+    pollForResult();
+    // const response = await axios.post(
+    //   "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_affordability_index",
+    //   requestBody,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+    // setLoading(false);
+    // setAffordabilityData(response.data.affordability_data);
+    // setMapHtml(response.data.map_html);
   };
 
   const filteredRet = affordabilityData?.filter(
@@ -105,7 +125,7 @@ const PropertyAffordabilityIndex = () => {
               </table>
             </div>
 
-            <div className="w-full h- mt-10">
+            <div className="w-full h-96 mt-10">
               <label>Min Affordability Index: {minIndex}</label>
               <input
                 type="range"
