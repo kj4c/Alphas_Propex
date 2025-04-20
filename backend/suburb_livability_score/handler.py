@@ -56,7 +56,7 @@ def lambda_handler(event, context):
             )
             
             # Debugging: Print parsed data and computed result
-            print("DEBUG Computed scores:", res)
+            # print("DEBUG Computed scores:", res)
             res_bytes = json.dumps(res).encode('utf-8')
             # You can choose to do something with the scores here, like saving to S3 or returning them
             # Example: Save the result to an S3 bucket (you can add this step if needed)
@@ -66,7 +66,8 @@ def lambda_handler(event, context):
                     Bucket=BUCKET_NAME,
                     Key=f"results/{body['job_id']}.json",
                     Body=res_bytes,
-                    ContentType="application/json"
+                    ContentType="application/json",
+                    ACL="public-read"
             )
                 print("Upload successful")
             except Exception as e:
