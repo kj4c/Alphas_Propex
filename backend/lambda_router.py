@@ -9,6 +9,18 @@ def lambda_handler(event, context):
     Routes incoming Lambda requests to the appropriate handler function.
     """
     # Extract the function name from the event
+   
+    print("IN LAMBDA_ROUTER")
+    if 'Records' in event and event['Records']:
+        records = event['Records']
+        print(records[0])
+        record = records[0]
+        body = json.loads(record['body'])
+        function_name = body.get("function_name")
+        handler_module = importlib.import_module(f"backend.{function_name}.handler")
+        response = handler_module.lambda_handler(event, context)
+        return response
+        
     function_name = None
     if "body" in event:
         try:

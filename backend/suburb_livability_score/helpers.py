@@ -1,74 +1,157 @@
 import pandas as pd
 import requests
+import folium
+import branca
 
 def find_suburb_livability_score(data, prox_w, prop_w, pop_w, crime_risk_w, weather_risk_w):
+    
+    print("IN HELPERS.py ")
     # Proximity to CBD 
     proximity = data.groupby('suburb')[['km_from_cbd']].first()
+    # print("1")
     # print(f"Proximity: {proximity}")
     max_proximity = proximity['km_from_cbd'].max()
+    # print("2")
     # print(f"Max Proximity: {max_proximity}")
     proximity['norm_prox'] = 1 - (proximity['km_from_cbd'] / max_proximity)
+    # print("3")
     # print(f"Normalized Proximity: {proximity.sort_values(by='norm_prox', ascending=False)}")
     
     # Property Size
     prop_size = data.groupby('suburb')[['property_size']].median()
+    # print("4")
     # print(f"Property Size: {prop_size}")
     max_prop_size = prop_size['property_size'].max()
+    # print("5")
     # print(f"Max Property Size: {max_prop_size}")
     prop_size['norm_prop_size'] = prop_size['property_size'] / max_prop_size
+    # print("6")
     # print(f"Normalized Property Size: {prop_size.sort_values(by='norm_prop_size', ascending=False)}")
     
     # Population Density
     population = data.groupby('suburb')[['suburb_population', 'suburb_sqkm']].first()
+    # print("7")
     # print(f"Population: {population}")
     population['population_density'] = population['suburb_population'] / population['suburb_sqkm']
+    # print("8")
     # print(f"Population Density: {population}")
     max_population = population['population_density'].max()
+    # print("9")
     # print(f"Max Population Density: {max_population}")
     population['norm_population_density'] = 1 - (population["population_density"] / max_population)
+    # print("10")
     # print(f"Normalized Population Density: {population.sort_values(by='norm_population_density', ascending=False)}")
     
-    num_crimes = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
-    # print(f"Unique Suburbs:\n {num_crimes}")
-    num_crimes['total_crimes'] = num_crimes['suburb'].apply(get_suburb_crime_data)
-    # print(f"Unique Suburbs with Crime Data:\n {num_crimes}")
-    median_crime = num_crimes['total_crimes'].median()
-    # print(f"Median Crime: {median_crime}\n")
-    num_crimes['total_crimes'] = num_crimes['total_crimes'].fillna(median_crime)
-    # print(f"Unique Suburbs with Crime Data:\n {num_crimes.sort_values(by='total_crimes', ascending=False)}")
-    max_crime = num_crimes['total_crimes'].max()
-    # print(f"Max Crime: {max_crime}\n")
-    num_crimes['norm_crime'] = 1 - (num_crimes['total_crimes'] / max_crime)
-    # print(f"Normalized Crime:\n {num_crimes.sort_values(by='norm_crime', ascending=False)}")
+    # num_crimes = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
+    # # print("11")
+    # # print(f"Unique Suburbs:\n {num_crimes}")
+
+    # print(f"fetching crime data")
+    # num_crimes['total_crimes'] = num_crimes['suburb'].apply(get_suburb_crime_data)
+    # # print("12")
+    # # print(f"Unique Suburbs with Crime Data:\n {num_crimes}")
+    # median_crime = num_crimes['total_crimes'].median()
+    # # print("13")
+    # # print(f"Median Crime: {median_crime}\n")
+    # num_crimes['total_crimes'] = num_crimes['total_crimes'].fillna(median_crime)
+    # # print("14")
+    # # print(f"Unique Suburbs with Crime Data:\n {num_crimes.sort_values(by='total_crimes', ascending=False)}")
+    # max_crime = num_crimes['total_crimes'].max()
+    # # print("15")
+    # # print(f"Max Crime: {max_crime}\n")
+    # num_crimes['norm_crime'] = 1 - (num_crimes['total_crimes'] / max_crime)
+    # # print(f"Normalized Crime:\n {num_crimes.sort_values(by='norm_crime', ascending=False)}")
+    # # print("16")
     
-    weather_risk = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
-    weather_risk['weather_risk'] = weather_risk['suburb'].apply(get_suburb_weather_data)
-    # print(f"Unique Suburbs with Weather Data:\n {weather_risk.sort_values(by='weather_risk', ascending=False)}")
-    max_weather = weather_risk['weather_risk'].max()
-    # print(f"Max Weather: {max_weather}\n")
-    weather_risk['norm_weather'] = 1 - (weather_risk['weather_risk'] / max_weather)
-    # print(f"Normalized Weather:\n {weather_risk.sort_values(by='norm_weather', ascending=False)}")
+    # weather_risk = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
+    # # print("17")
+
+    # print(f"fetching weather data")
+    # weather_risk['weather_risk'] = weather_risk['suburb'].apply(get_suburb_weather_data)
+    # # print("18")
+    # # print(f"Unique Suburbs with Weather Data:\n {weather_risk.sort_values(by='weather_risk', ascending=False)}")
+    # max_weather = weather_risk['weather_risk'].max()
+    # # print("19")
+    # # print(f"Max Weather: {max_weather}\n")
+    # weather_risk['norm_weather'] = 1 - (weather_risk['weather_risk'] / max_weather)
+    # # print("20")
+    # # print(f"Normalized Weather:\n {weather_risk.sort_values(by='norm_weather', ascending=False)}")
     
     # Merging the normalized data
     res = pd.merge(proximity, prop_size, on='suburb')
     res = pd.merge(res, population, on='suburb')
-    res = pd.merge(res, num_crimes, on='suburb')
-    res = pd.merge(res, weather_risk, on='suburb')
+    # res = pd.merge(res, num_crimes, on='suburb')
+    # res = pd.merge(res, weather_risk, on='suburb')
     # print(f"Merged Data:\n {res}")
    
     # Livability Score Calculation
+    # res['livability_score'] = (
+    #     prox_w * res['norm_prox'] + 
+    #     prop_w * res['norm_prop_size'] + 
+    #     pop_w * res['norm_population_density'] + 
+    #     crime_risk_w * res['norm_crime'] + 
+    #     weather_risk_w * res['norm_weather']
+    # ) * 100
+    
     res['livability_score'] = (
         prox_w * res['norm_prox'] + 
         prop_w * res['norm_prop_size'] + 
-        pop_w * res['norm_population_density'] + 
-        crime_risk_w * res['norm_crime'] + 
-        weather_risk_w * res['norm_weather']
+        pop_w * res['norm_population_density']
     ) * 100
     
+    max_score = res['livability_score'].max()
+    res['livability_score'] = (res['livability_score'] / max_score) * 100
+    
+    # print(f"result table for suburb livability is:\n {res}")
     # Returning the sorted dataframe based on livability score
     res = res.reset_index()
     res = res[['suburb', 'livability_score']]
-    return res.sort_values('livability_score', ascending=False)
+    
+    map_data = pd.merge(res, data[['suburb', 'suburb_lat', 'suburb_lng']].drop_duplicates(), on='suburb')
+    # print(f"map data is:\n {map_data}")
+    # print("21")
+    avg_lat = map_data['suburb_lat'].mean()
+    avg_lng = map_data['suburb_lng'].mean()
+    mapped = folium.Map(location=[avg_lat, avg_lng], zoom_start=10)
+    # print("22")    
+    q0 = map_data['livability_score'].quantile(0.0)
+    q1 = map_data['livability_score'].quantile(0.2)
+    q2 = map_data['livability_score'].quantile(0.4)
+    q3 = map_data['livability_score'].quantile(0.6)
+    q4 = map_data['livability_score'].quantile(0.8)
+    q5 = map_data['livability_score'].quantile(1.0)
+    # print("20")
+    
+    colormap = branca.colormap.LinearColormap(
+        colors=['black', 'purple', 'red', 'orange', 'yellow', 'green'],
+        index=[q0, q1, q2, q3, q4, q5],
+        vmin=q0,
+        vmax=q5
+    )
+    # print("24")
+    
+    for _, row in map_data.iterrows():
+        # print("25")
+        folium.CircleMarker(
+            location=[row['suburb_lat'], row['suburb_lng']],
+            color=colormap(row['livability_score']),
+            fill=True,
+            fill_color=colormap(row['livability_score']),
+            fill_opacity=0.6,
+            tooltip=f"{row['suburb']}: {row['livability_score']:.1f}"
+        ).add_to(mapped)
+    # print("26")
+    
+    colormap.add_to(mapped)
+    # print("27")
+
+    # print(f"map_html:\n {mapped._repr_html_()}")
+    # print("28")
+    
+    return {
+        "livability_data": res.sort_values('livability_score', ascending=False).to_dict('records'),
+        "map_html": mapped._repr_html_()
+    }
 
 def get_suburb_crime_data(suburb):
     API_KEY = 'eZMJkb6iFe2TjWr9AZ7z44q3oQNzb6Bp2LkylkhC'
@@ -178,5 +261,7 @@ def get_suburb_weather_data(suburb):
         # print(f"❌Weather data for {suburb} not found")
         return 0
     
+    # print("✅ Success!")
+    # print(f"Weather data fetched successfully for {suburb}.")
     weather_data = response.json().get('requestedSuburbData')
     return weather_data.get('occurrences') 
