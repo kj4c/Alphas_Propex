@@ -1,5 +1,7 @@
 import pandas as pd
 import requests
+import folium
+import branca
 
 def find_suburb_livability_score(data, prox_w, prop_w, pop_w, crime_risk_w, weather_risk_w):
     
@@ -91,10 +93,57 @@ def find_suburb_livability_score(data, prox_w, prop_w, pop_w, crime_risk_w, weat
         weather_risk_w * res['norm_weather']
     ) * 100
     
+    
+    print(f"result table for suburb livability is:\n {res}")
     # Returning the sorted dataframe based on livability score
     res = res.reset_index()
     res = res[['suburb', 'livability_score']]
-    return res.sort_values('livability_score', ascending=False)
+    
+    map_data = pd.merge(res, data[['suburb', 'suburb_lat', 'suburb_lng']].drop_duplicates(), on='suburb')
+    print(f"map data is:\n {map_data}")
+    print("21")
+    avg_lat = map_data['suburb_lat'].mean()
+    avg_lng = map_data['suburb_lng'].mean()
+    mapped = folium.Map(location=[avg_lat, avg_lng], zoom_start=10)
+    print("22")    
+    q0 = map_data['livability_score'].quantile(0.0)
+    q1 = map_data['livability_score'].quantile(0.2)
+    q2 = map_data['livability_score'].quantile(0.4)
+    q3 = map_data['livability_score'].quantile(0.6)
+    q4 = map_data['livability_score'].quantile(0.8)
+    q5 = map_data['livability_score'].quantile(1.0)
+    print("20")
+    
+    colormap = branca.colormap.LinearColormap(
+        colors=['black', 'purple', 'red', 'orange', 'yellow', 'green'],
+        index=[q0, q1, q2, q3, q4, q5],
+        vmin=q0,
+        vmax=q5
+    )
+    print("24")
+    
+    for _, row in map_data.iterrows():
+        print("25")
+        folium.CircleMarker(
+            location=[row['suburb_lat'], row['suburb_lng']],
+            color=colormap(row['livability_score']),
+            fill=True,
+            fill_color=colormap(row['livability_score']),
+            fill_opacity=0.6,
+            tooltip=f"{row['suburb']}: {row['livability_score']:.1f}"
+        ).add_to(mapped)
+    print("26")
+    
+    colormap.add_to(mapped)
+    print("27")
+    
+    print(f"map_html:\n {mapped._repr_html_()}")
+    print("28")
+    
+    return {
+        "livability_data": res.sort_values('livability_score', ascending=False).to_dict('records'),
+        "map_html": mapped._repr_html_()
+    }
 
 def get_suburb_crime_data(suburb):
     API_KEY = 'eZMJkb6iFe2TjWr9AZ7z44q3oQNzb6Bp2LkylkhC'

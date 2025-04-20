@@ -46,18 +46,18 @@ def lambda_handler(event, context):
             data = general_helpers.to_dataframe(body['id'])
 
             # Calculate the suburb livability scores
-            suburb_affordability_scores = helpers.find_suburb_livability_score(
+            res = helpers.find_suburb_livability_score(
                 data,
                 proximity_weight,
                 property_size_weight,
                 population_density_weight,
                 crime_risk_weight,
                 weather_risk_weight
-            ).to_json(orient='records')
+            )
             
             # Debugging: Print parsed data and computed result
-            print("DEBUG Computed scores:", suburb_affordability_scores)
-            suburb_affordability_scores_bytes = json.dumps(suburb_affordability_scores).encode('utf-8')
+            print("DEBUG Computed scores:", res)
+            res_bytes = json.dumps(res).encode('utf-8')
             # You can choose to do something with the scores here, like saving to S3 or returning them
             # Example: Save the result to an S3 bucket (you can add this step if needed)
 
@@ -65,7 +65,7 @@ def lambda_handler(event, context):
                 s3.put_object(
                     Bucket=BUCKET_NAME,
                     Key=f"results/{body['job_id']}.json",
-                    Body=suburb_affordability_scores_bytes,
+                    Body=res_bytes,
                     ContentType="application/json"
             )
                 print("Upload successful")
