@@ -2,51 +2,77 @@ import pandas as pd
 import requests
 
 def find_suburb_livability_score(data, prox_w, prop_w, pop_w, crime_risk_w, weather_risk_w):
+    
+    print("IN HELPERS.py ")
     # Proximity to CBD 
     proximity = data.groupby('suburb')[['km_from_cbd']].first()
+    print("1")
     # print(f"Proximity: {proximity}")
     max_proximity = proximity['km_from_cbd'].max()
+    print("2")
     # print(f"Max Proximity: {max_proximity}")
     proximity['norm_prox'] = 1 - (proximity['km_from_cbd'] / max_proximity)
+    print("3")
     # print(f"Normalized Proximity: {proximity.sort_values(by='norm_prox', ascending=False)}")
     
     # Property Size
     prop_size = data.groupby('suburb')[['property_size']].median()
+    print("4")
     # print(f"Property Size: {prop_size}")
     max_prop_size = prop_size['property_size'].max()
+    print("5")
     # print(f"Max Property Size: {max_prop_size}")
     prop_size['norm_prop_size'] = prop_size['property_size'] / max_prop_size
+    print("6")
     # print(f"Normalized Property Size: {prop_size.sort_values(by='norm_prop_size', ascending=False)}")
     
     # Population Density
     population = data.groupby('suburb')[['suburb_population', 'suburb_sqkm']].first()
+    print("7")
     # print(f"Population: {population}")
     population['population_density'] = population['suburb_population'] / population['suburb_sqkm']
+    print("8")
     # print(f"Population Density: {population}")
     max_population = population['population_density'].max()
+    print("9")
     # print(f"Max Population Density: {max_population}")
     population['norm_population_density'] = 1 - (population["population_density"] / max_population)
+    print("10")
     # print(f"Normalized Population Density: {population.sort_values(by='norm_population_density', ascending=False)}")
     
     num_crimes = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
+    print("11")
     # print(f"Unique Suburbs:\n {num_crimes}")
+
+    print(f"fetching crime data")
     num_crimes['total_crimes'] = num_crimes['suburb'].apply(get_suburb_crime_data)
+    print("12")
     # print(f"Unique Suburbs with Crime Data:\n {num_crimes}")
     median_crime = num_crimes['total_crimes'].median()
+    print("13")
     # print(f"Median Crime: {median_crime}\n")
     num_crimes['total_crimes'] = num_crimes['total_crimes'].fillna(median_crime)
+    print("14")
     # print(f"Unique Suburbs with Crime Data:\n {num_crimes.sort_values(by='total_crimes', ascending=False)}")
     max_crime = num_crimes['total_crimes'].max()
+    print("15")
     # print(f"Max Crime: {max_crime}\n")
     num_crimes['norm_crime'] = 1 - (num_crimes['total_crimes'] / max_crime)
     # print(f"Normalized Crime:\n {num_crimes.sort_values(by='norm_crime', ascending=False)}")
+    print("16")
     
     weather_risk = data[['suburb']].drop_duplicates().sort_values(by='suburb').reset_index(drop=True)
+    print("17")
+
+    print(f"fetching weather data")
     weather_risk['weather_risk'] = weather_risk['suburb'].apply(get_suburb_weather_data)
+    print("18")
     # print(f"Unique Suburbs with Weather Data:\n {weather_risk.sort_values(by='weather_risk', ascending=False)}")
     max_weather = weather_risk['weather_risk'].max()
+    print("19")
     # print(f"Max Weather: {max_weather}\n")
     weather_risk['norm_weather'] = 1 - (weather_risk['weather_risk'] / max_weather)
+    print("20")
     # print(f"Normalized Weather:\n {weather_risk.sort_values(by='norm_weather', ascending=False)}")
     
     # Merging the normalized data
@@ -139,12 +165,12 @@ def get_suburb_crime_data(suburb):
     response = requests.get(url, headers=headers, params=params)
     
     if response.status_code == 200:
-        # print("✅ Success!")
-        # print(f"Crime data fetched successfully for {suburb}.")
+        print("✅ Success!")
+        print(f"Crime data fetched successfully for {suburb}.")
         return response.json().get('totalNumCrimes')
     else:
-        # print(f"❌ Error: {response.status_code}")
-        # print(f"Error fetching crime data for {suburb}.")
+        print(f"❌ Error: {response.status_code}")
+        print(f"Error fetching crime data for {suburb}.")
         return None
 
 def get_suburb_weather_data(suburb):
@@ -175,8 +201,10 @@ def get_suburb_weather_data(suburb):
         return None
     
     if response.json().get('status') == 'not_found':
-        # print(f"❌Weather data for {suburb} not found")
+        print(f"❌Weather data for {suburb} not found")
         return 0
     
+    print("✅ Success!")
+    print(f"Weather data fetched successfully for {suburb}.")
     weather_data = response.json().get('requestedSuburbData')
     return weather_data.get('occurrences') 
