@@ -19,7 +19,7 @@
     background: linear-gradient(
       to right,
       transparent,
-    #466fba,
+    hsl(219, 100%, 79%),
       transparent
     );
     pointer-events: none; /* makes sure it doesn’t block clicks */

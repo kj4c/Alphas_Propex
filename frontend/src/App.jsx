@@ -17,8 +17,8 @@ import ForIndividuals from './pages/ForIndividuals';
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-[#010314] text-white">
-        <Navbar/>
+    <div className="min-h-screen bg-cover bg-no-repeat text-white bg-[linear-gradient(to_top,_#05030c_0%,_#01030c_50%,_#12182f_100%)]">
+    <Navbar/>
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/uploadjson" element={<UploadJson />} />
