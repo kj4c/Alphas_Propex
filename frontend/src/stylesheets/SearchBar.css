@@ -1,0 +1,17 @@
+.SearchBar {
+  display: flex;
+  align-items: center;
+  height: 3.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 1.7rem;
+  background-color: rgba(14, 12, 21, 0.8);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.LoadingIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 1rem;
+}

@@ -1,0 +1,43 @@
+.options-grid-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-left: 2ch;
+    margin-right: 2ch;
+    margin-top: 5%;
+    margin-bottom: 2ch;
+}
+
+.email-options {
+    width: 40%;
+    height: 250px;
+    background-color: white;
+    border: 3px solid #7f45f2;
+    border-radius: 20px;
+    cursor: pointer;
+
+    /* Additional styling to reset some default button styles */
+    font-size: 25px;
+    line-height: 50px; /* This helps vertically center the text */
+    text-align: center;
+    padding: 20px;
+    
+    /* Optional: Add a hover effect */
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.email-options:hover {
+    background-color:  #9c6aff; /* Darker shade on hover */
+    color: white;  
+    border: 3px solid white;
+}
+
+.fileTypeSelector {
+    color: #7f45f2;
+    font-size: 30px;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    border: #7f45f2 1px solid;
+}

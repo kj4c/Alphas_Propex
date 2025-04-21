@@ -1,0 +1,146 @@
+.ICUD-container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  /* background-color: purple; */
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  ),
+  url('../assets/InvoiceCreationPage/icon12.png');
+
+  background-size: cover;
+  background-position: center;
+  background-clip: border-box;
+}
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeIn 2s;
+}
+
+.upload {
+  width: 660px;
+  height: 300px;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  color:blueviolet;
+  background-color: #fff;
+  border: 1.5px dashed blueviolet;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  /* background-color: aqua; */
+}
+
+.upload:hover {
+  background-color: gainsboro;
+}
+
+.upload span{
+  width: 50px;
+  height: 50px;
+  font-size: 30px;
+  color: #5d4dcc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: #f1efff;
+}
+
+.uploadIcon {
+  font-size: 30px;
+  /* background-color: rgb(255, 255, 0); */
+}
+
+.file-container {
+  /* margin-top: 5%; */
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid rgba(117, 96, 255, 0.281);
+  border-radius: 6px;
+  padding: 15px 15px;
+  /* background-color: #000; */
+  width: 627px;
+}
+
+.file-icon {
+  font-size: 30px;
+  color: blueviolet;
+  /* background-color: #5d4dcc; */
+}
+
+.file-desc {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  /* background-color: blueviolet; */
+}
+
+.file-desc h6 {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.progress-container {
+  width: 100%;
+  height: 5px;
+  background-color: gainsboro;
+  border-radius: 8px;
+  margin-top: 8px;
+  /* background-color: brown; */
+}
+
+.progress-bar {
+  width: 0%;
+  height: 5px;
+  background-color: blueviolet;
+  border-radius: 8px;
+  transition: width 0.5s ease;
+}
+
+.close-icon {
+  display: flex;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.file-desc button,
+.progress-circle {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #463a99;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 30px;
+}
+
+.upload-btn {
+  width: 660px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background-color: blueviolet;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+}

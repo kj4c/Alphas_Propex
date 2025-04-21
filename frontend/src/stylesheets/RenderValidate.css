@@ -1,0 +1,175 @@
+.RenderValidate {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  max-width: 87.5rem;
+  margin-top: 2rem;
+  /* background-color: white; */
+}
+
+.RenderValidateContainer {
+  display: grid;
+  position: relative;
+  gap: 1.25rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* two grids side by side */
+}
+
+.LeftGrid {
+  position: relative;
+  min-height: 39rem;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  border: 1px solid rgb(255, 255, 255, 0.1);
+}
+
+/* .LeftGridImageContainer {
+  position: absolute;
+  inset: 0px;
+}
+
+.LeftGridImageContainer img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+} */
+
+.LeftGridContent {
+  position: absolute;
+  justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  /* inset: 0px; */
+  padding: 4rem;
+  /* background-image: linear-gradient(
+    to bottom,
+    rgba(14, 12, 21, 0.1),
+    rgba(14, 12, 21, 0.9)
+  ); */
+}
+
+.LeftGridContent h4 {
+  color: white;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.LeftGridContent p {
+  color: #ada8c3;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.RightGrid {
+  padding: 1rem;
+  min-height: 46rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background-color: #15131d;
+}
+
+.RightGridContent {
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.RightGridContent h4 {
+  color: white;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.RightGridContent p {
+  color: #ada8c3;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.RenderingIconsContainer {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.RenderingIcons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+}
+
+.GradientBorder {
+  height: 4.5rem;
+  width: 4.5rem;
+  padding: 0.1rem;
+  background-image: conic-gradient(
+    from 225deg,
+    #ffc876,
+    #79fff7,
+    #9f53ff,
+    #ff98e2,
+    #ffc876
+  );
+}
+
+.NormalBorder {
+  display: flex;
+  height: 3.75rem;
+  width: 3.75rem;
+  background-color: #252134;
+}
+
+.GradientImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+  background-color: #15131d;
+}
+
+.RightGridImageContainer {
+  position: relative;
+  height: 30rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background-color: #0e0c15;
+  filter: brightness(0.85);
+}
+
+.RightGridImageContainer img {
+  height: 100%;
+  width: 100%;
+}
+
+.LeftGridImageContainer {
+  position: relative;
+  height: 30rem;
+  overflow: hidden;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  /* background-color: aqua; */
+  filter: brightness(0.85);
+}
+
+.LeftGridImageContainer img {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+}
+
+.RenderingIcons {
+  font-size: 1.75rem;
+}

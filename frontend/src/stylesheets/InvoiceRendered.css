@@ -1,0 +1,102 @@
+.renderedContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.rendered {
+    border: solid;
+    border-color: #7f45f2;
+    background-color: #e6daff5e;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 5vw;
+    border-radius: 15px;
+    min-width: 40%;
+    font-size: 18px;
+    margin-top: 9vh;
+    padding-bottom: 30px;
+}
+
+.inv-heading {
+    margin: 30px 0 10px 0;
+    text-align: center;
+}
+
+.info {
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.to-from {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 20px;
+}
+
+.to, .from {
+    padding: 30px 0;
+}
+
+.p-info {
+    font-size: 18px;
+}
+
+th {
+    color: #3c1194;
+    text-align: left;
+    font-size: 22px;
+}
+
+tr {
+    font-size: 18px;
+}
+
+.pay-info {
+    display: flex;
+    flex-direction: row;
+    padding: 20px 0;
+    
+}
+
+.pay-heading {
+    font-size: 25px;
+    text-align: center;
+    color:#442583;
+    padding: 10px;
+}
+
+.pay-right, .pay-left {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.pay-right {
+    text-align: right;
+}
+.summary {
+    margin: 0;
+    font-size: 22px;
+    padding: 5px 0;
+}
+
+.backBtn {
+    background-color: #e6daff5e;
+    padding:  8px 20px;
+    margin: 15px 0;
+    border: solid #7f45f2;
+    border-radius: 0.8em;
+    font-weight: 600;
+    font-size: 15px;
+    color: #3c1194;
+}
+
+.backBtn:hover {
+    cursor: pointer;
+    background-color: #d5c6f7f3;
+}

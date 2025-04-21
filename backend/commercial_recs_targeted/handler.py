@@ -9,7 +9,6 @@ def lambda_handler(event, context):
         body = event.get("body")
         if not body:
             raise ValueError("No data provided.")
-    
         if isinstance(body, str):
             data = json.loads(body)
             if isinstance(data, str):

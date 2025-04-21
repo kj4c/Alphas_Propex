@@ -1,0 +1,210 @@
+.inboxContainer {
+    display: grid;
+    grid-template-columns: 0.1fr 0.5fr 1fr 1fr 0.5fr 0.5fr;
+    grid-template-rows: 50px repeat(12, 1fr);
+    width: 90%;
+    height: 70vh;
+    background-color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 15px;
+    border: 3px solid #7f45f2;
+    margin-bottom: 1%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #7f45f2 white;
+    animation: fadeIn 2s;
+}
+
+.searchContainer {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10vh;
+    margin-right: 10vh;
+    margin-top: 5vh;
+    margin-bottom: 2vh;
+    animation: fadeIn 2s;
+}
+
+
+.fetching {
+    flex: 1.5;
+    font-size: 30px;
+}
+
+.search {
+    border-radius: 20px;
+    margin-right: 1%;
+    background-color: #7f45f2;
+    border: none;
+}
+
+.search:hover {
+    cursor: pointer;
+    background-color: #ab81ff;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.search:hover {
+    cursor: pointer;
+}
+
+.inputSearch {
+    flex: 2;
+    margin-right: 10%;
+    border: none;
+    background-color: #FAFBFB;
+    border-bottom: 2px solid #000000;
+    outline: none;
+    font-size: 20px;
+}
+
+.options {
+    font-size: 18px;
+    padding: 5px;
+    flex: 1.5;
+    border: 2px solid #7f45f2;
+}
+
+.inbox-grid {
+    display: contents;
+}
+
+.grid-row {
+    display: contents;
+}
+
+.checkbox-container {
+    border-bottom: 2px solid #7f45f2;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.checkbox {
+    transform: scale(1.5);
+    accent-color: #7f45f2;
+    cursor: pointer;
+}
+
+.row-hover .grid-item {
+    background-color: #ecececec;
+    transition: 0.2s;
+    cursor: pointer; /* This will now work since .grid-row acts as a real container */
+}
+
+.grid-item {
+    /* Special styles for items not in the first row */
+    background-color: white;
+    padding: 10px;
+    font-size: 20px;
+    border-bottom: 2px solid #7f45f2;
+}
+
+.bin-button-container {
+    border-bottom: 2px solid #7f45f2;
+}
+
+.bin-button {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    margin: 10px;
+    height: 30px;
+    width: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: white;
+    transition: 0.3s;
+}
+
+.bin-button:hover {
+    background-color: rgb(218, 218, 218);
+}
+
+.bin-button .tooltip {
+    position: absolute;
+    background-color: gray;
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 2px;
+    font-size: 12px;
+    bottom: -30px;
+    opacity: 0;
+    transition: opacity 0.15s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.bin-button:hover .tooltip {
+    opacity: 1;
+}
+
+.bin-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.header {
+    padding: 10px;
+    font-size: 24px;
+    border-bottom: 2px solid #7f45f2;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    z-index: 100;
+    position: sticky;
+    background-color: #FAFBFB;
+    width: 100%;
+    animation: fadeIn 2s;
+}
+
+.button1, .button2 {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 18%;
+    margin-right: 18%;
+    background-color: white;
+    border: 3px solid #7f45f2;
+    border-radius: 20px;
+    cursor: pointer;
+
+    /* Additional styling to reset some default button styles */
+    font-size: 22px;
+    line-height: 50px; /* This helps vertically center the text */
+    text-align: center;
+    padding: 10px;
+    
+    /* Optional: Add a hover effect */
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.button1:hover, .button2:hover {
+    background-color:  #9c6aff; /* Darker shade on hover */
+    color: white;  
+    border: 3px solid white;
+}
+
+.button1 {
+    flex: 1
+}
+
+.button2 {
+    flex: 1
+}
+
+.loadingScreen {
+    position: absolute;
+    top: 40%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 47px; /* Adjust as needed */
+  }

@@ -1,0 +1,35 @@
+.button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #7f45f2; /* Main color */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 0 15px rgba(127, 69, 242, 0.75); /* Glowing effect */
+    position: relative;
+    outline: none;
+    animation: sideWays 2s ease-in-out infinite;
+  }
+  
+  .button:hover {
+    background-color: #8845f8; /* Slightly lighter shade for hover */
+    box-shadow: 0 0 25px rgba(127, 69, 242, 0.9), 0 0 50px rgba(127, 69, 242, 0.9); /* Enhanced glowing effect */
+    transform: translateY(-2px); /* Slight lift */
+  }
+  
+  .button:active {
+    transform: translateY(1px); /* Press down effect */
+    box-shadow: 0 0 15px rgba(127, 69, 242, 0.75); /* Diminish glow to simulate depth */
+  }
+  
+  @keyframes sideWays {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }
+  
