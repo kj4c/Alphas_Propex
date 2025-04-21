@@ -21,7 +21,7 @@ export default function Panel({ title, description, children, runbutton }) {
         >
           <ChevronDown
             className={cn(
-              "h-4 w-4 transform transition-transform duration-300",
+              "h-4 w-4 transform transition-transform duration-300 text-white",
               isOpen ? "rotate-0" : "rotate-90"
             )}
           />
