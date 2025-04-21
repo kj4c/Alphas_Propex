@@ -2,7 +2,7 @@ import "../stylesheets/SendReceive.css";
 import Section from "./Section.jsx";
 import { servicesData3 } from "../data/Services.jsx";
 import { FaCircleCheck } from "react-icons/fa6";
-import { GiCosmicEgg } from "react-icons/gi";
+import { GiCosmicEgg, GiFamilyHouse } from "react-icons/gi";
 import { servicesIcon } from "../data/Services.jsx";
 import curve1 from "../assets/services/curve-1.svg";
 import curve2 from "../assets/services/curve-2.svg";
@@ -43,7 +43,7 @@ const SendReceive = () => {
             <div className="InnerCircle">
               <div className="LogoBorder">
                 <div className="CircleGraphicLogo">
-                  <GiCosmicEgg />
+                  <GiFamilyHouse />
                 </div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { GiCosmicEgg } from "react-icons/gi";
+import { GiFamilyHouse } from "react-icons/gi";
 import "../stylesheets/header.css";
 
 import { navItems } from "../data/navbarData";
@@ -13,7 +13,7 @@ export const Header = () => {
         {/* Logo */}
         <a className="LogoContainer" href="#hero">
           <div className="Logo">
-            <GiCosmicEgg />
+            <GiFamilyHouse />
           </div>
           Propex
         </a>
@@ -37,11 +37,8 @@ export const Header = () => {
 
         {/* SignUp and Login button in Navbar */}
         <div className="buttonsContainer">
-          <a href="/register" className="signUpButton">
-            SIGN UP
-          </a>
-          <a href="/login" className="loginButton">
-            LOGIN
+          <a href="/uploadjson" className="loginButton">
+            GET STARTED
           </a>
         </div>
       </div>

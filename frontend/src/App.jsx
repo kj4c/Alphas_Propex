@@ -12,6 +12,7 @@ import UploadJson from "./pages/UploadJson";
 import SuburbLivability from "./pages/SuburbLivability";
 import ForBusinesses from "./pages/ForBusinesses";
 import ForIndividuals from "./pages/ForIndividuals";
+import "./App.css";
 
 const AppContent = () => {
   const location = useLocation();
@@ -24,7 +25,7 @@ const AppContent = () => {
     !hideNavBarPaths.includes(location.pathname);
 
   return (
-    <div className="min-h-screen bg-[#010314] text-white">
+    <div className="min-h-screentext-white bg-[url(assets/blurry-gradient-haikei.svg)] bg-cover bg-no-repeat bg-center">
       {showNavbar && <Navbar />}
 
       <Routes>

@@ -2,7 +2,7 @@ import "../stylesheets/RenderValidate.css";
 import Section from "./Section.jsx";
 import { RenderingIcons, ValidateIcons } from "../data/Services.jsx";
 import DemoSuburbPriceMap from "../pages/demoSuburbPriceMap";
-import DemoTopSchoolArea from "@/pages/DemoTopSchoolArea";
+import DemoTopSchoolArea from "@/pages/demoTopSchoolArea";
 
 const RenderValidate = () => {
   return (
