@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="nav-bar">
             <button className={`nav-btn ${isActive('/uploadjson') ? 'active' : ''}`} onClick={() => navigate('/uploadjson')}>Upload JSON</button>
             <button className={`nav-btn ${isActive('/businesses') ? 'active' : ''}`} onClick={() => navigate('/businesses')}>For Businesses</button>
-            <button className={`nav-btn ${isActive('/individuals') ? 'active' : ''}`} onClick={() => navigate('/individuals')}>Individuals</button>
+            <button className={`nav-btn ${isActive('/individuals') ? 'active' : ''}`} onClick={() => navigate('/individuals')}>For Individuals</button>
         </div>
     )
 }
