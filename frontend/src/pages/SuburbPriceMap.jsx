@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 const SuburbPriceMap = () => {
   const [loading, setLoading] = useState(false);
   const [ret, setRet] = useState(null);
@@ -36,11 +37,11 @@ const SuburbPriceMap = () => {
     <div>
       <Panel
         title="Suburb Median Prices"
+        loading={loading}
         description={
           "Heatmap of the median prices of properties in each Sydney Suburb"
         }
       >
-        {loading && <p>Loading...</p>}
         {!ret ? (
           <>
             <BasicInput
@@ -55,7 +56,7 @@ const SuburbPriceMap = () => {
                 }
               }}
             />
-            <RunButton onClick={fetchData} text={"Submit"}></RunButton>
+            {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
           </>
         ) : (
           <div

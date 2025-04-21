@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 const PropertyPrices = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -82,6 +83,7 @@ const PropertyPrices = () => {
       <Panel
         title="Average Property Prices"
         description="Find average property prices given optional filters"
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -233,14 +235,13 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <RunButton text={"Search"} onClick={fetchPrice}>Search</RunButton>
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}
+        {loaded && (
+          <div className="avg-price">
+            <h2> Average price: {price}</h2>
+          </div>
+        )}
       </Panel>
-      {loading && <div className="loading">loading...</div>}
-      {loaded && (
-        <div className="avg-price">
-          <h2> Average price: {price}</h2>
-        </div>
-      )}
     </div>
   );
 };

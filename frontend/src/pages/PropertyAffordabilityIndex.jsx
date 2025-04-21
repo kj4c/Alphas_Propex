@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 import {
   BarChart,
   Bar,
@@ -77,6 +78,7 @@ const PropertyAffordabilityIndex = () => {
       <Panel
         title="Property Affordability Index"
         description={"How affordable each suburb is based on given income"}
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -100,9 +102,7 @@ const PropertyAffordabilityIndex = () => {
             }
           }}
         />
-        <RunButton text="Fetch" onClick={fetchData} />
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {!loading && affordabilityData !== null && (
           <div className="ret w-full ">
