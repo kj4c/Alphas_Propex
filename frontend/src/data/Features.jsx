@@ -46,7 +46,7 @@ export const features = [
   },
   {
     id: "4",
-    title: "Commercial Recomendations",
+    title: "Commercial Recommendations",
     text: `Provides a ranked list of recommended suburbs for commercial properties based on suburb population density and average income. Also gives specific targeted recommendations based on the demographic of the suburb.`,
     backgroundUrl: "./src/assets/features/card-5.svg",
     icon: <HiOutlineFolderOpen />,

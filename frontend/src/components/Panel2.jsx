@@ -5,7 +5,7 @@ import { ReactNode, useState } from "react";
 import RunButton from "./Buttons";
 
 export default function Panel2({ title, description, children, runbutton }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
     <div className="flex pt-8 pb-4 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_88.27%)] px-4 backdrop-blur-20">
