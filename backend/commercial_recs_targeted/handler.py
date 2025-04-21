@@ -1,7 +1,7 @@
 import json
 import sys
 sys.path.append('../')
-import backend.commercial_recs.helpers as helpers
+import backend.commercial_recs_targeted.helpers as helpers
 import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
