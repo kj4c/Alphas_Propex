@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
 import RunButton from "./Buttons";
 
-export default function Panel({ title, description, children, runbutton }) {
+export default function Panel({ title, description, children, runbutton, loading}) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="flex w-[90vw] pt-8 pb-4 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 backdrop-blur-20">
+    <div className={`flex w-[90vw] pt-8 pb-4 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 backdrop-blur-20 ${loading && "animate-bg"}`}>
       <div className="flex items-start justify-between w-full">
         <div>
           <h2 className="text-2xl text-white font-bold">{title}</h2>

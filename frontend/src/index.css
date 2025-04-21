@@ -33,3 +33,16 @@
   --animate-fade-move-blur-in: fade-move-blur-in 1.2s ease-out forwards;
   --animate-fade-blur-in: fade-blur-in 1.2s ease-out forwards;
 }
+
+@keyframes bg-pulse {
+  0%, 100% {
+    background-color: rgba(47, 31, 90, 0.6);
+  }
+  50% {
+    background-color: rgba(9, 3, 22, 0.64);
+  }
+}
+
+.animate-bg {
+  animation: bg-pulse 2s ease-in-out infinite;
+}

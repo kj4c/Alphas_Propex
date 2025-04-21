@@ -4,7 +4,7 @@ import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Dropdown from "../components/Dropdown";
-
+import Loading from "@/components/Loading";
 const TopSchoolArea = () => {
   const [loading, setLoading] = useState(false);
   const [schools, setSchools] = useState(null);
@@ -64,6 +64,7 @@ const TopSchoolArea = () => {
       <Panel
         title="Schools Nearby"
         description="Find out how many properties are near a school and what the average property price is."
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -93,9 +94,7 @@ const TopSchoolArea = () => {
           onChange={(e) => setRadius(e.target.value)}
         />
 
-        <RunButton text="Fetch" onClick={fetchData} />
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {schools && (
           <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">

@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 import { v4 as uuidv4 } from "uuid";
 import {
   BarChart,
@@ -112,6 +113,7 @@ const SuburbLivability = () => {
       <Panel
         title="Suburb Livability Score"
         description="Calculates livability score given weightings of proximity to CBD, property size, population density, crime risk and weather risk"
+        loading={loading}      
       >
         <BasicInput
           type="text"
@@ -176,9 +178,7 @@ const SuburbLivability = () => {
           }}
         />
 
-        <RunButton onClick={fetchData} text={"Submit"}></RunButton>
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {!loading && livabilityData !== null && (
           <div className="ret w-full">

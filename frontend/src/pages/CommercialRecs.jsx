@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 
 const CommercialRecs = () => {
   const [id, setId] = useState(null);
@@ -43,6 +44,7 @@ const CommercialRecs = () => {
       <Panel
         title={"Commercial Recommendations"}
         description={"Find the best suburbs for commercial use"}
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -50,10 +52,10 @@ const CommercialRecs = () => {
           placeholder="Id"
           onChange={(e) => setId(e.target.value || null)}
         />
-        <RunButton text={"Submit"} onClick={fetchPrice} />
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}
 
         
-      {recs !== null && (
+      {recs !== null && !loading && (
         <div className="recs">
           <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
             <table className="min-w-full text-sm text-left text-white/90">
@@ -77,7 +79,6 @@ const CommercialRecs = () => {
           </div>
         </div>
       )}
-      {loading && <p>Loading...</p>}
       </Panel>
 
     </div>

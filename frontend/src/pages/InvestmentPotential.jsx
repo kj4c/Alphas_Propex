@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
@@ -37,6 +38,7 @@ const InvestmentPotential = () => {
       <Panel
         title="Investment Potential"
         description={"Which suburbs yield the highest investment potential"}
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -50,8 +52,8 @@ const InvestmentPotential = () => {
             }
           }}
         />
-        <RunButton text="Submit" onClick={fetchData}/>
-        {investPotential !== null && (
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+        {investPotential !== null && !loading  && (
         <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
           <table className="min-w-full text-sm text-left text-white/90">
             <thead className="bg-[--color-gray-800] text-white uppercase text-xs tracking-wider">
@@ -71,7 +73,6 @@ const InvestmentPotential = () => {
           </table>
         </div>
       )}
-      {loading && <p>Loading...</p>}
       </Panel>
     </div>
   );
