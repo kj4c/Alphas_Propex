@@ -1,9 +1,8 @@
 import "../stylesheets/RenderValidate.css";
 import Section from "./Section.jsx";
 import { RenderingIcons, ValidateIcons } from "../data/Services.jsx";
-import render3 from "../assets/services/Render3.png";
-import validate1 from "../assets/services/Validate1.png";
 import DemoSuburbPriceMap from "../pages/demoSuburbPriceMap";
+import DemoTopSchoolArea from "@/pages/DemoTopSchoolArea";
 
 const RenderValidate = () => {
   return (
@@ -38,12 +37,12 @@ const RenderValidate = () => {
             </ul>
 
             <div className="LeftGridContent">
-              <h4>Invoice Validation</h4>
+              <h4>Interactive Suburb Price Map</h4>
               <p>
-                Manual validation of invoices is time-consuming, costly, and
-                error-prone, with a 3-4% average error rate. Eggs Invoicing
-                automates validation, ensuring compliance, saving time, cutting
-                costs, and mitigating risks.
+                A dynamic map that visualizes median property prices across
+                suburbs using color-coded markers, categorizing pricing trends
+                with quantiles to help users easily compare and identify areas
+                with higher or lower property values.
               </p>
             </div>
           </div>
@@ -51,13 +50,13 @@ const RenderValidate = () => {
           {/* Right Grid */}
           <div className="RightGrid">
             <div className="RightGridContent">
-              <h4>Invoice Rendering</h4>
+              <h4>Top School Area Property Analysis</h4>
               <p>
-                Our platform offers powerful rendering capabilities that enable
-                users to effortlessly generate well-formatted invoices from XML
-                files. Say goodbye to manual formatting and hello to
-                professional-looking invoices with just a few clicks. Save time
-                and ensure accuracy with our advance rendering feature.
+                Identifying suburbs near top schools with the best property
+                value and income ratios based on school type, district, and
+                proximity. It provides a list of suburbs with top schools,
+                offering valuable insights for investment or family relocation
+                by comparing neighborhoods near preferred school types.
               </p>
 
               {/* Invoice Rendering Icons */}
@@ -78,7 +77,8 @@ const RenderValidate = () => {
             </div>
 
             <div className="RightGridImageContainer">
-              <img src={render3} width={520} height={400} alt="Scary robot" />
+              {/* <img src={render3} width={520} height={400} alt="Scary robot" /> */}
+              <DemoTopSchoolArea />
             </div>
           </div>
         </div>

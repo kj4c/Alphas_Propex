@@ -15,7 +15,7 @@ export const Header = () => {
           <div className="Logo">
             <GiCosmicEgg />
           </div>
-          Eggs-Invoice
+          Propex
         </a>
 
         {/* Dyanmically rendering each item in nav bar */}

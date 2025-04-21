@@ -16,38 +16,39 @@ import { MdDisplaySettings } from "react-icons/md";
 import { PiSlidersHorizontal } from "react-icons/pi";
 
 export const servicesData = [
-  "Comprehensive GUI Form",
-  "Save Time",
-  "Boost Productivity",
-  "Reducing Manual Data Entry",
+  "Analyzes property prices, income, and size",
+  "Scores suburbs as overpriced, fairly priced, or undervalued",
+  "Identifies suburbs within financial reach",
+  "Helps compare affordability across areas",
 ];
 
 export const servicesData2 = [
-  "Conveniently upload files",
-  "Supports file upload in JSON or CSV formats",
-  "Flexibility in data submission methods",
+  "Rates suburbs based on proximity to the CBD",
+  "Considers property size and population density",
+  "Assesses crime and extreme weather risks",
+  "Guides families in choosing the best suburbs for long-term living",
 ];
 
 export const servicesData3 = [
   {
     id: "0",
-    title: "Diverse Invoice Sending Options",
-    text: "Email XML and JSON invoices effortlessly, send batch emails with multiple XML/JSON files, schedule emails for later, and send multiple emails with invoices—all with ease and efficiency.",
+    title: "Filtered Properties Averages",
+    text: "Provides a suite of filters to pinpoint ideal estates and properties, averaging the target variable specified (e.g. price of households in specific suburbs, number of bathrooms/bedrooms in specific household types, etc).",
   },
   {
     id: "1",
-    title: "Centralised Invoice Management",
-    text: "Easily manage invoices by navigating to the receiving section, where all received invoices are centralized for convenient access and organization.",
+    title: "Ranked Influence Factors",
+    text: "Provides a ranked list of real estate features effecting the target variable (from most impactful to least impactful)",
   },
   {
     id: "2",
-    title: "Invoice Viewing and Downloading",
-    text: "Ensure no invoices go missing as each one is easily viewable and downloadable with a single click, streamlining the invoice management process.",
+    title: "Suburb Median Price Heatmap",
+    text: "An interactive heatmap displaying median property prices across Sydney suburbs, offering a clear visual guide to market trends and pricing insights.",
   },
   {
     id: "3",
-    title: "Advance Filter and Search Capabilities",
-    text: "Utilize the fetching feature to search for specific invoices by their ID, date, or date range, narrowing down the search space and enhancing organization.",
+    title: "Suburb Safety Score",
+    text: "UGenerates a safety score for each suburb by analyzing crime rates per 100,000 people—where lower crime leads to a higher, more reassuring score for residents and investors.",
   },
 ];
 

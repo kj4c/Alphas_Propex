@@ -11,7 +11,7 @@ export const Features = () => {
         {/* Re-usable Heading component */}
         <Heading
           className="FeaturesContainerHeading"
-          title="Effortlessly Manage Your Invoices with Eggs-Invoicing"
+          title="Effortlessly Generate Property Insights and Enhance Decisions with Propex"
         />
 
         <div className="CardContainer">

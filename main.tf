@@ -28,7 +28,7 @@ resource "aws_lambda_function" "multi_lambda" {
 
   function_name = each.key
   package_type  = "Image"
-  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/docker-lambda@sha256:acaaddb4cd356725abdf18d4279084f7be49abfd192a6e175684378a256bb984"
+  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/docker-lambda@sha256:605499ec1fac790d83726f75aedd24340d880e611e955e2380252bf2ea8f2659"
   role          = "arn:aws:iam::109471428046:role/LabRole"
   timeout       = 600
   memory_size   = 256

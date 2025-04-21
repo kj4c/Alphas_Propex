@@ -12,7 +12,7 @@ const SendReceive = () => {
     <Section id="sendreceive">
       <div className="SendReceive">
         <div className="SendReceiveContainer">
-          <h2>Effortless Invoice Management </h2>
+          <h2>Advanced Property Insights and Analytics </h2>
 
           {/* Dynamically render bullet points*/}
           <ul className="SendReceiveListContainer">
@@ -35,7 +35,8 @@ const SendReceive = () => {
         <div className="CircleGraphicTitleContainer">
           <p>
             With a multitude of features, it&apos;s the ultimate solution for
-            teams looking to work smarter and faster.
+            property buyers and investors looking to make smarter, faster
+            decisions.
           </p>
 
           <div className="OuterCircle">

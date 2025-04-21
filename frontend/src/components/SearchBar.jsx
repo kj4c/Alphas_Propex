@@ -12,7 +12,7 @@ const SearchBar = ({ className }) => {
         src={loadingIcon}
         alt="loading"
       />
-      Create, Validate, Render, Compose, Send and Receive Invoices ...
+      Search, Compare, Evaluate, Visualize, Decide, and Track Properties ...
     </div>
   );
 };

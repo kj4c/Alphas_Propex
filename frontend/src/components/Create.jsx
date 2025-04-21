@@ -11,8 +11,8 @@ const Create = () => {
     <Section id="create">
       <div className="CreateContainer">
         <Heading
-          title="Simplify Invoice Creation with Our Intuitive GUI"
-          subTitle="57% of invoices are manually typed! Save time and effort with our GUI form."
+          title="Simplify Property Affordability and Suburb Livability Analysis"
+          subTitle="Save time and make informed decisions with easy-to-use tools for assessing affordability and livability."
         />
 
         <div style={{ position: "relative" }}>
@@ -25,10 +25,10 @@ const Create = () => {
             </div>
 
             <div className="CreateBentoListContainer">
-              <h4>Efficient Generation</h4>
+              <h4>Tailored Affordability Score Generation</h4>
               <p>
-                Spend less time on invoice creation and focus on growing your
-                business.
+                Empowering Homebuyers and Investors with Data-Driven
+                Affordability Insights
               </p>
               <ul>
                 {servicesData.map((item, index) => (
@@ -52,7 +52,7 @@ const Create = () => {
             </div>
 
             <div className="CreateBentoListContainer">
-              <h4>Easy FIle Upload</h4>
+              <h4>Comprehensive Suburb Livability Score</h4>
               <p>
                 Save more time and effort by simply importing JSON or CSV files
                 for seamless invoice creation.

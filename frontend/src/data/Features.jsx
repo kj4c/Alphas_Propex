@@ -41,7 +41,7 @@ export const features = [
     backgroundUrl: "./src/assets/features/card-4.svg",
     icon: <SlPaperPlane />,
     light: true,
-    url: "#sendreceive",
+    url: "#create",
     colour: "#7ADB78",
   },
   {
@@ -55,11 +55,11 @@ export const features = [
   },
   {
     id: "5",
-    title: `Elevate Your Organization's Collaborative Potential`,
-    text: "Eggs Invoices provides a centralized platform for organizations to manage, track, and collaborate on invoices. Its features include team creation, member invitation, and shared invoice views, all designed to streamline collaboration and enhance efficiency. ",
+    title: `Filtered Properties Averages`,
+    text: "Provides a suite of filters to pinpoint ideal estates and properties, averaging the target variable specified (e.g. price of households in specific suburbs, number of bathrooms/bedrooms in specific household types, etc). ",
     backgroundUrl: "./src/assets/features/card-6.svg",
     icon: <MdOutlineSecurity />,
-    url: "#teams",
+    url: "#sendreceive",
     colour: "#ea5ed0",
   },
 ];

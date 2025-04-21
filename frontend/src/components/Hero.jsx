@@ -1,7 +1,7 @@
 import Section from "./Section";
 import "../stylesheets/Hero.css";
 import curve from "../assets/hero/curve.png";
-import banner1 from "../assets/hero/banner1.jpg";
+import banner2 from "../assets/hero/banner2.jpg";
 import { BackgroundCircles, Gradient } from "./design/Hero";
 import { ScrollParallax } from "react-just-parallax";
 import { useRef } from "react";
@@ -20,19 +20,19 @@ const Hero = () => {
         <div className="HeroTitleContainer">
           {/* Hero Title */}
           <h1>
-            Streamline Your Invoicing Process with{" "}
+            Simplify Your Property Decisions with{" "}
             {/* Separate inline block for 'Eggs-Invoicing' */}
             <span>
-              Eggs-Invoicing
+              Propex
               <img src={curve} width={415} height={15} alt="curve" />
             </span>
           </h1>
 
           {/* Sub heading */}
           <p>
-            A complete end-to-end e-invoicing solution that simplifies and
-            automates the invoicing process. Say goodbye to manual operations
-            and inefficiencies.
+            A complete end-to-end property insights platform that simplifies
+            real estate research and decision-making. Say goodbye to manual data
+            gathering and guesswork.
           </p>
 
           {/* Get Started Button */}
@@ -45,7 +45,7 @@ const Hero = () => {
             <div className="HeroImageBackground">
               {/* <div className='HeroImageTopPadding' /> */}
               <div className="HeroImageBorder">
-                <img src={banner1} width={1024} height={490} alt="banner" />
+                <img src={banner2} width={1024} height={490} alt="banner" />
 
                 {/* Scroll parallax for Searchbar */}
                 <ScrollParallax isAbsolutelyPositioned>
