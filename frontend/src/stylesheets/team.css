@@ -1,0 +1,465 @@
+.team-container, .inbox-container {
+  min-height: 100vh;
+  min-width: 100%;
+}
+
+.team-page, .inbox-page {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(#7f45f2 0, #3d266b 100%);
+  animation: fadeIn 3s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.team-left, .team-right {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 5vh 2vw 0 5vw;
+}
+
+.team-left {
+  background-color: white;
+  border-radius: 0px 100px 0px 0px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.team-right {
+  display: flex;
+  position: relative;
+}
+
+.inbox-left {
+  flex-direction: column;
+  width: 50%;
+  padding: 5vh 2vw 0 5vw;
+  background-color: white;
+  border-radius: 0px 100px 0px 0px;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.inbox-right {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  width: 50%;
+  padding: 5vh 1vw 0 1vw;
+}
+
+.team-img {
+  width: 85%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.team-info-container {
+  margin: 4vh 0 3vh 0
+}
+
+.team-info-heading {
+  padding: 0;
+  margin: 0;
+  color: #3d266b;
+  font-size: 48px;
+  display: inline-block;
+}
+
+.team-email {
+  color: rgb(83, 83, 83);
+  font-size: 20px;
+}
+
+.team-action {
+  display: flex;
+  text-align: center;
+  margin-top: 15px;
+  position: relative;
+}
+
+.team-invite, .team-leave {
+  margin-right: 1vw;
+  padding: 13px;
+  border-radius: 10px;
+  background-color: #7f45f2;
+  color: white;
+  width: 14vw;
+  font-size: 20px;
+}
+
+.team-invite:hover, .team-leave:hover {
+  cursor: pointer;
+  color: #7f45f2;
+  background-color: white;
+  transition: 0.2s ease-in-out;
+}
+
+.copied {
+  position: absolute;
+  margin-top: 4px;
+  padding: 0;
+  top: 100%;
+  left: 0;
+  color: rgb(123, 123, 123);
+}
+
+.member-heading {
+  color: #3d266b;
+  font-size: 30px; 
+}
+
+.member-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: 45vh;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.member {
+  padding: 3vh 0;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  border: solid #7f45f2;
+  width: 85%;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7f45f2; 
+  border-radius: 5px;
+}
+
+.team-send {
+  position:absolute;
+  display: flex;
+  align-items: center;
+  top: 25vh;
+  left: 30%
+}
+
+.team-receive {
+  position:absolute;
+  display: flex;
+  top: 35vh;
+  left: 30%;
+  align-items: center;
+}
+
+.team-send:hover, .team-receive:hover {
+  cursor: pointer;
+}
+
+.team-send-text, .team-receive-text {
+  color: white;
+  font-size: 35px;
+  display: inline;
+}
+
+.team-send-text:hover, .team-receive-text:hover {
+  font-size: 35px;
+  display: inline;
+  animation: popUp 0.5s;
+  transition: all 0.5s ease-in-out;
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
+}
+
+.arrow {
+  padding-top: 3px;
+  padding-left: 15px;
+  color: white;
+}
+
+.arrow:hover {
+  display: inline;
+  animation: popUp 0.5s;
+  transition: all 0.5s ease-in-out;
+}
+
+.team-loading {
+  display: flex;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(#7f45f2 0, #3d266b 100%);
+
+}
+
+.loading-text {
+  color: #ffffff;
+  font-size: 80px;
+  padding-top: 15vh;
+  position: absolute;
+  left: 29%;
+}
+
+.load-img {
+  height: 70%;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.team-creation-box {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border-color: #7f45f2;
+  flex-direction: column;
+  font-size: 25px;
+  padding: 30px;
+  width: 140%;;
+  margin-bottom: 4%;
+  margin-left: 0;
+  margin-top: 10%;
+  align-self: flex-start;
+}
+
+.input-div {
+  display: flex;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.invoice-creation-submit-button {
+  background-color: initial;
+  background-image: linear-gradient(#7f45f2 0, #3d266b 100%);
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: Roboto;
+  height: 100px;
+  line-height: 60px;
+  outline: 0;
+  justify-content: center;
+  margin-top: 10%;
+  text-align: center;
+  transition: all .3s cubic-bezier(.05, .03, .35, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.team-create-form {
+  margin-top: 7vh;
+  display: flex;
+}
+.team-creation-image {
+  width: 100%;
+  animation: fade-up 2s;
+}
+
+.back-button {
+  margin-top: 6vh;
+  margin-bottom: 1vh;
+}
+
+.inbox-back-button {
+  margin-top: 6vh;
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+}
+
+.join-text {
+  margin: 0;
+  padding-top: 10vh;
+}
+
+.team-send-email {
+  margin: 0;
+  margin-top: 3vh;
+}
+
+.fileUpload {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  height: 200px;
+  width: 100%;
+  color: rgb(155, 155, 155);
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.send-title {
+  font-size: 38px;
+  margin: 0;
+  margin-top: 25vh;
+  color: white;
+}
+
+.team-upload {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  height: 20vh;
+  width: 100%;
+  color: rgb(155, 155, 155);
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.team-upload:hover {
+  background: #ffffff;
+  color: #7f45f2;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 4vh;
+}
+
+.team-name-send {
+  color: #7f45f2;
+  font-size: 32px;
+}
+
+.team-email-send {
+  color: grey;
+  font-size: 19px;
+  padding: 0;
+  font-weight: bolder;
+}
+
+.team-email-input {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border: solid;
+  border-color: #7f45f2;
+  font-size: 25px;
+  padding: 30px;
+  margin-bottom: 3vh;
+  margin-top: 3vh;
+  width: 100%;
+}
+
+.send-page-title {
+  display: flex;
+  color: white;
+  font-size: 45px;
+  margin: 15vh 0 6vh 0;
+}
+
+.send-discription {
+  color: rgba(255, 255, 255, 0.758);
+  padding-bottom: 8vh; 
+  margin: 0; 
+}
+
+.create-img {
+
+  height: auto;
+  width: 80%;
+}
+
+.sent-active, .receive-active, .sent-inactive, .receive-inactive {
+  font-size: 25px;
+  padding-right: 15px;
+  cursor: default;
+}
+
+.sent-inactive:hover, .receive-inactive:hover {
+  cursor: pointer;
+}
+
+.sent-active, .receive-active {
+  color: #7f45f2;
+}
+
+.sent-inactive, .receive-inactive {
+  color: rgba(0, 0, 0, 0.43);
+}
+
+.inbox-title {
+  text-align: center;
+  color:#7f45f2;
+  font-size: 38px;
+}
+
+.inbox-email {
+  text-align: center;
+  font-size: 20px;
+  color: rgb(80, 80, 80);
+}
+
+.inboxContainerTeam {
+  display: grid;
+  grid-template-columns: 0.1fr 0.5fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-rows: 50px repeat(12, 1fr);
+  width: 90%;
+  height: 65vh;
+  background-color: white;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 15px;
+  border: 3px solid #7f45f2;
+  margin-bottom: 1%;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #7f45f2 white;
+  animation: fadeIn 2s;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10vh;
+  margin-right: 10vh;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
+  animation: fadeIn 2s;
+}

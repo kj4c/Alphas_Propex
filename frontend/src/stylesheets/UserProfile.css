@@ -1,0 +1,88 @@
+.heading {
+  font-size: 36px;
+  margin-left: 100px;
+  margin-top: 80px;
+}
+
+.profile-picture {
+  align-self: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  border-color: grey;
+  border-style: solid;
+
+}
+
+hr {
+  margin: 20px;
+}
+
+.user-name,
+.email,
+.phone-no {
+  font-size: 20px;
+  padding-left: 30px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  margin: 50px;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  padding-left: 200px;
+  padding-right: 200px;
+
+  border-style: solid;
+  border-radius: 40px;
+  border-width: 2px;
+  border-color: grey;
+}
+
+.info-containers {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info {
+  font-size: 20px;
+  padding-right: 30px;
+  color: grey
+}
+
+.log-out {
+  margin-top: 3vh;
+  align-self: center;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+
+  background-color: #7f45f2;
+  border-radius: 16px;
+  border-color: #7f45f2;
+  border-style: solid;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: 0.2s;
+  text-decoration: none;
+}
+
+.log-out:hover {
+  cursor: pointer;
+  color: #7f45f2;
+  background-color: white;
+}
+
+.pencilLogo {
+  border: none;
+  background-color: #FAFBFB;
+}
+
+.pencilLogo:hover {
+  cursor: pointer;
+}

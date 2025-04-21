@@ -1,0 +1,150 @@
+.sidebar-container {
+  margin-left: 0.75rem;
+  height: 100vh;
+  overflow: auto;
+}
+
+.sidebar-listContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sidebar-title {
+  margin-left: 0.75rem;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  color: #7f45f2;
+  text-decoration: none;
+}
+
+.sidebar-mt-10 {
+  margin-top: 2.5rem;
+}
+
+.sidebar-closeMenuButton {
+  /* margin-top: 1rem */
+  border: none;
+  display: block;
+  border-radius: 999px;
+  padding: 0.75rem;
+  font-size: 1.25rem;
+  background-color: #fafbfb;
+}
+
+.sidebar-closeMenuButton:hover {
+  background-color: #f7f7f7;
+}
+
+.sidebar-listTitles {
+  margin: 0.75rem;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  color: rgb(156 163 175 / 1);
+}
+
+.sidebar-activeLink {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  color: white;
+  background-color: #7f45f2;
+  margin: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.sidebar-normalLink {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  color: rgb(55 65 81);
+  margin: 0.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.sidebar-normalLink:hover {
+  background-color: #f7f7f7;
+}
+
+.subMenu-normal {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: 2rem;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  color: rgb(55 65 81);
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.subMenu-normal:hover {
+  background-color: #f7f7f7;
+}
+
+.subMenu-active {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-left: 2rem;
+  margin-right: 10px;
+  padding-left: 1rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-radius: 0.5rem;
+  /* color: rgb(55 65 81); */
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: #9160f2;
+}
+
+/* Medium screen size */
+@media (min-width: 768px) {
+  /* Apply overflow-hidden by default */
+  .md-overflow-hidden {
+    overflow: hidden;
+  }
+
+  /* Apply overflow-auto on hover */
+  .md-overflow-hidden:hover {
+    overflow: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .md-hidden {
+    display: none;
+  }
+}
+
+.sidebar,
+.sidebarActive,
+.sidebarUnActive {
+  transition: all 0.3s ease;
+}
+
+.main-container,
+.md-ml-72,
+.activeMenu,
+.unActiveMenu {
+  transition: margin-left 0.3s ease;
+}

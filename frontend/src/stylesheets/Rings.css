@@ -1,0 +1,62 @@
+.RingContainer {
+  position: absolute;
+  top: -30rem;
+  left: 50%;
+  width: 78rem;
+  aspect-ratio: 1 / 1;
+  border-radius: 9999px;
+  border: 1px solid rgba(202, 198, 221, 0.1);
+  transform: translateX(-50%);
+  /* background-color: aquamarine; */
+}
+
+.Ring1 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid rgba(202, 198, 221, 0.1);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  width: 65.875rem;
+  /* background-color: blue; */
+}
+
+.Ring2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 1 / 1;
+  border-width: 1px;
+  border: 1px solid rgba(202, 198, 221, 0.1);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  width: 51.375rem;
+  /* background-color: yellow; */
+}
+
+.Ring3 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 1 / 1;
+  border-width: 1px;
+  border: 1px solid rgba(202, 198, 221, 0.1);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  width: 36.125rem;
+  /* background-color: green; */
+}
+
+.Ring4 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  aspect-ratio: 1 / 1;
+  border-width: 1px;
+  border: 1px solid rgba(202, 198, 221, 0.1);
+  border-radius: 9999px;
+  transform: translate(-50%, -50%);
+  width: 23.125rem;
+  /* background-color: purple; */
+}

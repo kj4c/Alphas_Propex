@@ -1,0 +1,88 @@
+.FeaturesContainer {
+  position: relative;
+  max-width: 87.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2.25rem;
+  z-index: 2;
+  margin-top: 2rem;
+}
+
+.FeaturesContainerHeading {
+  max-width: 60rem;
+}
+
+.CardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.CardBox {
+  display: block;
+  position: relative;
+  padding: 0.125rem;
+  max-width: 24rem;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.Card {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-height: 22rem;
+  padding: 2.4rem;
+  z-index: 2;
+}
+
+.Card h5 {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.Card p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 1.5rem;
+  color: #ada8c3;
+}
+
+.CardMoreContainer {
+  display: flex;
+  align-items: center;
+  margin-top: auto;
+}
+
+.CardIcon {
+  font-size: x-large;
+  height: 3rem;
+  border-radius: 10px;
+  padding: 10px 15px;
+  color: black;
+}
+
+.CardMoreContainer a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1rem;
+  margin-left: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.Arrow {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1rem;
+  margin-left: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
