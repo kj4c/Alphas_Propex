@@ -17,7 +17,7 @@ const AppContent = () => {
   const location = useLocation();
   const knownPaths = ["/uploadjson", "/businesses", "/individuals"];
 
-  const hideNavBarPaths = ["/login", "/register", "reset-password", "/"];
+  const hideNavBarPaths = ["/"];
 
   const showNavbar =
     knownPaths.includes(location.pathname) &&
