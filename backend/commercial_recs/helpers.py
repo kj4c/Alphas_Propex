@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def find_commerical_recs(data,income_weight=0.5, traffic_weight=0.5,income_threshold=0.25,traffic_threshold=0.25, top_n=10):
+def find_commercial_recs(data,top_n=10,income_weight=0.5, traffic_weight=0.5,income_threshold=0.25,traffic_threshold=0.25):
 
     """
     calculates the top n recommeneded suburbs for commercial investment based on income and population density with a composite score.
@@ -48,6 +48,6 @@ def find_commerical_recs(data,income_weight=0.5, traffic_weight=0.5,income_thres
     recommended = recommended_areas.sort_values(by='composite_score', ascending=False).head(top_n)
     print(f"Top {top_n} recommended suburbs for commercial investment:")
     print(recommended[['suburb', 'suburb_median_income', 'population_density', 'composite_score']])
-
+    
     # return top n recs
     return recommended

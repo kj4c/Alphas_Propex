@@ -1,6 +1,6 @@
 # import requests
 
-# # THESE TEST THE DEPLOYED LINK
+# THESE TEST THE DEPLOYED LINK
 # ENDPOINT = "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs"
 
 # def test_commercial_recs():
@@ -16,3 +16,5 @@
 #         "function_name": "commercial_recs",
 #     })
 #     assert response.status_code == 400
+
+
