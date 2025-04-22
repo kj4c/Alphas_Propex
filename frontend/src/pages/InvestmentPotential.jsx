@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
@@ -28,7 +29,8 @@ const InvestmentPotential = () => {
       }
     );
     setLoading(false);
-    setInvestPotential(JSON.parse(response.data.investment_potentials));
+    console.log("response = ", response.data.investment_potentials);
+    setInvestPotential(response.data.investment_potentials);
   };
 
   return (
@@ -36,6 +38,7 @@ const InvestmentPotential = () => {
       <Panel
         title="Investment Potential"
         description={"Which suburbs yield the highest investment potential"}
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -49,29 +52,28 @@ const InvestmentPotential = () => {
             }
           }}
         />
-        <RunButton text="Submit" onClick={fetchData}/>
-      </Panel>
-      {investPotential !== null && (
-        <div className="investPotential">
-          <table>
-            <thead>
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+        {investPotential !== null && !loading  && (
+        <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <table className="min-w-full text-sm text-left text-white/90">
+            <thead className="bg-[--color-gray-800] text-white uppercase text-xs tracking-wider">
               <tr>
-                <th>Suburb</th>
-                <th>Investment Score</th>
+                <th className="px-6 py-3">Suburb</th>
+                <th className="px-6 py-3">Investment Score</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="divide-y divide-white/10">
               {investPotential.map((entry, index) => (
-                <tr key={index}>
-                  <td>{entry.suburb}</td>
-                  <td>{entry.investment_score.toFixed(2)}</td>
+                <tr key={index} className="hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-4">{entry.suburb}</td>
+                  <td className="px-6 py-4">{entry.investment_score.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
-      {loading && <p>Loading...</p>}
+      </Panel>
     </div>
   );
 };

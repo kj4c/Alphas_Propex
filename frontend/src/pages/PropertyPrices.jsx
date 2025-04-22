@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 const PropertyPrices = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -82,8 +83,8 @@ const PropertyPrices = () => {
       <Panel
         title="Average Property Prices"
         description="Find average property prices given optional filters"
+        loading={loading}
       >
-        <p>Id:</p>
         <BasicInput
           type="text"
           name="id"
@@ -96,164 +97,151 @@ const PropertyPrices = () => {
             }
           }}
         />
-        <div className="filter-field">
-          <p>Price range:</p>
-          <BasicInput
-            type="text"
-            name="min-price"
-            placeholder="Min price"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setMinPrice(e.target.value);
-              } else {
-                setMinPrice(null);
-              }
-            }}
-          />
-          <BasicInput
-            type="text"
-            name="max-price"
-            placeholder="Max price"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setMaxPrice(e.target.value);
-              } else {
-                setMaxPrice(null);
-              }
-            }}
-          />
-        </div>
-        <div className="filter-field">
-          <p>Date range:</p>
-          <BasicInput
-            type="text"
-            name="sold-after"
-            placeholder="Date sold after"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setDateSoldAfter(e.target.value);
-              } else {
-                setDateSoldAfter(null);
-              }
-            }}
-          />
-          <BasicInput
-            type="text"
-            name="sold-before"
-            placeholder="Date sold before"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setDateSoldBefore(e.target.value);
-              } else {
-                setDateSoldBefore(null);
-              }
-            }}
-          />
-        </div>
-        <div className="filter-field">
-          <p>Suburb:</p>
-          <BasicInput
-            type="text"
-            name="sold-after"
-            placeholder="Suburb"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setSuburb(e.target.value);
-              } else {
-                setSuburb(null);
-              }
-            }}
-          />
-        </div>
-        <div className="filter-field">
-          <p>Property feature:</p>
-          <BasicInput
-            type="text"
-            name="num-bath"
-            placeholder="Bathrooms"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setNumBath(e.target.value);
-              } else {
-                setNumBath(null);
-              }
-            }}
-          />
-          <BasicInput
-            type="text"
-            name="num-bed"
-            placeholder="Bedrooms"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setNumBed(e.target.value);
-              } else {
-                setNumBed(null);
-              }
-            }}
-          />
-          <BasicInput
-            type="text"
-            name="num-parking"
-            placeholder="Parking"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setNumParking(e.target.value);
-              } else {
-                setNumParking(null);
-              }
-            }}
-          />
-        </div>
-        <div className="filter-field">
-          <p>Property size:</p>
-          <BasicInput
-            type="text"
-            name="min-size"
-            placeholder="Min size"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setMinSize(e.target.value);
-              } else {
-                setMinSize(null);
-              }
-            }}
-          />
-          <BasicInput
-            type="text"
-            name="max-size"
-            placeholder="Max size"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setMaxSize(e.target.value);
-              } else {
-                setMaxSize(null);
-              }
-            }}
-          />
-        </div>
-        <div className="filter-field">
-          <p>Property type:</p>
-          <BasicInput
-            type="text"
-            name="min-size"
-            placeholder="Type"
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setType(e.target.value);
-              } else {
-                setType(null);
-              }
-            }}
-          />
-        </div>
-        <RunButton text={"Search"} onClick={fetchPrice}>Search</RunButton>
+        <p>Price range:</p>
+        <BasicInput
+          type="text"
+          name="min-price"
+          placeholder="Min price"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setMinPrice(e.target.value);
+            } else {
+              setMinPrice(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="max-price"
+          placeholder="Max price"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setMaxPrice(e.target.value);
+            } else {
+              setMaxPrice(null);
+            }
+          }}
+        />
+        <p>Date range:</p>
+        <BasicInput
+          type="text"
+          name="sold-after"
+          placeholder="Date sold after"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setDateSoldAfter(e.target.value);
+            } else {
+              setDateSoldAfter(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="sold-before"
+          placeholder="Date sold before"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setDateSoldBefore(e.target.value);
+            } else {
+              setDateSoldBefore(null);
+            }
+          }}
+        />
+        <p>Suburb:</p>
+        <BasicInput
+          type="text"
+          name="sold-after"
+          placeholder="Suburb"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setSuburb(e.target.value);
+            } else {
+              setSuburb(null);
+            }
+          }}
+        />
+        <p>Property feature:</p>
+        <BasicInput
+          type="text"
+          name="num-bath"
+          placeholder="Bathrooms"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setNumBath(e.target.value);
+            } else {
+              setNumBath(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="num-bed"
+          placeholder="Bedrooms"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setNumBed(e.target.value);
+            } else {
+              setNumBed(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="num-parking"
+          placeholder="Parking"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setNumParking(e.target.value);
+            } else {
+              setNumParking(null);
+            }
+          }}
+        />
+        <p>Property size:</p>
+        <BasicInput
+          type="text"
+          name="min-size"
+          placeholder="Min size"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setMinSize(e.target.value);
+            } else {
+              setMinSize(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="max-size"
+          placeholder="Max size"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setMaxSize(e.target.value);
+            } else {
+              setMaxSize(null);
+            }
+          }}
+        />
+        <p>Property type:</p>
+        <BasicInput
+          type="text"
+          name="min-size"
+          placeholder="Type"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setType(e.target.value);
+            } else {
+              setType(null);
+            }
+          }}
+        />
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}
+        {loaded && (
+          <div className="avg-price">
+            <h2> Average price: {price}</h2>
+          </div>
+        )}
       </Panel>
-      {loading && <div className="loading">loading...</div>}
-      {loaded && (
-        <div className="avg-price">
-          <h2> Average price: {price}</h2>
-        </div>
-      )}
     </div>
   );
 };

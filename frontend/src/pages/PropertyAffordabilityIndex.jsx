@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 import {
   BarChart,
   Bar,
@@ -77,6 +78,7 @@ const PropertyAffordabilityIndex = () => {
       <Panel
         title="Property Affordability Index"
         description={"How affordable each suburb is based on given income"}
+        loading={loading}
       >
         <BasicInput
           type="text"
@@ -100,25 +102,23 @@ const PropertyAffordabilityIndex = () => {
             }
           }}
         />
-        <RunButton text="Fetch" onClick={fetchData} />
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {!loading && affordabilityData !== null && (
           <div className="ret w-full ">
-            <div className="ret max-h-96 overflow-auto border border-white/30 rounded-md mt-4">
-              <table className="ml-4">
-                <thead>
+            <div className="ret max-h-96 overflow-auto border border-white/20 rounded-lg backdrop-blur-sm mt-4">
+              <table className="min-w-full text-sm text-left text-white/90">
+                <thead className="bg-gray-500 text-white uppercase text-xs tracking-wider sticky top-0 backdrop-blur-sm z-10">
                   <tr>
-                    <th>Suburb</th>
-                    <th>Normalized Affordability Index</th>
+                    <th className="px-6 py-3">Suburb</th>
+                    <th className="px-6 py-3">Normalized Affordability Index</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-white/10">
                   {affordabilityData.map((recommendation, index) => (
-                    <tr key={index}>
-                      <td>{recommendation.suburb}</td>
-                      <td>{recommendation.norm_affordability_index}</td>
+                    <tr key={index}  className="hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4">{recommendation.suburb}</td>
+                      <td className="px-6 py-4">{recommendation.norm_affordability_index}</td>
                     </tr>
                   ))}
                 </tbody>

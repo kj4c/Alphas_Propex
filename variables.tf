@@ -19,6 +19,7 @@ variable "lambda_functions" {
   # Auto-detected functions from backend/
   default = {
     "commercial_recs_chart" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "commercial_recs_targeted" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "influence_factors" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "property_prices" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "suburb_livability_score" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }

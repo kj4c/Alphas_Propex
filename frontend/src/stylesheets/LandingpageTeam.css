@@ -1,0 +1,74 @@
+.LandingpageTeamTheme {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  max-width: 87.5rem;
+  padding-bottom: 2.5rem;
+  margin-top: 2rem;
+  /* background-color: white; */
+}
+
+.LandingpageTeamContainer {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding-bottom: 7rem;
+  /* background-color: white; */
+}
+
+.LandingpageTeamCardPos {
+  display: flex;
+  border-radius: 2.5rem;
+  /* background-color: white; */
+  background-color: #252134;
+}
+
+.LandingpageTeamCardPos:nth-child(even) {
+  transform: translateY(7rem);
+  /* background-color: blue; */
+}
+
+.LadingpageTeamCardContainer {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem;
+  border-radius: 2.5rem;
+  /* background-color: aqua; */
+}
+
+.LandingpageTeamContent {
+  position: relative;
+  /* background-color: pink; */
+}
+
+.LandingpageTeamContent h4 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: white;
+  /* background-color: orange; */
+}
+
+.LandingpageTeamContent p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5rem;
+  margin-bottom: 2.5rem;
+  color: #757185;
+  /* background-color: purple; */
+}
+
+.LandingpageTeamCardImage {
+  margin-bottom: 2.5rem;
+  height: 25rem;
+  /* background-color: yellow; */
+}
+
+.LandingpageTeamCardImage img {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  filter: brightness(0.95);
+}

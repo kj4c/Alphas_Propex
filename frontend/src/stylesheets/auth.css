@@ -1,0 +1,170 @@
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.login-form div {
+  margin-bottom: 1rem;
+}
+
+.inputFields {
+  width: calc(100% - 20px);
+  padding: 12px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease; /* Adds a smooth transition effect */
+}
+
+.inputFields:focus {
+  outline: none; /* Removes the default focus outline */
+  border-color: #7f45f2; /* Changes border color on focus */
+  box-shadow: 0 0 8px rgba(127, 69, 242, 0.8); /* Creates a glow effect */
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #7f45f2;
+  margin-top: 10px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.submit-button:hover {
+  transition: 0.5s;
+  background-color: #fafbfb;
+  color: #7f45f2;
+}
+
+.title-login {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
+.registration-form-container {
+  display: flex;
+  flex-direction: column;
+  float: right;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
+.auth-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.auth-links a {
+  margin: 5px;
+  color: #7f45f2;
+  align-items: center;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.auth-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  height: 60vh;
+}
+
+.slideshow-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slideshow-image {
+  max-width: 70%;
+  height: auto;
+  border-radius: 40px;
+}
+
+.login-form-container {
+  flex: 1;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.eggs-logo {
+  width: 100px;
+  height: auto;
+  margin-left: 40px;
+  margin-top: 30px;
+}
+
+.login-error {
+  color: rgb(240, 57, 57);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.label-regi {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.email-input-box {
+  margin-bottom: 10px;
+}
+
+.LandingPageButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.LandingPageButton {
+  background-color: aqua;
+  padding: 15px 30px; /* Adds padding around the text */
+  color: white; /* Text color */
+  font-size: 1.2rem; /* Bigger text */
+  font-weight: bold; /* Bold text */
+  background: linear-gradient(
+    45deg,
+    #442583,
+    #7f45f2
+  ); /* Gradient background */
+  border: none; /* No border */
+  border-radius: 30px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  outline: none; /* Removes the outline */
+  cursor: pointer; /* Changes cursor to a hand icon */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Smooth transition for button press and hover effects */
+}
+
+.LandingPageButton:hover,
+.LandingPageButton:focus {
+  transform: translateY(-3px); /* Moves the button up slightly */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Larger shadow when hovered */
+}
+
+.LandingPageButton:active {
+  transform: translateY(-1px); /* Subtle button press effect */
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.12); /* Smaller shadow for pressed state */
+}

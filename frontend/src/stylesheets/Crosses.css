@@ -1,0 +1,27 @@
+.leftCross {
+  position: absolute;
+  /* display: none; */
+  /* display: block; */
+  top: -0.3125rem;
+  left: 1.5625rem;
+}
+
+.leftCrossConditional {
+  pointer-events: none;
+  display: block;
+  /* left: 2.1875rem; */
+}
+
+.rightCross {
+  position: absolute;
+  /* display: none; */
+  /* display: block; */
+  top: -0.3125rem;
+  right: 1.5625rem;
+}
+
+.rightCrossConditional {
+  pointer-events: none;
+  display: block;
+  /* right: 2.1875rem */
+}

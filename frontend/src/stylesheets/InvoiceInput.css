@@ -1,0 +1,333 @@
+.splitScreen {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  align-items: center;
+  background-color: #7f45f2;
+  background-image: linear-gradient(#7f45f2, #2a125a);
+  height: 100vh;
+}
+
+.inputBox {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border-color: #7f45f2;
+  flex-direction: column;
+  font-size: 25px;
+  padding: 30px;
+  margin-bottom: 10%;
+  margin-top: 15%;
+  width: 100%;
+}
+
+.inputBox2 {
+  color: black;
+  box-sizing: border-box;
+  border-radius: 5px;
+  height: 40px;
+  border-color: #7f45f2;
+  flex-direction: column;
+  font-size: 25px;
+  padding: 30px;
+  margin-bottom: 10%;
+  width: 100%;
+}
+
+.inputContainers {
+  width: 47%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 4px 0px 10px 12px #f5f5f5 inset;
+  border-radius: 0px 100px 0px 0px;
+}
+
+.inputWrapper {
+  margin: 8%;
+  animation: fade-right 2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  height: 100%;
+  flex: 1;
+}
+
+.sourceImage {
+  width: 100%;
+  animation: fade-up 2s;
+}
+
+.team-create-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+}
+
+.pageTitle {
+  color: white; 
+  font-size: 60px;
+  animation: fade-right 2s;
+}
+
+
+.formBox {
+  display: flex;
+}
+
+.labels {
+  flex-direction: column;
+  font-size: 40px;
+  margin-left: 1%;
+}
+
+.fileUpload {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 2px solid #7f45f2; /* Purple border */
+  height: 200px;
+  width: 100%;
+  color: rgb(155, 155, 155);
+  font-size: 25px;
+  line-height: 50px;
+  text-align: center;;
+  border-radius: 10px;
+  transition: all .3s ease;
+}
+
+.fileUpload:hover {
+  background: #ffffff;
+  color: #7f45f2;
+  transition: all .3s;
+  cursor: pointer;
+}
+
+.submit{
+  background-color: initial;
+  background-image: linear-gradient(#7f45f2 0, #3d266b 100%);
+  border-radius: 5px;
+  border-style: none;
+  box-shadow: rgba(245, 244, 247, .25) 0 1px 1px inset;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  font-weight: 500;
+  font-family: Roboto;
+  height: 100px;
+  line-height: 60px;
+  outline: 0;
+  justify-content: center;
+  margin-top: 10%;
+  text-align: center;
+  transition: all .3s cubic-bezier(.05, .03, .35, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: bottom;
+  width: 100%;
+}
+
+.submit:hover {
+  opacity: .7;
+}
+
+.header {
+  font-size: 45px;
+}
+
+.description {
+  margin-bottom: 3%;
+}
+
+@media screen and (max-width: 1000px) {
+  .submit{
+    font-size: 25px;
+    height: 55px;
+    line-height: 55px;
+    width: 150px;
+  }
+}
+
+.backButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff; /* Keeps text white for contrast */
+  background-color: #7f45f2; /* Purple background */
+  border: 2px solid #7f45f2; /* Purple border */
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out, border-color 0.3s ease-in-out;
+  text-decoration: none; /* In case you switch to <a> tag */
+  align-self: flex-start; /* Aligns the button to the start of the flex container */
+}
+
+.backButton:hover,
+.backButton:focus {
+  background-color: #6b39c8; /* Slightly darker purple on hover/focus for visual feedback */
+  border-color: #6b39c8; /* Darker border color on hover/focus to match */
+  transform: translateY(-2px);
+  outline: none; /* Removes the outline on focus for a cleaner look */
+}
+
+.backButton:active {
+  background-color: #5d2eb4; /* Even darker purple on active/click for a "pressed" effect */
+  border-color: #5d2eb4; /* Border color matches the active background */
+  transform: translateY(1px);
+}
+
+.fileWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+  height: 28vh;
+  scrollbar-width: thin;
+  scrollbar-color: #7f45f2 white;
+  border: 2px solid #7f45f2;
+  padding: 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.attachmentGroup {
+  margin-bottom: 15px; /* Space between each attachment group */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.plusButton {
+  font-size: 30px;
+  background-color: #7f45f2;
+  color: white;
+  font-family: bold;
+  padding: 0;
+  cursor: pointer;
+  text-align: center;
+  line-height: 50px;
+  width: 50px;
+  height: 40px;
+  border-radius: 20%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.plusButton:hover {
+  background-color: #945eff;
+  color: white;
+  transition: all .3s;
+}
+.file-upload-button {
+  background: #ffffff;
+  border-color: #7f45f2;
+  border: 1px dashed #7f45f2; /* Purple border */
+  color: rgb(155, 155, 155);
+  font-size: 20px;
+  text-align: center;
+  border-radius: 10px;
+  transition: all .3s ease;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 99%;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.file-upload-button:hover {
+  background: #ffffff;
+  color: #7f45f2;
+  transition: all .3s;
+  cursor: pointer;
+}
+/* Styles for the title input of each attachment */
+.attachmentTitleInput {
+  margin: 5px 0;
+  padding: 10px;
+  width: 80%; /* Adjust the width as necessary */
+  border: 2px solid #007bff; /* Light blue border */
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Styles for the file input */
+.attachmentFileInput {
+  margin: 5px 0;
+  padding: 10px;
+  width: 95%;
+  /* width: calc(80% + 22px); eSlightly larger to align with the title input's visual width */
+  border: 2px dashed #007bff; /* Light blue dashed border */
+  border-radius: 4px;
+  background-color: #f8f9fa; /* Light background to distinguish from other inputs */
+  color: #495057; /* Slightly darker text for better readability */
+  cursor: pointer;
+}
+
+/* Style adjustments for the span displaying the file name */
+.fileNameDisplay {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #6c757d; /* Grey text */
+}
+
+/* General styling for buttons within the form for consistency */
+.formButton {
+  cursor: pointer;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #fff; /* White text */
+}
+
+/* KEYFRAMES */
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px) scale(1);
+  }
+}
+
+@keyframes fade-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+  }
+}
+
+@keyframes move-right {
+  0% {
+    transform: translateX(-50px) scale(1);
+  }
+
+  100% {
+    transform: translateX(0px) scale(1);
+  }
+}

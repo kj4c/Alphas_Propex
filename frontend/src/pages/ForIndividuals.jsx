@@ -7,14 +7,21 @@ import TestPropertyAfford from "./testPropertyAfford";
 
 const ForIndividuals = () => {
   return (
-    <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10">
-      <h1 className="text-3xl font-bold mb-6">For Individuals</h1>
+    <>
+      <div className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/darkhouse.jpg)] bg-center">
+      <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center">
+        <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">For Individuals</h1>
+      </div>
+        <div className="absolute bottom-0 w-full h-3 bg-gradient-to-t from-[#010314]/90 to-transparent backdrop-blur-md"></div>
+      </div>
+      <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10">
       <PropertyPrices />
       <PropertyAffordabilityIndex />
       <SuburbLivability />
       <SuburbPriceMap />
       <TopSchoolArea />
-    </div>
+      </div>
+    </>
   );
 };
 
