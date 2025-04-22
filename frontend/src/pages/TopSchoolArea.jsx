@@ -4,7 +4,7 @@ import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Dropdown from "../components/Dropdown";
-
+import Loading from "@/components/Loading";
 const TopSchoolArea = () => {
   const [loading, setLoading] = useState(false);
   const [schools, setSchools] = useState(null);
@@ -64,8 +64,8 @@ const TopSchoolArea = () => {
       <Panel
         title="Schools Nearby"
         description="Find out how many properties are near a school and what the average property price is."
+        loading={loading}
       >
-        <p>Id:</p>
         <BasicInput
           type="text"
           name="id"
@@ -87,42 +87,41 @@ const TopSchoolArea = () => {
           options={districts}
         />
 
-        <p>Radius (km):</p>
         <BasicInput
           type="text"
           name="radius"
-          placeholder="Radius"
+          placeholder="Radius (km)"
           onChange={(e) => setRadius(e.target.value)}
         />
 
-        <RunButton text="Fetch" onClick={fetchData} />
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {schools && (
-          <table>
-            <thead>
-              <tr>
-                <th>School</th>
-                <th>Number of Properties</th>
-                <th>Average Property Price</th>
-              </tr>
-            </thead>
-            <tbody>
-              {schools.map((school, index) => (
-                <tr key={index}>
-                  <td>{school.school}</td>
-                  <td>{school.num_properties}</td>
-                  <td>
-                    {school.avg_property_price.toLocaleString("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    })}
-                  </td>
+          <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+            <table className="min-w-full text-sm text-left text-white/90">
+              <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
+                <tr>
+                  <th className="px-6 py-3">School</th>
+                  <th className="px-6 py-3">Number of Properties</th>
+                  <th className="px-6 py-3">Average Property Price</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {schools.map((school, index) => (
+                  <tr key={index} className="hover:bg-white/5 transition-colors">
+                    <td className="px-6 py-4">{school.school}</td>
+                    <td className="px-6 py-4">{school.num_properties}</td>
+                    <td className="px-6 py-4">
+                      {school.avg_property_price.toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </Panel>
     </div>

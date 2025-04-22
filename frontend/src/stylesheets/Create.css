@@ -1,0 +1,106 @@
+.CreateContainer {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  margin-top: 2rem;
+  max-width: 87.5rem;
+}
+
+.CreateBentoContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  padding: 2rem;
+  height: 42rem;
+  /* margin-left: 40px; */
+  /* margin-right: 40px; */
+  border-radius: 1.5rem;
+  border: 1px solid rgb(255, 255, 255, 0.1);
+  overflow: hidden;
+  /* background-color: blue; */
+}
+
+.CreateBentoBox {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #15131d;
+  /* background-color: aqua; */
+}
+
+.CreateImage {
+  filter: invert(0.1);
+  /* border-radius: 50px; */
+  border-radius: 1.5rem;
+  transform: scale(0.7);
+  overflow-y: scroll;
+  margin-top: -7rem;
+  margin-left: -4rem;
+  height: 60rem;
+  width: 60em;
+  /* background-color: aqua; */
+}
+
+.CreateImage2 {
+  filter: invert(0.1);
+  /* border-radius: 50px; */
+  border-radius: 1.5rem;
+  transform: scale(0.9);
+  overflow-y: scroll;
+  /* margin-top: -7rem; */
+  margin-left: 3rem;
+  padding-bottom: 5rem;
+  height: 41rem;
+  width: 46.5em;
+  overflow: hidden;
+}
+
+.CreateImage::-webkit-scrollbar {
+  width: 0px;
+}
+
+.CreateBentoListContainer {
+  position: relative;
+  margin-left: auto;
+  max-width: 28rem;
+  /* background-color: aqua; */
+}
+
+.CreateBentoListContainer h4 {
+  color: white;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.CreateBentoListContainer p {
+  margin-bottom: 3rem;
+  color: #ada8c3;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5rem;
+  margin-top: 5px;
+  /* background-color: blueviolet; */
+}
+
+.CreateBentoListItems {
+  display: flex;
+  margin-left: -2.5rem;
+  padding-top: 1rem;
+  margin-bottom: -1.5rem;
+  border-top: 1px solid #252134;
+  /* background-color: blue; */
+}
+
+.checkIcon {
+  font-size: xx-large;
+  color: rgb(183, 116, 246);
+}
+
+.CreateBentoListItems p {
+  margin-left: 1rem;
+}

@@ -3,6 +3,7 @@ import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
+import Loading from "@/components/Loading";
 import { v4 as uuidv4 } from "uuid";
 import {
   BarChart,
@@ -112,6 +113,7 @@ const SuburbLivability = () => {
       <Panel
         title="Suburb Livability Score"
         description="Calculates livability score given weightings of proximity to CBD, property size, population density, crime risk and weather risk"
+        loading={loading}      
       >
         <BasicInput
           type="text"
@@ -176,25 +178,23 @@ const SuburbLivability = () => {
           }}
         />
 
-        <RunButton onClick={fetchData} text={"Submit"}></RunButton>
-
-        {loading && <p>Loading...</p>}
+        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
 
         {!loading && livabilityData !== null && (
           <div className="ret w-full">
-            <div className="ret max-h-96 overflow-auto border border-white/30 rounded-md mt-4">
-              <table className="ml-4">
-                <thead>
+            <div className="max-h-96 overflow-auto border border-white/20 rounded-lg backdrop-blur-sm mt-4">
+              <table className="min-w-full text-sm text-left text-white/90">
+                <thead className="bg-gray-500 text-white uppercase text-xs tracking-wider sticky top-0 backdrop-blur-sm z-10">
                   <tr>
-                    <th>Suburb</th>
-                    <th>Livability Score</th>
+                    <th className="px-6 py-3">Suburb</th>
+                    <th className="px-6 py-3">Livability Score</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="divide-y divide-white/10">
                   {livabilityData.map((entry, index) => (
-                    <tr key={index}>
-                      <td>{entry.suburb}</td>
-                      <td>{entry.livability_score.toFixed(2)}</td>
+                    <tr key={index} className="hover:bg-white/5 transition-colors">
+                      <td className="px-6 py-4">{entry.suburb}</td>
+                      <td className="px-6 py-4">{entry.livability_score.toFixed(2)}</td>
                     </tr>
                   ))}
                 </tbody>

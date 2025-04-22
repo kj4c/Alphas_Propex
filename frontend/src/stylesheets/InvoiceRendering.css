@@ -1,0 +1,198 @@
+.render-container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  width: 48%;
+  border-radius: 0px 100px 0px 0px;
+}
+
+.information-text {
+  font-family: Sora, sans-serif;
+  margin-top: 5%;
+  color: #7f45f2;
+  font-size: 20px;
+}
+
+.fileBtnDiv {
+  display: flex;
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  border: 2px dashed;
+  height: 10vh;
+  width: 100%;
+  margin: 10%;
+  margin-top: 30%;
+  align-items: center;
+  justify-content: center;  
+  text-align: center;
+  transition: 0.2s;
+}
+
+.fileBtnDiv :hover {
+  cursor: pointer;
+}
+
+.fileBtnDiv:hover {
+  background-color: #7f45f2;
+  color: white;
+}
+
+.fileText {
+  position: absolute;
+  font-size: 1.5em;
+  font-weight: 900;
+}
+
+.fileBtn::-webkit-file-upload-button {
+  visibility: hidden;
+  width: 100%;
+}
+.fileBtn {
+  display: flex;
+  height: 10vh;
+  width: 100%;
+  margin-right: 200px;
+  border: dashed;
+
+  color: transparent;
+}
+
+.uploadNotif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.48);
+  z-index: 9999;
+  top: 0;
+  left: 0;
+
+}
+
+.notifText {
+  position: relative;
+  display: flex;
+  padding: 30px;
+  max-width: 20%;
+  height: 10vh;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  border: solid;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 2;
+}
+
+.notifText h3 {
+  text-align: center;
+}
+
+.select-button-div2 {
+  display: flex;
+  position: relative;
+  border: dashed;
+  border-color: #7f45f2;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 14vh;
+  transition: 0.2s;
+  width: 100%;
+  color: rgb(155, 155, 155);
+}
+
+.select-button-div2:hover {
+  background-color: #7f45f2;
+  cursor: pointer;
+  color: white;
+}
+
+.closeBtn {
+  margin-top: 10px;
+  background-color: rgb(192, 189, 189);
+  border: none;
+  border-radius: 16px;
+  padding: 0.5em 0.8em;
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.closeBtn:hover {
+  background-color: #7f45f2;
+  color: white;
+  cursor: pointer;
+}
+
+
+.textUploaded {
+  color: black;
+  padding: 3vh;
+}
+
+.textNotUploaded {
+  color: transparent;
+  padding: 3vh;
+}
+
+.submitBtn, .noSubmitBtn {
+  display: flex;
+  position: relative;
+  border-radius: 16px;
+  border: solid;
+  border-color: #7f45f2;
+  height: 10vh;
+  width: 32vw;
+  align-items: center;
+  justify-content: center;  
+  text-align: center;
+  background-color: white;
+  font-size: 1.5em;
+  font-weight: 600;
+  padding: 5vh;
+  transition: 0.3s;
+}
+
+.submitBtn:hover {
+  cursor: pointer;
+  background-color: #7f45f2;
+  color: white;
+}
+
+.noSubmitBtn {
+  color: rgb(125, 125, 125);
+}
+
+.noSubmitBtn:hover {
+  animation: vibrate 0.4s;
+  cursor: pointer;
+  color: red;
+  border-color: red;
+}
+
+.vibrating {
+  animation: vibrate 0.4s;
+}
+
+@keyframes vibrate {
+  0% {transform: translateX(3px);}
+  10% {transform: translateX(-3px);}
+  20% {transform: translateX(2.5px);}
+  40% {transform: translateX(-2.5px);}
+  50% {transform: translateX(2px);}
+  60% {transform: translateX(-1px);}
+  70% {transform: translateX(1px);}
+  80% {transform: translateX(-1px);}
+  90% {transform: translateX(1px);}
+  100% {transform: translateX(-1px);}
+}

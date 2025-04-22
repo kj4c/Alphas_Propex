@@ -29,7 +29,7 @@ resource "aws_lambda_function" "multi_lambda" {
 
   function_name = each.key
   package_type  = "Image"
-  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/test-lambda@sha256:f969b4b4cb6e415a11cfb77650305d433f205634eac34321f6a1b480f381fefa"
+  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/test-lambda@sha256:90421691df155feb9340a17d877bbf6c8322b2c2c0957b42cf84331713423a19"
   role          = "arn:aws:iam::109471428046:role/LabRole"
   timeout       = 60
   memory_size   = 256
