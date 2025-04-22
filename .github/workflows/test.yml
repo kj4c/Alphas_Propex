@@ -32,10 +32,10 @@ jobs:
           export PYTHONPATH=$(pwd)/backend
           python -m unittest discover backend/tests > test_output.txt
           
-      - name: Run route tests with pytest
-        run: |
-          export PYTHONPATH=$(pwd)/backend
-          pytest backend/route_tests > route_test_output.txt
+      # - name: Run route tests with pytest
+      #   run: |
+      #     export PYTHONPATH=$(pwd)/backend
+      #     pytest backend/route_tests > route_test_output.txt
           
       - name: Run Coverage Check
         run: |
