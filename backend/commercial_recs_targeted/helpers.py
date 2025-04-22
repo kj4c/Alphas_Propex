@@ -1,7 +1,7 @@
 import requests
 
 FAMILY_CENSUS_API_URL = "https://m42dj4mgj8.execute-api.ap-southeast-2.amazonaws.com/prod"
-API_KEY = "eZMJkb6iFe2TjWr9AZ7z44q3oQNzb6Bp2LkylkhC"
+API_KEY = "ISAU03zC565h1QwCk39bL3eSZ1rE78vD4qTJw98c"
 
 
 trait_to_business = {
@@ -13,12 +13,13 @@ trait_to_business = {
 }
 
 # main function that accepts top_n suburbs from commercial_recs, 
-def find_commercial_recs_targeted(recs, top_n=10):
+def find_commercial_recs_targeted(recs):
     target_results = []
     for rec in recs:
         suburb = rec['suburb']
-        print(f"Processing suburb: {suburb}")
-
+        print(f"Processing suburb: {suburb.split()[0]}")
+        
+        suburb = suburb.split()[0]
         # Fetch family data
         family_data = get_family_data(suburb)
         family_analysis = analyse_family_data(family_data)
@@ -83,30 +84,39 @@ def get_business_recommendations(persona):
 
 def get_family_data(suburb):
     headers = {"x-api-key": API_KEY}
-    response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/suburb={suburb}", headers=headers)
+    response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/{suburb}", headers=headers)
     if response.status_code == 200:
+        return response.json()
+    elif response.status_code == 404:
+        print(f"Suburb not found: {suburb}, replacing with 'Sydney'")
+        response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/Sydney", headers=headers)
         return response.json()
     else:
         raise ValueError(f"Failed to fetch family data: {response.status_code} - {response.text}")
     
 def get_gender_data(suburb):
     headers = {"x-api-key": API_KEY} 
-    response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/population/suburb={suburb}", headers=headers)
+    response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/population/{suburb}", headers=headers)
     if response.status_code == 200:
+        return response.json()
+    elif response.status_code == 404:
+        print(f"Suburb not found: {suburb}, replacing with 'Sydney'")
+        response = requests.get(f"{FAMILY_CENSUS_API_URL}/family/population/Sydney", headers=headers)
         return response.json()
     else:
         raise ValueError(f"Failed to fetch family data: {response.status_code}  - {response.text}")
     
 def analyse_family_data(family_data):
-    total_families = int(family_data["total_families"].replace(",", ""))
-    children_families = int(family_data["couple_family_with_children_under_15"].replace(",", "")) + \
-        int(family_data["one_parent_with_children_under_15"].replace(",", ""))
+    total_families = int(family_data["totalFamilies"])
+    print(f"Total families: {total_families}")
+    children_families = int(family_data["coupleFamilyWithChildrenUnder15"]) + \
+        int(family_data["oneParentWithChildrenUnder15"])
 
     children_oriented = (children_families / total_families) * 100
     print(f"Children-oriented families: {children_oriented:.2f}%")
 
-    older_children_families = int(family_data["couple_family_with_children_over_15"].replace(",", "")) + \
-        int(family_data["one_parent_with_children_over_15"].replace(",", ""))
+    older_children_families = int(family_data["coupleFamilyWithChildrenOver15"]) + \
+        int(family_data["oneParentWithChildrenOver15"])
     older_children_oriented = (older_children_families / total_families) * 100
 
     print(f"Older children-oriented families: {older_children_oriented:.2f}%")
@@ -117,9 +127,9 @@ def analyse_family_data(family_data):
     }
 
 def analyse_gender_data(gender_data):
-    total_population = int(gender_data["total_population"].replace(",", ""))
-    males = int(gender_data["male"].replace(",",""))
-    females = int(gender_data["female"].replace(",",""))
+    total_population = int(gender_data["totalPopulation"])
+    males = int(gender_data["male"])
+    females = int(gender_data["female"])
 
     male_ratio = males / total_population * 100
     female_ratio = females / total_population * 100

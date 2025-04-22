@@ -1,7 +1,7 @@
 # import requests
 
-# # THESE TEST THE DEPLOYED LINK
-# ENDPOINT = "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs"
+# THESE TEST THE DEPLOYED LINK
+ENDPOINT = "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs"
 
 # def test_commercial_recs():
 #     response = requests.post(ENDPOINT, json = {
