@@ -9,7 +9,7 @@ const Navbar = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <div className="nav-bar flex w-full items-center justify-between p-4 px-6">
+        <div className="nav-bar flex w-full items-center text-white justify-between p-4 px-6">
               <div className="flex items-center gap-1">
                 <GiFamilyHouse className="text-5xl text-[#8a2bdf]" />
                 <button
