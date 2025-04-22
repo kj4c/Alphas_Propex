@@ -3,7 +3,7 @@ import pandas as pd
 import unittest
 import numpy as np
 # from backend.commercial_recs.handler import lambda_handler
-from backend.commercial_recs.helpers import find_commerical_recs
+from backend.commercial_recs.helpers import find_commercial_recs
 
 class TestCommercialRecs(unittest.TestCase):
     def setUp(self):
@@ -26,7 +26,7 @@ class TestCommercialRecs(unittest.TestCase):
     def test_basic_functionality(self):
 
         # test if the function works lol
-        result = find_commerical_recs(self.df.copy())
+        result = find_commercial_recs(self.df.copy())
         self.assertIsInstance(result, pd.DataFrame)
 
         required_columns = ["suburb", "suburb_median_income", "population_density", "composite_score"]
@@ -38,7 +38,7 @@ class TestCommercialRecs(unittest.TestCase):
     
         # tests whether the commercial recommendations are ranked correctly.
 
-        result = find_commerical_recs(self.df.copy())
+        result = find_commercial_recs(self.df.copy())
         scores = result['composite_score'].values
         
         self.assertTrue(all(scores[i] >= scores[i + 1] 
@@ -47,16 +47,16 @@ class TestCommercialRecs(unittest.TestCase):
     def test_threshold_filter(self):
         # tests whether the function filters suburbs below a certain threshold
 
-        default_res = find_commerical_recs(self.df.copy())
+        default_res = find_commercial_recs(self.df.copy())
         
         # return less suburbs if the threshold is higher
-        high_threshold_res = find_commerical_recs(self.df.copy(), income_threshold=0.8, traffic_threshold=0.8)
+        high_threshold_res = find_commercial_recs(self.df.copy(), income_threshold=0.8, traffic_threshold=0.8)
         self.assertLess(len(high_threshold_res), len(default_res))
     
     def test_weight(self):
         # test that weight affect the ranks properly
-        income_heavy = find_commerical_recs(self.df.copy(), income_weight=0.9, traffic_weight=0.1)
-        traffic_heavy = find_commerical_recs(self.df.copy(), income_weight=0.1, traffic_weight=0.9)
+        income_heavy = find_commercial_recs(self.df.copy(), income_weight=0.9, traffic_weight=0.1)
+        traffic_heavy = find_commercial_recs(self.df.copy(), income_weight=0.1, traffic_weight=0.9)
 
         income_scores = income_heavy['composite_score'].values
         traffic_scores = traffic_heavy['composite_score'].values
@@ -68,7 +68,7 @@ class TestCommercialRecs(unittest.TestCase):
 
         df_missing = self.df.copy()
         df_missing.loc[0, "suburb_median_income"] = np.nan
-        result = find_commerical_recs(df_missing)
+        result = find_commercial_recs(df_missing)
         self.assertGreater(len(result), 0)
 
     def test_empty_dataframe(self):
@@ -76,7 +76,7 @@ class TestCommercialRecs(unittest.TestCase):
         # tests the function behavior when given an empty df
 
         df_empty = pd.DataFrame(columns=self.df.columns)
-        result = find_commerical_recs(df_empty)
+        result = find_commercial_recs(df_empty)
         self.assertEqual(len(result), 0)
 
     def test_handle_zero_sqkm(self):
@@ -85,7 +85,7 @@ class TestCommercialRecs(unittest.TestCase):
 
         df_zero_sqkm = self.df.copy()
         df_zero_sqkm.loc[0, "suburb_sqkm"] = 0
-        result = find_commerical_recs(df_zero_sqkm)
+        result = find_commercial_recs(df_zero_sqkm)
         self.assertGreater(len(result), 0)
         self.assertTrue(np.isinf(result.loc[0, "population_density"]))
     
@@ -94,14 +94,14 @@ class TestCommercialRecs(unittest.TestCase):
         # tests how the function handles cases where columns are missing
         df_missing = self.df.drop(columns=["suburb_median_income"])
         with self.assertRaises(ValueError) as e:
-            find_commerical_recs(df_missing)
+            find_commercial_recs(df_missing)
         
         self.assertEqual(str(e.exception), "Missing required columns")
 
     def test_top_n_param(self):
         # tests whether the top_n parameter works as expected
         for i in [1, 2, 3]:
-            result = find_commerical_recs(self.df.copy(), top_n=i)
+            result = find_commercial_recs(self.df.copy(), top_n=i)
             self.assertEqual(len(result), i)
 
 
