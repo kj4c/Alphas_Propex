@@ -1,0 +1,53 @@
+.SectionContainer {
+  position: relative;
+}
+
+.py-16 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.py-32 {
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.leftLine {
+  /* display: none; */
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 1.75rem;
+  height: 100%;
+  width: 0px;
+  pointer-events: none;
+  background-color: #26242c;
+}
+
+.rightLine {
+  /* display: none; */
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 1.75rem;
+  height: 100%;
+  width: 0px;
+  pointer-events: none;
+  background-color: #26242c;
+}
+
+.crossStyle {
+  /* display: none; */
+  position: absolute;
+  left: 1.75rem;
+  right: 1.75rem;
+  top: 0px;
+  height: 0px;
+  background-color: #26242c;
+}
+
+.crossStyleConditional {
+  display: block;
+  pointer-events: none;
+  right: 2.5rem;
+}

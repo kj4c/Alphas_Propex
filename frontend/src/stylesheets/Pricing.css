@@ -1,0 +1,118 @@
+.PricingSection {
+  overflow: hidden;
+}
+
+.PricingContainer {
+  margin-top: 5rem;
+  margin-bottom: 10rem;
+  position: relative;
+  max-width: 87.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  /* background-color: aqua; */
+}
+
+.PricingListContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.PricingItemBorder:nth-child(even) {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.PricingItemBorder:nth-child(odd) {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.PricingItemBorder:nth-child(1) h4 {
+  color: #ffc876;
+}
+
+.PricingItemBorder:nth-child(2) h4 {
+  color: #ac6aff;
+}
+
+.PricingItemBorder:nth-child(3) h4 {
+  color: #ff776f;
+}
+
+.PricingItemBorder {
+  height: 100%;
+  width: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 2rem;
+  border: 1px solid #252134;
+  background-color: #0e0c15;
+}
+
+.PricingItemBorder h4 {
+  color: white;
+  font-size: 2rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.PricingItemBorder p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 300;
+  min-height: 4rem;
+  margin-bottom: 0.75rem;
+  color: rgb(255, 255, 255, 0.5);
+}
+
+.Pricing {
+  display: flex;
+  align-items: center;
+  height: 5.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.Pricing h3 {
+  color: white;
+  font-size: 2.5rem;
+  line-height: 1.5;
+}
+
+.PricingPrice {
+  font-size: 5.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.PricingItemBorder li {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-top: 1px solid #252134;
+  /* background-color: aqua; */
+}
+
+.PriceButton {
+  margin-bottom: 2.25rem;
+}
+
+.PriceButton a {
+  text-decoration: none;
+  transition-property: color;
+  transition-duration: 300ms;
+  font-weight: 600;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: white;
+}
+
+.PriceButton a:hover {
+  color: #ac6aff;
+}

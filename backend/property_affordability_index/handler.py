@@ -35,11 +35,12 @@ def lambda_handler(event, context):
         
         income = data.get("income", None)
         data = general_helpers.to_dataframe(data['id'])
-        property_price_index = helpers.find_property_price_index(data, income).to_json(orient='records')
+        # property_price_index = helpers.find_property_price_index(data, income).to_json(orient='records')
+        result = helpers.find_property_price_index(data, income)
        
         return {
             "statusCode": 200,
-            "body": property_price_index
+            "body": json.dumps(result)
         }
     except Exception as e:
         return {

@@ -1,0 +1,21 @@
+.GradientBar1 {
+  position: relative;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  height: 1.5rem;
+  border-bottom-right-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+  z-index: 1;
+  background-color: #1b1b2e;
+}
+
+.GradientBar2 {
+  position: relative;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  height: 1.5rem;
+  border-bottom-right-radius: 1.25rem;
+  border-bottom-left-radius: 1.25rem;
+  background-color: rgba(27, 27, 46, 0.7);
+  z-index: 1;
+}

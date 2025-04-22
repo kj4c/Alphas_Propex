@@ -9,7 +9,6 @@ def lambda_handler(event, context):
         body = event.get("body")
         if not body:
             raise ValueError("No data provided.")
-    
         if isinstance(body, str):
             data = json.loads(body)
             if isinstance(data, str):
@@ -25,12 +24,12 @@ def lambda_handler(event, context):
 
         if "id" not in data:
             raise ValueError("Missing 'id' in body")
+        
+        top_n = data.get('top_n', 10)  # Default to 10 if not provided
 
         data = general_helpers.to_dataframe(data['id'])
 
-        top_n = data.get('top_n', 10)  # Default to 10 if not provided
-        
-        recommendations = helpers.find_commerical_recs(data, top_n=top_n).to_json(orient='records')
+        recommendations = helpers.find_commercial_recs_targeted(data, top_n=top_n).to_json(orient='records')
         
         return {
             "statusCode": 200,

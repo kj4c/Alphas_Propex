@@ -1,0 +1,161 @@
+.HeroContainer {
+  margin-top: -5.25rem;
+  padding-top: 8rem;
+}
+
+.HeroCrossOffset {
+  transform: translateY(5.25rem);
+}
+
+.HeroBox {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 77.5rem;
+  padding: 3.75rem;
+}
+
+.HeroTitleContainer {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 6.25rem;
+  max-width: 62rem;
+  z-index: 1;
+}
+
+.HeroTitleContainer h1 {
+  color: white;
+  font-size: 3.25rem;
+  font-weight: 600;
+  line-height: 4.0625rem;
+  margin-bottom: 1.5rem;
+}
+
+.HeroTitleContainer span {
+  position: relative;
+  display: inline-block;
+}
+
+.HeroTitleContainer img {
+  position: absolute;
+  left: -5px;
+  top: 100%;
+}
+
+.HeroTitleContainer p {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+  max-width: 48rem;
+  color: #cac6dd;
+}
+
+.HeroTitleContainer a {
+  text-decoration: none;
+  width: 5rem;
+  margin-right: 1rem;
+  height: 2rem;
+  transition-property: color;
+  transition-duration: 300ms;
+  font-weight: 600;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: #ac6aff;
+}
+
+.HeroTitleContainer a:hover {
+  color: white;
+}
+
+.HeroImageContainer {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 64.2rem;
+  margin-bottom: 6rem;
+  /* background-color: aqua; */
+}
+
+.HeroImageFrame {
+  position: relative;
+  border-radius: 1rem;
+  padding: 0px;
+  padding: 0.125rem;
+  z-index: 1;
+  /* background: white; */
+  background: conic-gradient(
+    from 225deg,
+    #ffc876,
+    #79fff7,
+    #9f53ff,
+    #ff98e2,
+    #ffc876
+  );
+}
+
+.HeroImageBackground {
+  position: relative;
+  border-radius: 1rem;
+  /* background-color: yellow; */
+  background-color: #0e0c15;
+}
+
+/* .HeroImageTopPadding {
+  height: 1.4rem;
+  overflow: hidden;
+  border-top-left-radius: 0.9rem;
+  border-top-right-radius: 0.9rem;
+  background-color: #43435c;
+} */
+
+.HeroImageBorder {
+  overflow: hidden;
+  border-top-left-radius: 0.9rem;
+  border-top-right-radius: 0.9rem;
+  border-bottom-right-radius: 0.9rem;
+  border-bottom-left-radius: 0.9rem;
+  aspect-ratio: 1024/490;
+}
+
+.HeroIcons {
+  /* display: none; */
+  display: flex;
+  position: absolute;
+  left: -5.5rem;
+  bottom: 7.5rem;
+  border-radius: 1rem;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  backdrop-filter: blur(8px);
+  background-color: rgba(71, 64, 96, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.HeroIcons li {
+  padding: 1.25rem;
+}
+
+.SearchBarPos {
+  position: absolute;
+  left: 50%;
+  right: auto;
+  bottom: 2rem;
+  width: 35rem;
+  transform: translateX(-50%);
+}
+
+.OrganisationPos {
+  display: flex;
+  position: absolute;
+  right: -5.5rem;
+  bottom: 11rem;
+  width: 18rem;
+}

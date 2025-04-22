@@ -1,0 +1,90 @@
+.IC-Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(#e2d4ff, #9260f7);
+  /* background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url('../assets/InvoiceCreationPage/icon12.png'); */
+
+  background-size: cover;
+  background-position: center;
+  background-clip: border-box;
+}
+
+.IC-Form {
+  background-color: rgb(255, 255, 255);
+  padding: 0px 60px;
+  border-radius: 10px;
+  box-shadow: rgb(113 122 131 / 11%) 0px 7px 30px 0px;
+  /* background-color: cadetblue; */
+  margin-top: 2.5%;
+  margin-bottom: 2.5%;
+  /* width: 30%; */
+  animation: fade-right 2s;
+
+}
+
+.IC-h1 {
+  color: rgb(77, 1, 77);
+  font-weight: 700;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid gray;
+}
+
+.IC-h2 {
+  color: rgb(77, 1, 77);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
+
+.IC-button {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  border: none;
+  background-color: blueviolet;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.FI-Container {
+  display: flex;
+  flex-direction: column;
+  width: 800px;
+  margin-bottom: 10px;
+  /* background-color: rgb(20, 170, 100); */
+}
+
+.FI-Container input {
+  padding: 15px;
+  margin: 10px 0px;
+  font-size: large;
+  /* background-color: rgb(111, 206, 235); */
+}
+
+.FI-Container label {
+  font-size: medium;
+  color: gray;
+}
+
+.FI-Container h2 {
+  color: rgb(77, 1, 77);
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 5px;
+  border-bottom: 1px solid gray;
+}
