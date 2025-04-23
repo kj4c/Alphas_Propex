@@ -66,7 +66,11 @@ const InvestmentPotential = () => {
             }
           }}
         />
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+         {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchData} />
+        )}
         {investPotential !== null && !loading  && (
         <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
           <table className="min-w-full text-sm text-left text-white/90">
