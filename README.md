@@ -25,7 +25,7 @@ docker run -it --rm alphas-esg-backend
 
 ---
 ## AWS BACKEND DEPLOYED ENDPOINT
-All endpoints should have **`https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/`** followed by the route name listed in the swagger document.
+All endpoints should have **`https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/`** followed by the route name listed in the swagger document.
 
 ## 📤 Uploading Your Data
 
