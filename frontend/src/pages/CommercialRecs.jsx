@@ -54,6 +54,13 @@ const CommercialRecs = () => {
           placeholder="Id"
           onChange={(e) => setId(e.target.value || null)}
         />
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchPrice} />
+        )}
+=========
+
         <BasicInput
           type="text"
           name="top_n"

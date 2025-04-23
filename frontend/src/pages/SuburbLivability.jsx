@@ -114,6 +114,7 @@ const SuburbLivability = () => {
         title="Suburb Livability Score"
         description="Discover the best suburbs to live in based on livability score given weightings of proximity to CBD, property size, population density, crime risk and weather risk"
         loading={loading}      
+      >
         <BasicInput
           type="text"
           name="id"

@@ -86,23 +86,11 @@ const InvestmentPotential = () => {
                   <td className="px-6 py-4">{entry.suburb}</td>
                   <td className="px-6 py-4">{entry.investment_score.toFixed(2)}</td>
                 </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10">
-                {investPotential.map((entry, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-white/5 transition-colors"
-                  >
-                    <td className="px-6 py-4">{entry.suburb}</td>
-                    <td className="px-6 py-4">
-                      {entry.investment_score.toFixed(2)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
       </Panel>
     </div>
   );
