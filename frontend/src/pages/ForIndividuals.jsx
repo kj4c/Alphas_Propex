@@ -14,7 +14,7 @@ const ForIndividuals = () => {
       </div>
         <div className="absolute bottom-0 w-full h-3 bg-gradient-to-t from-[#010314]/90 to-transparent backdrop-blur-md"></div>
       </div>
-      <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10">
+      <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10 pb-40">
       <PropertyPrices />
       <PropertyAffordabilityIndex />
       <SuburbLivability />

@@ -8,6 +8,7 @@ const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
   const [id, setId] = useState(null);
+  const [topN, setTopN] = useState(null);
 
   const fetchData = async () => {
     if (id == null) {
@@ -17,6 +18,7 @@ const InvestmentPotential = () => {
     const requestBody = {
       id: id,
       function_name: "investment_potential",
+      top_n: topN
     };
     setLoading(true);
     const response = await axios.post(
@@ -36,8 +38,8 @@ const InvestmentPotential = () => {
   return (
     <div>
       <Panel
-        title="Investment Potential"
-        description={"Which suburbs yield the highest investment potential"}
+        title="Investment Potentials"
+        description={"Explore suburbs with high investment potential based on property price growth, rental yield, location demand and affordability."}
         loading={loading}
       >
         <BasicInput
@@ -52,18 +54,37 @@ const InvestmentPotential = () => {
             }
           }}
         />
-        {loading ? (
+        <BasicInput
+          type="text"
+          name="top_n"
+          placeholder="Number of Recommendations"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setTopN(e.target.value);
+            } else {
+              setTopN(null);
+            }
+          }}
+        />
+         {loading ? (
           <Loading />
         ) : (
           <RunButton text={"Submit"} onClick={fetchData} />
         )}
-        {investPotential !== null && !loading && (
-          <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-            <table className="min-w-full text-sm text-left text-white/90">
-              <thead className="bg-[--color-gray-800] text-white uppercase text-xs tracking-wider">
-                <tr>
-                  <th className="px-6 py-3">Suburb</th>
-                  <th className="px-6 py-3">Investment Score</th>
+        {investPotential !== null && !loading  && (
+        <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <table className="min-w-full text-sm text-left text-white/90">
+            <thead className="bg-[--color-gray-800] text-white uppercase text-xs tracking-wider">
+              <tr>
+                <th className="px-6 py-3">Suburb</th>
+                <th className="px-6 py-3">Investment Score</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/10">
+              {investPotential.map((entry, index) => (
+                <tr key={index} className="hover:bg-white/5 transition-colors">
+                  <td className="px-6 py-4">{entry.suburb}</td>
+                  <td className="px-6 py-4">{entry.investment_score.toFixed(2)}</td>
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10">

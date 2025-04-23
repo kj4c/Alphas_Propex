@@ -8,20 +8,20 @@ export default function Panel({ title, description, children, runbutton, loading
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className={`flex w-[90vw] pt-8 pb-4 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 backdrop-blur-20 ${loading && "animate-bg"}`}>
-      <div className="flex items-start justify-between w-full">
-        <div>
-          <h2 className="text-2xl text-white font-bold">{title}</h2>
-          <p className="text-sm text-white/70 mt-1">{description}</p>
+    <div className={`flex w-[90vw] pt-8 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 text-white backdrop-blur-20 ${loading && "animate-bg"}`}>
+      <div className="flex items-center justify-between w-full">
+        <div className="flex flex-col pl-6">
+          <h2 className="text-[32px] text-white font-bold">{title}</h2>
+          <p className="text-[20px] text-white/70 mt-3">{description}</p>
         </div>
         <Button
-          size="sm"
-          className="bg-transparent my-auto mr-5 cursor-pointer hover:bg-transparent"
+          size="circle"
+          className="bg-[#ffffff1a] p-5 mr-4 rounded-full hover:bg-[#ffffff33] transition justify-center"
           onClick={() => setIsOpen(!isOpen)}
         >
           <ChevronDown
             className={cn(
-              "h-4 w-4 transform transition-transform duration-300 text-white",
+              "h-12 w-12 transform transition-transform duration-300 text-white",
               isOpen ? "rotate-0" : "rotate-90"
             )}
           />
@@ -38,7 +38,7 @@ export default function Panel({ title, description, children, runbutton, loading
         }}
         className="flex flex-col gap-4 items-center py-5"
       >
-        <div className="w-full flex flex-col gap-4 items-center">
+        <div className="w-full flex flex-col gap-4 items-center px-4">
           {children}
         </div>
         <div>{runbutton}</div>

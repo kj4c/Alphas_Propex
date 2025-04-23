@@ -82,7 +82,7 @@ const PropertyPrices = () => {
     <div>
       <Panel
         title="Average Property Prices"
-        description="Find average property prices given optional filters"
+        description="Explore average property prices with optional filters like suburb, size and features. "
         loading={loading}
       >
         <BasicInput

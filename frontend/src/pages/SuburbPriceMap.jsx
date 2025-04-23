@@ -39,7 +39,7 @@ const SuburbPriceMap = () => {
         title="Suburb Median Prices"
         loading={loading}
         description={
-          "Heatmap of the median prices of properties in each Sydney Suburb"
+          "Visualise property prices with a heatmap of the median prices of properties in each Sydney Suburb"
         }
       >
         {!ret ? (
