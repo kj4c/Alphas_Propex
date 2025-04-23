@@ -45,7 +45,7 @@ const InvestmentPotential = () => {
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Dataset ID"
           onChange={(e) => {
             if (e.target.value !== "") {
               setId(e.target.value);

@@ -39,6 +39,7 @@ const CommercialRecs = () => {
     );
     setLoading(false);
     setRecs(JSON.parse(response.data.recommendations));
+    console.log("response = ", response.data.recommendations);
   };
 
   return (
@@ -51,20 +52,15 @@ const CommercialRecs = () => {
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Dataset ID"
           onChange={(e) => setId(e.target.value || null)}
         />
-        {loading ? (
-          <Loading />
-        ) : (
-          <RunButton text={"Submit"} onClick={fetchPrice} />
-        )}
 
         <BasicInput
           type="text"
           name="top_n"
           placeholder="Number of Recommendations"
-          onChange={(e) => setId(e.target.value || null)}
+          onChange={(e) => setTopN(e.target.value || null)}
         />
     
         {loading ? (
