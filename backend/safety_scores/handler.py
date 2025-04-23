@@ -1,6 +1,7 @@
 import json 
-from helpers import safety_scores
-from general_helpers import to_dataframe
+sys.path.append('../')
+import backend.safety_scores.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     """
@@ -33,9 +34,9 @@ def lambda_handler(event, context):
         suburb = data.get("suburb")
 
         
-        data = to_dataframe(data['id'])
+        data = general_helpers.to_dataframe(data['id'])
         
-        safety_score = safety_scores(
+        safety_score = helpers.safety_scores(
             data,
             suburb
         ).to_json(orient='records')
