@@ -3,7 +3,7 @@
 BACKEND_DIR="./backend"
 DOCKER_IMAGE_NAME="docker-lambda"
 AWS_REGION="us-east-1"
-ECR_URL="109471428046.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE_NAME"
+ECR_URL="754754248018.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE_NAME"
 
 CHANGED=0
 

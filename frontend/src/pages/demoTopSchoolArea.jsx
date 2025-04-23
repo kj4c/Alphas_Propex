@@ -42,7 +42,7 @@ const DemoTopSchoolArea = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/top_school_area",
+        "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/top_school_area",
         requestBody,
         {
           headers: {

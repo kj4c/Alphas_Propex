@@ -60,7 +60,7 @@ const PropertyPrices = () => {
 
     try {
       const response = await axios.post(
-        "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_prices",
+        "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/property_prices",
         requestBody,
         {
           headers: {
@@ -235,7 +235,11 @@ const PropertyPrices = () => {
             }
           }}
         />
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchPrice} />
+        )}
         {loaded && (
           <div className="avg-price">
             <h2> Average price: {price}</h2>

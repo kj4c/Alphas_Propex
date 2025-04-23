@@ -20,7 +20,7 @@ const SuburbPriceMap = () => {
     };
 
     const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_price_map",
+      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/suburb_price_map",
       requestBody,
       {
         headers: {
@@ -56,7 +56,11 @@ const SuburbPriceMap = () => {
                 }
               }}
             />
-            {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+            {loading ? (
+              <Loading />
+            ) : (
+              <RunButton text={"Submit"} onClick={fetchData} />
+            )}
           </>
         ) : (
           <div

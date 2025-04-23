@@ -27,7 +27,7 @@ const CommercialRecs = () => {
     };
 
     const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs",
+      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/commercial_recs",
       requestBody,
       {
         headers: {
@@ -52,35 +52,44 @@ const CommercialRecs = () => {
           placeholder="Id"
           onChange={(e) => setId(e.target.value || null)}
         />
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchPrice} />
+        )}
 
-        
-      {recs !== null && !loading && (
-        <div className="recs">
-          <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-            <table className="min-w-full text-sm text-left text-white/90">
-              <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
-                <tr>
-                  <th className="px-6 py-3">Suburb</th>
-                  <th className="px-6 py-3">Median Income</th>
-                  <th className="px-6 py-3">Population Density</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10">
-                {recs.map((recommendation, index) => (
-                  <tr key={index} className="hover:bg-white/5 transition-colors">
-                    <td className="px-6 py-4">{recommendation.suburb}</td>
-                    <td className="px-6 py-4">{recommendation.suburb_median_income}</td>
-                    <td className="px-6 py-4">{recommendation.population_density}</td>
+        {recs !== null && !loading && (
+          <div className="recs">
+            <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+              <table className="min-w-full text-sm text-left text-white/90">
+                <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
+                  <tr>
+                    <th className="px-6 py-3">Suburb</th>
+                    <th className="px-6 py-3">Median Income</th>
+                    <th className="px-6 py-3">Population Density</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-white/10">
+                  {recs.map((recommendation, index) => (
+                    <tr
+                      key={index}
+                      className="hover:bg-white/5 transition-colors"
+                    >
+                      <td className="px-6 py-4">{recommendation.suburb}</td>
+                      <td className="px-6 py-4">
+                        {recommendation.suburb_median_income}
+                      </td>
+                      <td className="px-6 py-4">
+                        {recommendation.population_density}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </Panel>
-
     </div>
   );
 };

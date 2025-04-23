@@ -3,9 +3,9 @@ provider "aws" {
 }
 
 # S3 Bucket for deployment artifacts
-resource "aws_s3_bucket" "lambda_bucket" {
-  bucket = var.lambda_bucket_name
-}
+#resource "aws_s3_bucket" "lambda_bucket" {
+#  bucket = var.lambda_bucket_name
+#}
 
 # S3 Bucket for RAW DATA
 resource "aws_s3_bucket" "raw_data_bucket" {
@@ -17,10 +17,10 @@ resource "aws_s3_bucket" "raw_data_bucket" {
   }
 }
 
-# Create ECR Repository for Lambda Docker Images
-#resource "aws_ecr_repository" "lambda_repo" {
-#  name = "docker-lambda"
-#}
+#Create ECR Repository for Lambda Docker Images
+resource "aws_ecr_repository" "lambda_repo" {
+  name = "docker-lambda"
+}
 
 # AWS Lambda Function using Docker Image
 resource "aws_lambda_function" "multi_lambda" {
@@ -28,8 +28,8 @@ resource "aws_lambda_function" "multi_lambda" {
 
   function_name = each.key
   package_type  = "Image"
-  image_uri = "109471428046.dkr.ecr.us-east-1.amazonaws.com/docker-lambda@sha256:605499ec1fac790d83726f75aedd24340d880e611e955e2380252bf2ea8f2659"
-  role          = "arn:aws:iam::109471428046:role/LabRole"
+  image_uri = "754754248018.dkr.ecr.us-east-1.amazonaws.com/docker-lambda@sha256:f66be29bbd970d344dfbb7a8dd98b5fbe50f65d20784de5435ce45a3bb151178"
+  role          = "arn:aws:iam::754754248018:role/LabRole"
   timeout       = 600
   memory_size   = 256
 

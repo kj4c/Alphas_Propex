@@ -18,7 +18,7 @@ const InfluenceFactor = () => {
     };
 
     const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/influence_factor",
+      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/influence_factor",
       requestBody,
       {
         headers: {
@@ -46,7 +46,7 @@ const InfluenceFactor = () => {
           }
         }}
       />
-      <RunButton text={"Submit"} onClick={fetchData}/>
+      <RunButton text={"Submit"} onClick={fetchData} />
       <h1>Influence Factor</h1>
       {loading && <p>Loading...</p>}
       {factor !== null && { factor }}
