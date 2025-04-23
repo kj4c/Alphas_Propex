@@ -45,7 +45,7 @@ const InvestmentPotential = () => {
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Dataset ID"
           onChange={(e) => {
             if (e.target.value !== "") {
               setId(e.target.value);
@@ -55,17 +55,11 @@ const InvestmentPotential = () => {
           }}
         />
         <BasicInput
-          type="text"
+          type="number"
           name="top_n"
           placeholder="Number of Recommendations"
-          onChange={(e) => {
-            if (e.target.value !== "") {
-              setTopN(e.target.value);
-            } else {
-              setTopN(null);
-            }
-          }}
-        />
+          onChange={(e) => setTopN(parseInt(e.target.value) || 10)}
+        />  
          {loading ? (
           <Loading />
         ) : (

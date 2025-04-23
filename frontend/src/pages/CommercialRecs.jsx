@@ -24,12 +24,12 @@ const CommercialRecs = () => {
     setLoading(true);
     const requestBody = {
       id: id,
-      function_name: "commercial_recs",
+      function_name: "commercial_recs_targeted",
       top_n: topN,
     };
 
     const response = await axios.post(
-      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/commercial_recs",
+      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/commercial_recs_targeted",
       requestBody,
       {
         headers: {
@@ -38,7 +38,7 @@ const CommercialRecs = () => {
       }
     );
     setLoading(false);
-    setRecs(JSON.parse(response.data.recommendations));
+    setRecs(response.data.targeted_recommendations);
   };
 
   return (
@@ -51,21 +51,16 @@ const CommercialRecs = () => {
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Dataset ID"
           onChange={(e) => setId(e.target.value || null)}
         />
-        {loading ? (
-          <Loading />
-        ) : (
-          <RunButton text={"Submit"} onClick={fetchPrice} />
-        )}
 
         <BasicInput
-          type="text"
+          type="number"
           name="top_n"
           placeholder="Number of Recommendations"
-          onChange={(e) => setId(e.target.value || null)}
-        />
+          onChange={(e) => setTopN(parseInt(e.target.value) || 10)}
+        />    
     
         {loading ? (
           <Loading />
@@ -79,9 +74,10 @@ const CommercialRecs = () => {
               <table className="min-w-full text-sm text-left text-white/90">
                 <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
                   <tr>
+                    <th className="px-6 py-3">Rank</th>
                     <th className="px-6 py-3">Suburb</th>
-                    <th className="px-6 py-3">Median Income</th>
-                    <th className="px-6 py-3">Population Density</th>
+                    <th className="px-6 py-3">Majority Demographic</th>
+                    <th className="px-6 py-3">Commercial Recommendations</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
@@ -90,12 +86,29 @@ const CommercialRecs = () => {
                       key={index}
                       className="hover:bg-white/5 transition-colors"
                     >
+                      <td className="px-6 py-4">{index + 1}</td>
                       <td className="px-6 py-4">{recommendation.suburb}</td>
                       <td className="px-6 py-4">
-                        {recommendation.suburb_median_income}
+                        {recommendation.persona}
                       </td>
                       <td className="px-6 py-4">
-                        {recommendation.population_density}
+                        {recommendation.business_recommendations.map((business, i) => (
+                          <div
+                            key={i}
+                            className={cn(
+                              "flex items-center space-x-2",
+                              i === 0 ? "mt-2" : "mt-1"
+                            )}
+                          >
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="text-xs"
+                            >
+                              {business}
+                            </Button>
+                          </div>
+                        ))}
                       </td>
                     </tr>
                   ))}
