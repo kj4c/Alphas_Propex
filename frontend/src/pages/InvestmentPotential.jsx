@@ -22,7 +22,7 @@ const InvestmentPotential = () => {
     };
     setLoading(true);
     const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/investment_potential",
+      "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/investment_potential",
       requestBody,
       {
         headers: {

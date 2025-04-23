@@ -25,7 +25,7 @@ const UploadJson = () => {
       try {
         const jsonObject = JSON.parse(e.target.result);
         const url =
-          "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/upload_json";
+          "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/upload_json";
 
         const response = await axios.post(
           url,
@@ -40,9 +40,7 @@ const UploadJson = () => {
         setRet(response.data);
       } catch (error) {
         console.error("Error uploading file:", error);
-        alert(
-          "Error uploading file. Please ensure it is a valid JSON file."
-        );
+        alert("Error uploading file. Please ensure it is a valid JSON file.");
       } finally {
         setLoading(false);
       }
@@ -55,7 +53,9 @@ const UploadJson = () => {
     <>
       <div className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/map.jpg)]">
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-          <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">Upload Dataset</h1>
+          <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">
+            Upload Dataset
+          </h1>
         </div>
       </div>
       <div className="flex flex-col items-center justify-start min-h-screen pt-20 px-4 text-center text-white">
@@ -68,14 +68,17 @@ const UploadJson = () => {
           To get started, please upload a JSON file
         </motion.h1>
         <p1>
-          If you do not have a file to upload, please use our pre-existing datasets.
+          If you do not have a file to upload, please use our pre-existing
+          datasets.
         </p1>
-        <p1 className= "mb-4">
-          Large Data Set 2016-2022, over 30,000 property sales records: <span className="font-mono text-purple-400">
+        <p1 className="mb-4">
+          Large Data Set 2016-2022, over 30,000 property sales records:{" "}
+          <span className="font-mono text-purple-400">
             76d3b838-5880-4320-b42f-8bd8273ab6a0
           </span>
           <br></br>
-          Small Data Set, 20 property sales records: <span className="font-mono text-purple-400">
+          Small Data Set, 20 property sales records:{" "}
+          <span className="font-mono text-purple-400">
             34c762a2-e1cd-44a7-a9ea-56f22d64989e
           </span>
         </p1>
@@ -94,9 +97,12 @@ const UploadJson = () => {
           />
         </label>
 
-
         <div className="w-full max-w-sm">
-          <RunButton text="Upload" onClick={handleUpload} className="w-full py-4 text-lg" />
+          <RunButton
+            text="Upload"
+            onClick={handleUpload}
+            className="w-full py-4 text-lg"
+          />
         </div>
 
         {loading && (

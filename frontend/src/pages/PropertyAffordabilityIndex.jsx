@@ -56,7 +56,7 @@ const PropertyAffordabilityIndex = () => {
 
     pollForResult();
     // const response = await axios.post(
-    //   "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/property_affordability_index",
+    //   "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/property_affordability_index",
     //   requestBody,
     //   {
     //     headers: {
@@ -102,7 +102,11 @@ const PropertyAffordabilityIndex = () => {
             }
           }}
         />
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchData} />
+        )}
 
         {!loading && affordabilityData !== null && (
           <div className="ret w-full ">
@@ -111,14 +115,21 @@ const PropertyAffordabilityIndex = () => {
                 <thead className="bg-gray-500 text-white uppercase text-xs tracking-wider sticky top-0 backdrop-blur-sm z-10">
                   <tr>
                     <th className="px-6 py-3">Suburb</th>
-                    <th className="px-6 py-3">Normalized Affordability Index</th>
+                    <th className="px-6 py-3">
+                      Normalized Affordability Index
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {affordabilityData.map((recommendation, index) => (
-                    <tr key={index}  className="hover:bg-white/5 transition-colors">
+                    <tr
+                      key={index}
+                      className="hover:bg-white/5 transition-colors"
+                    >
                       <td className="px-6 py-4">{recommendation.suburb}</td>
-                      <td className="px-6 py-4">{recommendation.norm_affordability_index}</td>
+                      <td className="px-6 py-4">
+                        {recommendation.norm_affordability_index}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
