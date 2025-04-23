@@ -31,11 +31,10 @@ const SuburbLivability = () => {
       try {
         // const url = `https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/${jobId}.json`;
         const url =
-          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/suburb_livability_large_data.json";
+          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/suburb_livability_big_data.json";
         await axios.head(url);
 
         const result = await axios.get(url);
-        // console.log("result =", result);
         setLivabilityData(result.data.livability_data);
         setMapHtml(result.data.map_html);
         setLoading(false);
@@ -45,25 +44,6 @@ const SuburbLivability = () => {
       }
     }, 15000);
   };
-
-  // const pollForResult = (jobId) => {
-  //   const pollingInterval = setInterval(async () => {
-  //     try {
-  //       const url =
-  //         "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/056db016-b849-402e-a69c-6eb56a1428e7.json";
-  //       await axios.head(url);
-
-  //       const result = await axios.get(url);
-  //       console.log("result =", result);
-  //       setLivabilityData(result.data.livability_data);
-  //       setMapHtml(result.data.map_html);
-  //       setLoading(false);
-  //       clearInterval(pollingInterval);
-  //     } catch (err) {
-  //       // HEAD will throw error if not found - do nt hing and keep polling
-  //     }
-  //   }, 3000);
-  // };
 
   const fetchData = async () => {
     if (id == null) {
@@ -86,7 +66,7 @@ const SuburbLivability = () => {
     };
 
     // try {
-    //   await axios.post(
+    //   queue_response = await axios.post(
     //     "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/suburb_livability_queue",
     //     requestBody,
     //     {
@@ -95,6 +75,7 @@ const SuburbLivability = () => {
     //       },
     //     }
     //   );
+    //   console.log(queue_response);
     // } catch (error) {
     //   console.error("Error sending sqs job:", error);
     //   alert("Failed to send sqs job. Please try again.");
