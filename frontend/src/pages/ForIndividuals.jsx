@@ -4,6 +4,7 @@ import SuburbLivability from "./SuburbLivability";
 import SuburbPriceMap from "./SuburbPriceMap";
 import TopSchoolArea from "./TopSchoolArea";
 import TestPropertyAfford from "./testPropertyAfford";
+import CrimeWeight from "./CrimeWeight";
 
 const ForIndividuals = () => {
   return (
@@ -20,6 +21,7 @@ const ForIndividuals = () => {
       <SuburbLivability />
       <SuburbPriceMap />
       <TopSchoolArea />
+      <CrimeWeight />
       </div>
     </>
   );
