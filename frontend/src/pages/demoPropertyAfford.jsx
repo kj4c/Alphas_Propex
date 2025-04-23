@@ -25,7 +25,7 @@ const DemoPropertyAfford = () => {
     const pollingInterval = setInterval(async () => {
       try {
         const url =
-          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/property_afford_large_data.json";
+          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/property_afford_large_data.json.json";
         await axios.head(url);
 
         const result = await axios.get(url);
