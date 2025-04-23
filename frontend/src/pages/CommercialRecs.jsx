@@ -59,7 +59,6 @@ const CommercialRecs = () => {
         ) : (
           <RunButton text={"Submit"} onClick={fetchPrice} />
         )}
-=========
 
         <BasicInput
           type="text"
