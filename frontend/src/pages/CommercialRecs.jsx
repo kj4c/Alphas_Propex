@@ -10,6 +10,7 @@ import Loading from "@/components/Loading";
 
 const CommercialRecs = () => {
   const [id, setId] = useState(null);
+  const [topN, setTopN] = useState(10);
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -24,10 +25,11 @@ const CommercialRecs = () => {
     const requestBody = {
       id: id,
       function_name: "commercial_recs",
+      top_n: topN,
     };
 
     const response = await axios.post(
-      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs",
+      "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/commercial_recs_targeted",
       requestBody,
       {
         headers: {
@@ -43,13 +45,20 @@ const CommercialRecs = () => {
     <div>
       <Panel
         title={"Commercial Recommendations"}
-        description={"Find the best suburbs for commercial use"}
+        description={"Discover high potential suburbs for commercial growth with tailored commercial business types based on income, population density and demographic trends."}
         loading={loading}
       >
         <BasicInput
           type="text"
           name="id"
           placeholder="Id"
+          onChange={(e) => setId(e.target.value || null)}
+        />
+
+        <BasicInput
+          type="text"
+          name="top_n"
+          placeholder="Number of Recommendations"
           onChange={(e) => setId(e.target.value || null)}
         />
         {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchPrice} />}

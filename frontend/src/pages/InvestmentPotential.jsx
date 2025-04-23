@@ -8,6 +8,7 @@ const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
   const [id, setId] = useState(null);
+  const [topN, setTopN] = useState(null);
 
   const fetchData = async () => {
     if (id == null) {
@@ -17,6 +18,7 @@ const InvestmentPotential = () => {
     const requestBody = {
       id: id,
       function_name: "investment_potential",
+      top_n: topN
     };
     setLoading(true);
     const response = await axios.post(
@@ -36,8 +38,8 @@ const InvestmentPotential = () => {
   return (
     <div>
       <Panel
-        title="Investment Potential"
-        description={"Which suburbs yield the highest investment potential"}
+        title="Investment Potentials"
+        description={"Explore suburbs with high investment potential based on property price growth, rental yield, location demand and affordability."}
         loading={loading}
       >
         <BasicInput
@@ -49,6 +51,18 @@ const InvestmentPotential = () => {
               setId(e.target.value);
             } else {
               setId(null);
+            }
+          }}
+        />
+        <BasicInput
+          type="text"
+          name="top_n"
+          placeholder="Number of Recommendations"
+          onChange={(e) => {
+            if (e.target.value !== "") {
+              setTopN(e.target.value);
+            } else {
+              setTopN(null);
             }
           }}
         />

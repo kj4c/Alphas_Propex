@@ -63,7 +63,7 @@ const TopSchoolArea = () => {
     <div className="page">
       <Panel
         title="Schools Nearby"
-        description="Find out how many properties are near a school and what the average property price is."
+        description="Check top schools accessibility and property prices in educational hotspots for your family."
         loading={loading}
       >
         <BasicInput
@@ -74,7 +74,8 @@ const TopSchoolArea = () => {
         />
 
         <Dropdown
-          label="School level:"
+          className="mb-4 text-white/90"
+          label="School Level"
           value={option}
           onChange={(e) => setOption(parseInt(e.target.value))}
           options={schoolTypes}

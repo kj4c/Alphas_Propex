@@ -77,7 +77,7 @@ const PropertyAffordabilityIndex = () => {
     <div>
       <Panel
         title="Property Affordability Index"
-        description={"How affordable each suburb is based on given income"}
+        description={"See how affordable each suburb is based on your given income."}
         loading={loading}
       >
         <BasicInput
