@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
 import { v4 as uuidv4 } from "uuid";
+import SortableHeader from "@/components/SortableHeader";
 import {
   BarChart,
   Bar,
@@ -25,6 +26,7 @@ const SuburbLivability = () => {
   const [livabilityData, setLivabilityData] = useState(null);
   const [mapHtml, setMapHtml] = useState(null);
   const [minIndex, setMinIndex] = useState(0);
+  const [sortConfig, setSortConfig] = useState({ key: "livability_score", direction: "desc" });
 
   const pollForResult = (jobId) => {
     const pollingInterval = setInterval(async () => {
@@ -88,6 +90,31 @@ const SuburbLivability = () => {
   const filteredRet = livabilityData?.filter(
     (r) => r.livability_score >= minIndex
   );
+
+  const handleSort = (key) => {
+    console.log(key);
+    setSortConfig((prev) =>
+      prev.key === key
+        ? { key, direction: prev.direction === "asc" ? "desc" : "asc" }
+        : { key, direction: "asc" }
+    );
+  };
+
+
+  const sortedData = useMemo(() => {
+      if (!livabilityData) return [];
+      const sorted = [...livabilityData];
+      if (sortConfig.key) {
+        sorted.sort((a, b) => {
+          const valA = a[sortConfig.key];
+          const valB = b[sortConfig.key];
+          if (valA < valB) return sortConfig.direction === "asc" ? -1 : 1;
+          if (valA > valB) return sortConfig.direction === "asc" ? 1 : -1;
+          return 0;
+        });
+      }
+      return sorted;
+    }, [livabilityData, sortConfig]);
 
   return (
     <div>
@@ -171,12 +198,22 @@ const SuburbLivability = () => {
               <table className="min-w-full text-sm text-left text-white/90">
                 <thead className="bg-gray-500 text-white uppercase text-xs tracking-wider sticky top-0 backdrop-blur-sm z-10">
                   <tr>
-                    <th className="px-6 py-3">Suburb</th>
-                    <th className="px-6 py-3">Livability Score</th>
+                    <SortableHeader
+                      label="Suburb"
+                      field="suburb"
+                      sortConfig={sortConfig}
+                      onClick={handleSort}
+                    />
+                    <SortableHeader
+                      label="Livability Score"
+                      field="livability_score"
+                      sortConfig={sortConfig}
+                      onClick={handleSort}
+                    />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
-                  {livabilityData.map((entry, index) => (
+                  {sortedData.map((entry, index) => (
                     <tr
                       key={index}
                       className="hover:bg-white/5 transition-colors"

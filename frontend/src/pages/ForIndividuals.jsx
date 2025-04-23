@@ -4,6 +4,7 @@ import SuburbLivability from "./SuburbLivability";
 import SuburbPriceMap from "./SuburbPriceMap";
 import TopSchoolArea from "./TopSchoolArea";
 import TestPropertyAfford from "./testPropertyAfford";
+import CrimeWeight from "./CrimeWeight";
 import { motion } from "framer-motion";
 
 const ForIndividuals = () => {
@@ -37,6 +38,7 @@ const ForIndividuals = () => {
       <SuburbLivability />
       <SuburbPriceMap />
       <TopSchoolArea />
+      <CrimeWeight />
       </div>
     </>
   );

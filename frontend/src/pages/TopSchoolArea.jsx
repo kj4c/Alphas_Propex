@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import axios from "axios";
+
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Dropdown from "../components/Dropdown";
 import Loading from "@/components/Loading";
+import SortableHeader from "@/components/SortableHeader";
 const TopSchoolArea = () => {
   const [loading, setLoading] = useState(false);
   const [schools, setSchools] = useState(null);
-  const [option, setOption] = useState(0);
-  const [option1, setOption1] = useState(0);
+
+  const [schoolTypeIndex, setSchoolTypeIndex] = useState(0);
+  const [districtIndex, setDistrictIndex] = useState(0);
   const [radius, setRadius] = useState(10);
   const [id, setId] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: "avg_property_price", direction: "desc" });
 
+  const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
   const districts = [
     "Central Coast",
     "Northern Sydney",
@@ -23,19 +28,17 @@ const TopSchoolArea = () => {
     "Nepean Blue Mountains",
   ];
 
-  const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
-
   const fetchData = async () => {
-    if (id == null) {
-      alert("missing id");
+    if (!id) {
+      alert("Please enter a valid ID.");
       return;
     }
 
     const requestBody = {
       id,
       radius: parseInt(radius) || 10,
-      district: districts[option1],
-      school_type: schoolTypes[option],
+      district: districts[districtIndex],
+      school_type: schoolTypes[schoolTypeIndex],
       function_name: "top_school_area",
     };
 
@@ -44,20 +47,41 @@ const TopSchoolArea = () => {
       const response = await axios.post(
         "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/top_school_area",
         requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
-      setSchools(JSON.parse(response.data.top_school_area));
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong!");
+      const data = JSON.parse(response.data.top_school_area);
+      setSchools(data);
+    } catch (error) {
+      console.error("API error:", error);
+      alert("Something went wrong while fetching data.");
     } finally {
       setLoading(false);
     }
   };
+
+  const handleSort = (key) => {
+    console.log(key);
+    setSortConfig((prev) =>
+      prev.key === key
+        ? { key, direction: prev.direction === "asc" ? "desc" : "asc" }
+        : { key, direction: "asc" }
+    );
+  };
+
+  const sortedSchools = useMemo(() => {
+    if (!schools) return [];
+    const sorted = [...schools];
+    if (sortConfig.key) {
+      sorted.sort((a, b) => {
+        const valA = a[sortConfig.key];
+        const valB = b[sortConfig.key];
+        if (valA < valB) return sortConfig.direction === "asc" ? -1 : 1;
+        if (valA > valB) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+    return sorted;
+  }, [schools, sortConfig]);
 
   return (
     <div className="page">
@@ -66,28 +90,32 @@ const TopSchoolArea = () => {
         description="Check top schools accessibility and property prices in educational hotspots for your family."
         loading={loading}
       >
+        {/* ID Input */}
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Enter Location ID"
           onChange={(e) => setId(e.target.value || null)}
         />
 
+        {/* School Level Dropdown */}
         <Dropdown
           className="mb-4 text-white/90"
           label="School Level"
-          value={option}
-          onChange={(e) => setOption(parseInt(e.target.value))}
+          value={schoolTypeIndex}
+          onChange={(e) => setSchoolTypeIndex(parseInt(e.target.value))}
           options={schoolTypes}
         />
 
+        {/* District Dropdown */}
         <Dropdown
-          label="District:"
-          value={option1}
-          onChange={(e) => setOption1(parseInt(e.target.value))}
+          label="District"
+          value={districtIndex}
+          onChange={(e) => setDistrictIndex(parseInt(e.target.value))}
           options={districts}
         />
 
+        {/* Radius Input */}
         <BasicInput
           type="text"
           name="radius"
@@ -95,28 +123,38 @@ const TopSchoolArea = () => {
           onChange={(e) => setRadius(e.target.value)}
         />
 
-        {loading ? (
-          <Loading />
-        ) : (
-          <RunButton text={"Submit"} onClick={fetchData} />
-        )}
+        {/* Run Button or Loading */}
+        {loading ? <Loading /> : <RunButton text="Submit" onClick={fetchData} />}
 
+        {/* Results Table */}
         {schools && (
-          <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm mt-6">
             <table className="min-w-full text-sm text-left text-white/90">
               <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
                 <tr>
-                  <th className="px-6 py-3">School</th>
-                  <th className="px-6 py-3">Number of Properties</th>
-                  <th className="px-6 py-3">Average Property Price</th>
+                  <SortableHeader
+                    label="School"
+                    field="school"
+                    sortConfig={sortConfig}
+                    onClick={handleSort}
+                  />
+                  <SortableHeader
+                    label="Number of Properties"
+                    field="num_properties"
+                    sortConfig={sortConfig}
+                    onClick={handleSort}
+                  />
+                  <SortableHeader
+                    label="Average Property Price"
+                    field="avg_property_price"
+                    sortConfig={sortConfig}
+                    onClick={handleSort}
+                  />
                 </tr>
               </thead>
               <tbody className="divide-y divide-white/10">
-                {schools.map((school, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-white/5 transition-colors"
-                  >
+                {sortedSchools.map((school, index) => (
+                  <tr key={index} className="hover:bg-white/5 transition-colors">
                     <td className="px-6 py-4">{school.school}</td>
                     <td className="px-6 py-4">{school.num_properties}</td>
                     <td className="px-6 py-4">

@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import axios from "axios";
 import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
+import SortableHeader from "@/components/SortableHeader";
 import {
   BarChart,
   Bar,
@@ -21,6 +22,7 @@ const PropertyAffordabilityIndex = () => {
   const [mapHtml, setMapHtml] = useState(null);
   const [id, setId] = useState(null);
   const [minIndex, setMinIndex] = useState(0);
+  const [sortConfig, setSortConfig] = useState({ key: "norm_affordability_index", direction: "desc" });
 
   const pollForResult = () => {
     const pollingInterval = setInterval(async () => {
@@ -73,6 +75,31 @@ const PropertyAffordabilityIndex = () => {
     (r) => r.norm_affordability_index >= minIndex
   );
 
+
+  const handleSort = (key) => {
+    console.log(key);
+    setSortConfig((prev) =>
+      prev.key === key
+        ? { key, direction: prev.direction === "asc" ? "desc" : "asc" }
+        : { key, direction: "asc" }
+    );
+  };
+
+
+  const sortedData = useMemo(() => {
+    if (!affordabilityData) return [];
+    const sorted = [...affordabilityData];
+    if (sortConfig.key) {
+      sorted.sort((a, b) => {
+        const valA = a[sortConfig.key];
+        const valB = b[sortConfig.key];
+        if (valA < valB) return sortConfig.direction === "asc" ? -1 : 1;
+        if (valA > valB) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+    return sorted;
+  }, [affordabilityData, sortConfig]);
   return (
     <div>
       <Panel
@@ -114,14 +141,22 @@ const PropertyAffordabilityIndex = () => {
               <table className="min-w-full text-sm text-left text-white/90">
                 <thead className="bg-gray-500 text-white uppercase text-xs tracking-wider sticky top-0 backdrop-blur-sm z-10">
                   <tr>
-                    <th className="px-6 py-3">Suburb</th>
-                    <th className="px-6 py-3">
-                      Normalized Affordability Index
-                    </th>
+                    <SortableHeader
+                      label="Suburb"
+                      field="suburb"
+                      sortConfig={sortConfig}
+                      onClick={handleSort}
+                    />
+                    <SortableHeader
+                      label=" Normalized Affordability Index"
+                      field="norm_affordability_index"
+                      sortConfig={sortConfig}
+                      onClick={handleSort}
+                    />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
-                  {affordabilityData.map((recommendation, index) => (
+                  {sortedData.map((recommendation, index) => (
                     <tr
                       key={index}
                       className="hover:bg-white/5 transition-colors"
