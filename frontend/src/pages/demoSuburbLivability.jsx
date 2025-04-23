@@ -84,21 +84,21 @@ const DemoSuburbLivability = () => {
       job_id: uniqueId,
     };
 
-    try {
-      await axios.post(
-        "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_livability_queue",
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.error("Error sending sqs job:", error);
-      alert("Failed to send sqs job. Please try again.");
-      setLoading(false);
-    }
+    // try {
+    //   await axios.post(
+    //     "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_livability_queue",
+    //     requestBody,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    // } catch (error) {
+    //   console.error("Error sending sqs job:", error);
+    //   alert("Failed to send sqs job. Please try again.");
+    //   setLoading(false);
+    // }
 
     pollForResult(uniqueId);
   };
