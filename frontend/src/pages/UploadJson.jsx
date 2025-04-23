@@ -8,6 +8,16 @@ const UploadJson = () => {
   const [file, setFile] = useState(null);
   const [ret, setRet] = useState(null);
   const [loading, setLoading] = useState(false);
+  const maskVariants = {
+    hidden: { clipPath: "inset(0 0 100% 0)" },
+    show: {
+      clipPath: "inset(0 0 0% 0)",
+      transition: {
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+    },
+  };
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -52,13 +62,17 @@ const UploadJson = () => {
 
   return (
     <>
-      <div className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/map.jpg)]">
+      <motion.div
+      variants={maskVariants}
+      initial="hidden"
+      animate="show"
+      className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/map.jpg)]">
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">
             Upload Dataset
           </h1>
         </div>
-      </div>
+      </motion.div>
       <div className="flex flex-col items-center justify-start min-h-screen pt-20 px-4 text-center text-white">
         <motion.h1
           className="text-5xl font-semibold mb-10 max-w-2xl leading-snug"
