@@ -74,7 +74,7 @@ const CrimeWeight = () => {
     <div className="page">
       <Panel
         title="Weighted Crime Rate"
-        description="Check the weighted crime rate per 10k population by suburbs."
+        description="Check the weighted crime rate per 10,000 population by suburbs. Crimes are weighted by their severity."
         loading={loading}
       >
         <BasicInput
