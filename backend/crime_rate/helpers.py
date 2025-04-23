@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from urllib.parse import quote
 
-def safety_scores(df, suburb):
+def crime_rate(df, suburb):
     """
     Calculates a scaled safety score for a given suburb based on
     weighted crime rate per 100,000 people. Lower crime = higher score.
@@ -62,16 +62,13 @@ def safety_scores(df, suburb):
         for crime_type, details in crimes.items()
     )
 
-    # Crime rate per 100,000 people
-    crime_rate_per_100k = (weighted_crimes / suburb_population) * 100000
+    # Crime rate per 10,000 people
+    crime_rate_per_10k = (weighted_crimes / suburb_population) * 10000
 
-    # Scale so that 500000 = 50 (around the median score according to self testing)
-    scaled_score = 100 - ((crime_rate_per_100k / 500000) * 50)
-    scaled_score = round(max(0, min(scaled_score, 100)), 2)
 
     result = pd.DataFrame([{
         "suburb": suburb,
-        "safety_score": scaled_score,
+        "crime_rate": crime_rate_per_10k,
         "median_price": median_price
     }])
 
