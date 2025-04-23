@@ -36,14 +36,14 @@ def lambda_handler(event, context):
         
         data = general_helpers.to_dataframe(data['id'])
         
-        safety_score = helpers.crime_rate(
+        crime_rate = helpers.crime_rate(
             data,
             suburb
         ).to_json(orient='records')
        
         return {
             "statusCode": 200,
-            "body": safety_score
+            "body": crime_rate
         }
     except Exception as e:
         return {
