@@ -13,7 +13,7 @@ resource "aws_s3_bucket" "raw_data_bucket" {
 
   tags = {
     Name        = "JSON Raw Data Storage Bucket"
-    Environment = "Dev"
+    Environment = "Dev" 
   }
 }
 

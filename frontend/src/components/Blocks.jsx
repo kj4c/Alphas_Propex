@@ -2,13 +2,25 @@ import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ReactNode, useState } from "react";
-import RunButton from "./Buttons";
+import RunButton from "./Buttons"
+import { motion } from "framer-motion";
 
 export default function Panel({ title, description, children, runbutton, loading}) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const myAnimation = {
+    initial: { opacity: 0, x: -50 },
+    inView: { opacity: 1, x: 0, transition: { delay: 0.1 } },
+    hover: { borderColor: "white", scale: 1.02 , y: -6}
+   };
   return (
-    <div className={`flex w-[90vw] pt-8 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 text-white backdrop-blur-20 ${loading && "animate-bg"}`}>
+    <motion.div 
+      initial='initial' 
+      whileInView='inView'
+      whileHover='hover'
+      viewport={{ once: true }}
+      variants={myAnimation}
+      className={`flex w-[90vw] pt-8 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 text-white backdrop-blur-20 ${loading && "animate-bg"}`}>
       <div className="flex items-center justify-between w-full">
         <div className="flex flex-col pl-6">
           <h2 className="text-[32px] text-white font-bold">{title}</h2>
@@ -43,6 +55,6 @@ export default function Panel({ title, description, children, runbutton, loading
         </div>
         <div>{runbutton}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }

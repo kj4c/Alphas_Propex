@@ -29,6 +29,6 @@ variable "lambda_functions" {
     "top_school_area_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "investment_potential_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
     "property_affordability_index_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
-    "safety_scores_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
+    "crime_rate_staging" = { handler = "handler.lambda_handler", runtime = "python3.9", method = "POST" }
   }
 }
