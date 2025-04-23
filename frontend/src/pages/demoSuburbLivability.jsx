@@ -30,7 +30,7 @@ const DemoSuburbLivability = () => {
       try {
         // const url = `https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/${jobId}.json`;
         const url =
-          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/suburb_livability_large_data.json";
+          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/suburb_livability_big_data.json";
         await axios.head(url);
 
         const result = await axios.get(url);
