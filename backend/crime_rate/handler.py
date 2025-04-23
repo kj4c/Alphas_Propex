@@ -1,6 +1,8 @@
 import json 
-from helpers import safety_scores
-from general_helpers import to_dataframe
+import sys
+sys.path.append('../')
+import backend.crime_rate.helpers as helpers
+import backend.general_helpers as general_helpers
 
 def lambda_handler(event, context):
     """
@@ -33,16 +35,16 @@ def lambda_handler(event, context):
         suburb = data.get("suburb")
 
         
-        data = to_dataframe(data['id'])
+        data = general_helpers.to_dataframe(data['id'])
         
-        safety_score = safety_scores(
+        crime_rate = helpers.crime_rate(
             data,
             suburb
         ).to_json(orient='records')
        
         return {
             "statusCode": 200,
-            "body": safety_score
+            "body": crime_rate
         }
     except Exception as e:
         return {
