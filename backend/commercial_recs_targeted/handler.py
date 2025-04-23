@@ -55,10 +55,9 @@ def lambda_handler(event, context):
 #         "body": json.dumps({
 #             "function_name": "commercial_recs_targeted",
 #             "id": "34c762a2-e1cd-44a7-a9ea-56f22d64989e",
-#             "top_n": 3
+#             "top_n": 1
 #         })
 #     }
 #     context = {}
 #     response = lambda_handler(event, context)
 #     print(response)
-
