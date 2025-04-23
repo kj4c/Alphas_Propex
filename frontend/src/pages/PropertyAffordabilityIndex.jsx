@@ -26,11 +26,11 @@ const PropertyAffordabilityIndex = () => {
     const pollingInterval = setInterval(async () => {
       try {
         const url =
-          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/property_afford_large_data.json";
+          "https://suburb-livability-bucket.s3.us-east-1.amazonaws.com/results/property_afford_large_data.json.json";
         await axios.head(url);
 
         const result = await axios.get(url);
-        console.log("result =", result);
+        // console.log("result =", result);
         setAffordabilityData(result.data.affordability_data);
         setMapHtml(result.data.map_html);
         setLoading(false);

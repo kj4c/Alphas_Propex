@@ -56,7 +56,7 @@ if [ -n "$IMAGE_DIGEST" ]; then
     echo "🔄 Updating Terraform Lambda image URI... in main.tf"
     awk -v region="$AWS_REGION" -v digest="$IMAGE_DIGEST" '
     {
-        gsub(/image_uri[[:space:]]*=[[:space:]]*"[^"]*"/, "image_uri = \"109471428046.dkr.ecr." region ".amazonaws.com/docker-lambda@" digest "\"")
+        gsub(/image_uri[[:space:]]*=[[:space:]]*"[^"]*"/, "image_uri = \"754754248018.dkr.ecr." region ".amazonaws.com/docker-lambda@" digest "\"")
         print
     }' main.tf > temp.tf && mv temp.tf main.tf
     echo "✅ Terraform configuration updated with new image: $IMAGE_DIGEST"
