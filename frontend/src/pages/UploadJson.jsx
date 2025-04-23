@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import RunButton from "../components/Buttons";
 import { motion } from "framer-motion";
+import { Upload } from "lucide-react";
 
 const UploadJson = () => {
   const [file, setFile] = useState(null);
@@ -67,11 +68,11 @@ const UploadJson = () => {
         >
           To get started, please upload a JSON file
         </motion.h1>
-        <p1>
+        <p1 className="text-2xl mb-10 max-w-2xl leading-snug">
           If you do not have a file to upload, please use our pre-existing
           datasets.
         </p1>
-        <p1 className="mb-4">
+        <p1 className="mb-10 text-xl">
           Large Data Set 2016-2022, over 30,000 property sales records:{" "}
           <span className="font-mono text-purple-400">
             76d3b838-5880-4320-b42f-8bd8273ab6a0
@@ -85,8 +86,9 @@ const UploadJson = () => {
 
         <label
           htmlFor="json-upload"
-          className="inline-block cursor-pointer rounded-xl border border-[#c8c8c8] bg-[#010314] text-[#c8c8c8] px-10 py-6 mb-6 text-lg transition hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-[#466fba]"
+          className="inline-flex flex-col items-center justify-center cursor-pointer rounded-2xl border-2 border-[#c8c8c8] bg-[#010314] text-[#c8c8c8] px-10 py-20 mb-6 text-lg transition hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-[#466fba]"
         >
+          <Upload className="w-8 h-8 mb-5" />
           {file ? `Selected: ${file.name}` : "Upload JSON File"}
           <input
             id="json-upload"
