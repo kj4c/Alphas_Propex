@@ -42,7 +42,7 @@ const TopSchoolArea = () => {
     try {
       setLoading(true);
       const response = await axios.post(
-        "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/top_school_area",
+        "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/top_school_area",
         requestBody,
         {
           headers: {
@@ -95,7 +95,11 @@ const TopSchoolArea = () => {
           onChange={(e) => setRadius(e.target.value)}
         />
 
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchData} />
+        )}
 
         {schools && (
           <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
@@ -109,7 +113,10 @@ const TopSchoolArea = () => {
               </thead>
               <tbody className="divide-y divide-white/10">
                 {schools.map((school, index) => (
-                  <tr key={index} className="hover:bg-white/5 transition-colors">
+                  <tr
+                    key={index}
+                    className="hover:bg-white/5 transition-colors"
+                  >
                     <td className="px-6 py-4">{school.school}</td>
                     <td className="px-6 py-4">{school.num_properties}</td>
                     <td className="px-6 py-4">

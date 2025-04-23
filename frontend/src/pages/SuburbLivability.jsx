@@ -85,21 +85,21 @@ const SuburbLivability = () => {
       job_id: uniqueId,
     };
 
-    try {
-      await axios.post(
-        "https://q50eubtwpj.execute-api.us-east-1.amazonaws.com/suburb_livability_queue",
-        requestBody,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-    } catch (error) {
-      console.error("Error sending sqs job:", error);
-      alert("Failed to send sqs job. Please try again.");
-      setLoading(false);
-    }
+    // try {
+    //   await axios.post(
+    //     "https://7c4yt1yrr2.execute-api.us-east-1.amazonaws.com/suburb_livability_queue",
+    //     requestBody,
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    // } catch (error) {
+    //   console.error("Error sending sqs job:", error);
+    //   alert("Failed to send sqs job. Please try again.");
+    //   setLoading(false);
+    // }
 
     pollForResult(uniqueId);
   };
@@ -114,7 +114,6 @@ const SuburbLivability = () => {
         title="Suburb Livability Score"
         description="Discover the best suburbs to live in based on livability score given weightings of proximity to CBD, property size, population density, crime risk and weather risk"
         loading={loading}      
-      >
         <BasicInput
           type="text"
           name="id"
@@ -178,7 +177,11 @@ const SuburbLivability = () => {
           }}
         />
 
-        {loading ? <Loading/> :<RunButton text={"Submit"} onClick={fetchData} />}
+        {loading ? (
+          <Loading />
+        ) : (
+          <RunButton text={"Submit"} onClick={fetchData} />
+        )}
 
         {!loading && livabilityData !== null && (
           <div className="ret w-full">
@@ -192,9 +195,14 @@ const SuburbLivability = () => {
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {livabilityData.map((entry, index) => (
-                    <tr key={index} className="hover:bg-white/5 transition-colors">
+                    <tr
+                      key={index}
+                      className="hover:bg-white/5 transition-colors"
+                    >
                       <td className="px-6 py-4">{entry.suburb}</td>
-                      <td className="px-6 py-4">{entry.livability_score.toFixed(2)}</td>
+                      <td className="px-6 py-4">
+                        {entry.livability_score.toFixed(2)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
