@@ -36,7 +36,6 @@ const ForIndividuals = () => {
       <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10 pb-40">
       <PropertyPrices />
       <CrimeWeight />
-      <InfluenceFactor/>
       <PropertyAffordabilityIndex />
       <SuburbLivability />
       <SuburbPriceMap />
