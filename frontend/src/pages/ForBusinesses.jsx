@@ -32,8 +32,7 @@ const ForBusinesses = () => {
           <InvestmentPotential />
           <CommercialRecommendations />
           <CommercialRecommendationsTargeted />
-
-        {/* Add other components similarly */}
+          <InfluenceFactor/>
       </div>
     </>
   );
