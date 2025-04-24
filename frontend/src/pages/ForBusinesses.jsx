@@ -3,6 +3,7 @@ import CommercialRecommendations from "./CommercialRecs";
 import {motion} from "framer-motion";
 import CommercialRecs from "./CommercialRecs";
 import CommercialRecommendationsTargeted from "./CommercialRecsTargeted";
+import InfluenceFactor from "./InfluenceFactor";
 
 const ForBusinesses = () => {
   const maskVariants = {
