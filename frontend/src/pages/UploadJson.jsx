@@ -66,7 +66,7 @@ const UploadJson = () => {
       variants={maskVariants}
       initial="hidden"
       animate="show"
-      className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/map.jpg)]">
+      className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(/map.jpg)]">
         <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
           <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">
             Upload Dataset
