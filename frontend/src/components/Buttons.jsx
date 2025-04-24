@@ -5,7 +5,7 @@ const RunButton = ({ text, onClick }) => {
     <button
       onClick={onClick}
       className="relative group bg-gradient-to-b from-[#150f2f] to-[#442b72] 
-      text-[#ecdcff] font-medium py-3 px-6 rounded-lg border-[0.2px]
+      text-[#ecdcff] font-medium py-4 px-15 rounded-lg border-[0.2px] mt-5
       border-white hover:bg-purple-800 transition cursor-pointer text-2xl"
     >
       {text}

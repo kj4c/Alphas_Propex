@@ -73,7 +73,7 @@ const UploadJson = () => {
           </h1>
         </div>
       </motion.div>
-      <div className="flex flex-col items-center justify-start min-h-screen pt-20 px-4 text-center text-white">
+      <div className="flex flex-col items-center justify-start min-h-[120vh] pt-20 px-4 text-center text-white">
         <motion.h1
           className="text-5xl font-semibold mb-10 max-w-2xl leading-snug"
           initial={{ opacity: 0, y: -10 }}
