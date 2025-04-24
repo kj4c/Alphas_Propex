@@ -241,8 +241,9 @@ const PropertyPrices = () => {
           <RunButton text={"Submit"} onClick={fetchPrice} />
         )}
         {loaded && (
-          <div className="avg-price">
-            <h2> Average price: {price}</h2>
+          <div className="text-[40px] text-center mt-20">
+            <h2 className="text-[30px] mb-10">Average Price</h2>
+            <h2 className="mt-5 font-bold border-2 py-6 px-10 rounded-2xl mb-20">$1453697</h2>
           </div>
         )}
       </Panel>
