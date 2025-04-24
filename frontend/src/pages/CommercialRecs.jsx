@@ -7,6 +7,14 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const CommercialRecs = () => {
   const [id, setId] = useState(null);
@@ -41,6 +49,11 @@ const CommercialRecs = () => {
     setRecs(response.data.recommendations);
   };
 
+  const chartData = recs?.map((r) => ({
+    suburb: r.suburb,
+    score: +(r.composite_score * 100).toFixed(2),
+  }));
+
   return (
     <div>
       <Panel
@@ -74,7 +87,8 @@ const CommercialRecs = () => {
         )}
 
         {recs !== null && !loading && (
-            <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <div className="ret w-full">
+          <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
           <table className="min-w-full text-[18px] text-center text-white/90 mt-4 mb-4">
             <thead className="bg-[--color-gray-800] text-white uppercase text-[18px] tracking-wider">
                   <tr>
@@ -99,8 +113,27 @@ const CommercialRecs = () => {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table>           
             </div>
+            <div className="w-full h-96 mt-10">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <XAxis dataKey="suburb" angle={-45} textAnchor="end" height={100} tick={{ fill: '#ffffff' }} />
+                  <YAxis
+                    label={{
+                      value: "Commercial Score",
+                      angle: -90,
+                      position: "insideLeft",
+                      fill: '#ffffff'
+                    }}
+                    tick={{ fill: '#ffffff' }}
+                  />
+                  <Tooltip />
+                  <Bar dataKey="score" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>   
+          </div>
         )}
       </Panel>
     </div>
