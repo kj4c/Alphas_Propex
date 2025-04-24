@@ -22,7 +22,10 @@ const PropertyAffordabilityIndex = () => {
   const [mapHtml, setMapHtml] = useState(null);
   const [id, setId] = useState(null);
   const [minIndex, setMinIndex] = useState(0);
-  const [sortConfig, setSortConfig] = useState({ key: "norm_affordability_index", direction: "desc" });
+  const [sortConfig, setSortConfig] = useState({
+    key: "norm_affordability_index",
+    direction: "desc",
+  });
 
   const pollForResult = () => {
     const pollingInterval = setInterval(async () => {
@@ -75,7 +78,6 @@ const PropertyAffordabilityIndex = () => {
     (r) => r.norm_affordability_index >= minIndex
   );
 
-
   const handleSort = (key) => {
     console.log(key);
     setSortConfig((prev) =>
@@ -84,7 +86,6 @@ const PropertyAffordabilityIndex = () => {
         : { key, direction: "asc" }
     );
   };
-
 
   const sortedData = useMemo(() => {
     if (!affordabilityData) return [];
@@ -104,7 +105,9 @@ const PropertyAffordabilityIndex = () => {
     <div>
       <Panel
         title="Property Affordability Index"
-        description={"See how affordable each suburb is based on your given income."}
+        description={
+          "See how affordable each suburb is based on your given income. We take into account Median multiple indicator, housing costs as percentage of gross income."
+        }
         loading={loading}
       >
         <BasicInput
