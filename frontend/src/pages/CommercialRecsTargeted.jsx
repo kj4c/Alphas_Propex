@@ -41,6 +41,20 @@ const CommercialRecommendationsTargeted = () => {
     setRecs(response.data.targeted_recommendations);
   };
 
+  const getDominantPersonaKey = (demo) =>
+    Object.entries(demo).reduce(
+      (best, current) => (current[1] > best[1] ? current : best),
+      ["", -Infinity]
+    )[0];
+  
+  /** Optional: map the raw keys to readable labels */
+  const DEMO_LABELS = {
+    female_ratio: "Female-Dominant",
+    male_ratio: "Male-Dominant",
+    children_oriented: "Children Oriented",
+    older_children_oriented: "Older Children Oriented",
+  };
+
   return (
     <div>
       <Panel
@@ -51,7 +65,7 @@ const CommercialRecommendationsTargeted = () => {
           "Male Dominanted",
           "Female Dominanted",
           "Children Oriented",
-          "Young Adults Oriented"
+          "Older Children Oriented"
         ]}
         loading={loading}
       >
@@ -84,7 +98,6 @@ const CommercialRecommendationsTargeted = () => {
                     <th className="px-6 py-3">Rank</th>
                     <th className="px-6 py-3">Suburb</th>
                     <th className="px-6 py-3">Majority Demographic</th>
-                    <th className="px-6 py-3">Commercial Recommendations</th>
                     <th className="px-6 py-3">Demographic Scores</th>
                   </tr>
                 </thead>
@@ -95,23 +108,10 @@ const CommercialRecommendationsTargeted = () => {
                       className="hover:bg-white/5 transition-colors"
                     >
                       <td className="px-6 py-4">{index + 1}</td>
-                      <td className="px-6 py-4">{recommendation.suburb}</td>
-                      <td className="px-6 py-4">
-                        {recommendation.persona}
-                      </td>
-                      <td className="px-6 py-4 flex flex-col items-center justify-center">
-                        {recommendation.business_recommendations.map((business, i) => (
-                          <div
-                            key={i}
-                            className={cn(
-                              "flex items-center space-x-2",
-                              i === 0 ? "mt-2" : "mt-1"
-                            )}
-                          >
-                            {business}
-                          </div>
-                        ))}
-                      </td>
+                      <td className="px-6 py-4 font-bold">{recommendation.suburb}</td>
+                      <td className="px-6 py-4 font-semibold">
+                        {DEMO_LABELS[getDominantPersonaKey(recommendation.demographics)] ?? "—"}
+                        </td>
                       <td className="px-6 py-4">
                         <ul className="flex flex-wrap gap-x-2 gap-y-1">
                             {prettifyDemographics(recommendation.demographics).map((tag, i) => (
