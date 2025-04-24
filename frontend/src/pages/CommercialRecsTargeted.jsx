@@ -78,13 +78,14 @@ const CommercialRecommendationsTargeted = () => {
         {recs !== null && !loading && (
           <div className="recs">
             <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-              <table className="min-w-full text-sm text-left text-white/90">
-                <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
+              <table className="min-w-full text-[18px] text-center text-white/90">
+                <thead className="bg-white/10 text-white uppercase text-[18px] tracking-wider">
                   <tr>
                     <th className="px-6 py-3">Rank</th>
                     <th className="px-6 py-3">Suburb</th>
                     <th className="px-6 py-3">Majority Demographic</th>
                     <th className="px-6 py-3">Commercial Recommendations</th>
+                    <th className="px-6 py-3">Demographic Scores</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
@@ -98,7 +99,7 @@ const CommercialRecommendationsTargeted = () => {
                       <td className="px-6 py-4">
                         {recommendation.persona}
                       </td>
-                      <td className="px-6 py-4">
+                      <td className="px-6 py-4 flex flex-col items-center justify-center">
                         {recommendation.business_recommendations.map((business, i) => (
                           <div
                             key={i}
@@ -107,16 +108,19 @@ const CommercialRecommendationsTargeted = () => {
                               i === 0 ? "mt-2" : "mt-1"
                             )}
                           >
-                            <Button
-                              variant="outline"
-                              size="sm"
-                              className="text-xs"
-                            >
-                              {business}
-                            </Button>
+                            {business}
                           </div>
                         ))}
                       </td>
+                      <td className="px-6 py-4">
+                        <ul className="flex flex-wrap gap-x-2 gap-y-1">
+                            {prettifyDemographics(recommendation.demographics).map((tag, i) => (
+                            <li key={i} className="inline-block text-[18px] text-white/90 bg-white/10 rounded px-2 py-0.5">
+                                {tag}
+                            </li>
+                            ))}
+                        </ul>
+                        </td>       
                     </tr>
                   ))}
                 </tbody>
@@ -130,3 +134,13 @@ const CommercialRecommendationsTargeted = () => {
 };
 
 export default CommercialRecommendationsTargeted;
+
+const prettifyDemographics = (demoObj) =>
+    Object.entries(demoObj)
+      .sort()
+      .map(([k, v]) => {
+        const label = k
+          .replace(/_/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+        return `${label} ${v.toFixed(1)}%`;
+      });

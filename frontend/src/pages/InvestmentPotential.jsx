@@ -4,6 +4,15 @@ import RunButton from "../components/Buttons";
 import BasicInput from "../components/Inputs";
 import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
@@ -34,6 +43,11 @@ const InvestmentPotential = () => {
     console.log("response = ", response.data.investment_potentials);
     setInvestPotential(response.data.investment_potentials);
   };
+
+  const chartData = investPotential?.map((i) => ({
+    suburb: i.suburb,
+    score: +i.investment_score.toFixed(2),
+  }));
 
   return (
     <div>
@@ -73,25 +87,45 @@ const InvestmentPotential = () => {
           <RunButton text={"Submit"} onClick={fetchData} />
         )}
         {investPotential !== null && !loading  && (
-        <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-          <table className="min-w-full text-[16px] text-left text-white/90">
-            <thead className="bg-[--color-gray-800] text-white uppercase text-[16px] tracking-wider">
-              <tr>
-                <th className="px-6 py-3">Rank</th>
-                <th className="px-6 py-3">Suburb</th>
-                <th className="px-6 py-3">Investment Score</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/10">
-              {investPotential.map((entry, index) => (
-                <tr key={index} className="hover:bg-white/5 transition-colors">
-                  <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4">{entry.suburb}</td>
-                  <td className="px-6 py-4 font-bold">{entry.investment_score.toFixed(2)}</td>
+          <div className="rec w-full">
+          <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+            <table className="min-w-full text-[18px] text-center text-white/90 mt-4 mb-4">
+              <thead className="bg-[--color-gray-800] text-white uppercase text-[18px] tracking-wider">
+                <tr>
+                  <th className="px-6 py-3">Rank</th>
+                  <th className="px-6 py-3">Suburb</th>
+                  <th className="px-6 py-3">Investment Score</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-white/10">
+                {investPotential.map((entry, index) => (
+                  <tr key={index} className="hover:bg-white/5 transition-colors">
+                    <td className="px-6 py-4">{index + 1}</td>
+                    <td className="px-40 py-4 font-bold">{entry.suburb}</td>
+                    <td className="px-6 py-4 font-bold">{entry.investment_score.toFixed(2)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="w-full h-96 mt-10">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={chartData}>
+            <XAxis dataKey="suburb" angle={-45} textAnchor="end" height={100} tick={{ fill: '#ffffff' }} />
+            <YAxis
+              label={{
+                value: "Investment Score",
+                angle: -90,
+                position: "insideLeft",
+                fill: '#ffffff'
+              }}
+              tick={{ fill: '#ffffff' }}
+            />
+            <Tooltip />
+            <Bar dataKey="score" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
+        </div>   
         </div>
       )}
       </Panel>

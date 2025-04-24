@@ -7,6 +7,14 @@ import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const CommercialRecs = () => {
   const [id, setId] = useState(null);
@@ -41,6 +49,11 @@ const CommercialRecs = () => {
     setRecs(response.data.recommendations);
   };
 
+  const chartData = recs?.map((r) => ({
+    suburb: r.suburb,
+    score: +(r.composite_score * 100).toFixed(2),
+  }));
+
   return (
     <div>
       <Panel
@@ -74,29 +87,52 @@ const CommercialRecs = () => {
         )}
 
         {recs !== null && !loading && (
-          <div className="recs">
-            <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-              <table className="min-w-full text-sm text-left text-white/90">
-                <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
+          <div className="ret w-full">
+          <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <table className="min-w-full text-[18px] text-center text-white/90 mt-4 mb-4">
+            <thead className="bg-[--color-gray-800] text-white uppercase text-[18px] tracking-wider">
                   <tr>
                     <th className="px-6 py-3">Rank</th>
                     <th className="px-6 py-3">Suburb</th>
+                    <th className="px-6 py-3">Suburb Population</th>
+                    <th className="px-6 py-3">Population Density (people/sqkm)</th>
                     <th className="px-6 py-3">Commercial Score</th>
+                   
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {recs.map((recommendation, index) => (
                   <tr key={index} className="hover:bg-white/5 transition-colors">
                       <td className="px-6 py-4">{index + 1}</td>
-                      <td className="px-6 py-4">{recommendation.suburb}</td>
+                      <td className="px-40 py-4 font-bold">{recommendation.suburb}</td>
+                      <td className="px-6 py-4">{recommendation.suburb_population}</td>
+                      <td className="px-6 py-4">{recommendation.population_density}</td>
                       <td className="px-6 py-4">
                         {(recommendation.composite_score * 100).toFixed(2)}
                       </td>
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table>           
             </div>
+            <div className="w-full h-96 mt-10">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData}>
+                  <XAxis dataKey="suburb" angle={-45} textAnchor="end" height={100} tick={{ fill: '#ffffff' }} />
+                  <YAxis
+                    label={{
+                      value: "Commercial Score",
+                      angle: -90,
+                      position: "insideLeft",
+                      fill: '#ffffff'
+                    }}
+                    tick={{ fill: '#ffffff' }}
+                  />
+                  <Tooltip />
+                  <Bar dataKey="score" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>   
           </div>
         )}
       </Panel>
