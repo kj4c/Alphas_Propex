@@ -74,8 +74,8 @@ const InvestmentPotential = () => {
         )}
         {investPotential !== null && !loading  && (
         <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-          <table className="min-w-full text-[16px] text-left text-white/90">
-            <thead className="bg-[--color-gray-800] text-white uppercase text-[16px] tracking-wider">
+          <table className="min-w-full text-[18px] text-center text-white/90 mt-4 mb-4">
+            <thead className="bg-[--color-gray-800] text-white uppercase text-[18px] tracking-wider">
               <tr>
                 <th className="px-6 py-3">Rank</th>
                 <th className="px-6 py-3">Suburb</th>
@@ -86,7 +86,7 @@ const InvestmentPotential = () => {
               {investPotential.map((entry, index) => (
                 <tr key={index} className="hover:bg-white/5 transition-colors">
                   <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4">{entry.suburb}</td>
+                  <td className="px-40 py-4 font-bold">{entry.suburb}</td>
                   <td className="px-6 py-4 font-bold">{entry.investment_score.toFixed(2)}</td>
                 </tr>
               ))}

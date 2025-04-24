@@ -74,21 +74,25 @@ const CommercialRecs = () => {
         )}
 
         {recs !== null && !loading && (
-          <div className="recs">
-            <div className="w-full overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
-              <table className="min-w-full text-sm text-left text-white/90">
-                <thead className="bg-white/10 text-white uppercase text-xs tracking-wider">
+            <div className="w-full flex justify-center overflow-x-auto rounded-lg border border-white/20 backdrop-blur-sm">
+          <table className="min-w-full text-[18px] text-center text-white/90 mt-4 mb-4">
+            <thead className="bg-[--color-gray-800] text-white uppercase text-[18px] tracking-wider">
                   <tr>
                     <th className="px-6 py-3">Rank</th>
                     <th className="px-6 py-3">Suburb</th>
+                    <th className="px-6 py-3">Suburb Population</th>
+                    <th className="px-6 py-3">Population Density (people/sqkm)</th>
                     <th className="px-6 py-3">Commercial Score</th>
+                   
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/10">
                   {recs.map((recommendation, index) => (
                   <tr key={index} className="hover:bg-white/5 transition-colors">
                       <td className="px-6 py-4">{index + 1}</td>
-                      <td className="px-6 py-4">{recommendation.suburb}</td>
+                      <td className="px-40 py-4 font-bold">{recommendation.suburb}</td>
+                      <td className="px-6 py-4">{recommendation.suburb_population}</td>
+                      <td className="px-6 py-4">{recommendation.population_density}</td>
                       <td className="px-6 py-4">
                         {(recommendation.composite_score * 100).toFixed(2)}
                       </td>
@@ -97,7 +101,6 @@ const CommercialRecs = () => {
                 </tbody>
               </table>
             </div>
-          </div>
         )}
       </Panel>
     </div>
