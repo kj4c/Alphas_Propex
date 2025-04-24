@@ -86,6 +86,7 @@ const UploadJson = () => {
           If you do not have a file to upload, please use our pre-existing
           datasets.
         </p1>
+        <p1 className="text-3xl mb-5">Sydney Property Data</p1>
         <p1 className="mb-10 text-xl">
           Large Data Set 2016-2022, over 30,000 property sales records:{" "}
           <span className="font-mono text-purple-400">
@@ -100,7 +101,7 @@ const UploadJson = () => {
 
         <label
           htmlFor="json-upload"
-          className="inline-flex flex-col items-center justify-center cursor-pointer rounded-2xl border-2 border-[#c8c8c8] bg-[#010314] text-[#c8c8c8] px-10 py-20 mb-6 text-lg transition hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-[#466fba]"
+          className="inline-flex flex-col items-center justify-center cursor-pointer rounded-2xl border-2 border-[#c8c8c8] bg-[#010314] text-[#c8c8c8] px-15 py-20 mb-10 text-lg transition hover:text-white hover:border-white focus:outline-none focus:ring-2 focus:ring-[#466fba]"
         >
           <Upload className="w-8 h-8 mb-5" />
           {file ? `Selected: ${file.name}` : "Upload JSON File"}
