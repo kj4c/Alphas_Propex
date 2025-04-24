@@ -25,7 +25,7 @@ const AppContent = () => {
     !hideNavBarPaths.includes(location.pathname);
 
   return (
-    <div className=" bg-[url(assets/blurry-gradient-haikei.svg)] z-0 bg-cover bg-no-repeat bg-center">
+    <div className=" bg-[url(/blurry-gradient-haikei.svg)] z-0 bg-cover bg-no-repeat bg-center">
       {showNavbar && <Navbar />}
 
       <Routes>

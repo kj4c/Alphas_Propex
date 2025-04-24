@@ -20,7 +20,7 @@ const ForBusinesses = () => {
         variants={maskVariants}
         initial="hidden"
         animate="show"
-        className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/darkbuildings.jpg)] bg-center backdrop-blur-sm bg-white/10">
+        className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(/darkbuildings.jpg)] bg-center backdrop-blur-sm bg-white/10">
         <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center">
           <h1 className="animate-fade-move-blur-in text-white text-[80px] font-bold">For Businesses</h1>
         </div>

@@ -10,7 +10,7 @@ export default function Panel({ title, description, children, runbutton, loading
 
   const myAnimation = {
     initial: { opacity: 0, x: -50 },
-    inView: { opacity: 1, x: 0, transition: { delay: 0.1 } },
+    inView: { opacity: 1, x: 0 },
     hover: { borderColor: "white", scale: 1.02 , y: -6}
    };
   return (

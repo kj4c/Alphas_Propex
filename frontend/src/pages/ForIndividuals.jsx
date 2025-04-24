@@ -26,7 +26,7 @@ const ForIndividuals = () => {
         variants={maskVariants}
         initial="hidden"
         animate="show" 
-        className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(src/assets/darkhouse.jpg)] bg-center">
+        className="animate-fade-blur-in relative w-full h-[60vh] bg-cover bg-[url(/darkhouse.jpg)] bg-center">
       <div className="absolute inset-0 bg-black/30 backdrop-blur-[1px] flex items-center justify-center">
         <h1 className="animate-fade-move-blur-in text-white font-inter text-[80px] font-bold">For Individuals</h1>
       </div>
