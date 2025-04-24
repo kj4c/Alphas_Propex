@@ -126,7 +126,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="id"
-          placeholder="Id"
+          placeholder="Dataset ID"
           onChange={(e) => {
             if (e.target.value !== "") {
               setId(e.target.value);
@@ -138,7 +138,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="proximityWeight"
-          placeholder="Proximity weight"
+          placeholder="Proximity Weight"
           onChange={(e) => {
             if (e.target.value !== "") {
               setWeight(e.target.value);
@@ -148,7 +148,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="sizeWeight"
-          placeholder="Property size weight"
+          placeholder="Property Size Weight"
           onChange={(e) => {
             if (e.target.value !== "") {
               setSizeWeight(e.target.value);
@@ -158,7 +158,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="densityWeight"
-          placeholder="Population density weight"
+          placeholder="Population Density Weight"
           onChange={(e) => {
             if (e.target.value !== "") {
               setDensity(e.target.value);
@@ -168,7 +168,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="crimeRiskWeight"
-          placeholder="Crime risk weight"
+          placeholder="Crime Risk Weight"
           onChange={(e) => {
             if (e.target.value !== "") {
               setCrimeRiskWeight(e.target.value);
@@ -178,7 +178,7 @@ const SuburbLivability = () => {
         <BasicInput
           type="text"
           name="weatherRiskWeight"
-          placeholder="Weather risk weight"
+          placeholder="Weather Risk Weight"
           onChange={(e) => {
             if (e.target.value !== "") {
               setWeatherRiskWeight(e.target.value);

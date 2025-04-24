@@ -1,6 +1,8 @@
 import InvestmentPotential from "./InvestmentPotential";
 import CommercialRecommendations from "./CommercialRecs";
 import {motion} from "framer-motion";
+import CommercialRecs from "./CommercialRecs";
+import CommercialRecommendationsTargeted from "./CommercialRecsTargeted";
 
 const ForBusinesses = () => {
   const maskVariants = {
@@ -29,6 +31,7 @@ const ForBusinesses = () => {
       <div className="page mx-auto w-full px-6 py-10 flex flex-col gap-10 pb-40">
           <InvestmentPotential />
           <CommercialRecommendations />
+          <CommercialRecommendationsTargeted />
 
         {/* Add other components similarly */}
       </div>
