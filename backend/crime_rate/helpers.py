@@ -63,7 +63,7 @@ def crime_rate(df, suburb):
     )
 
     # Crime rate per 10,000 people
-    crime_rate_per_10k = (weighted_crimes / suburb_population) * 10000
+    crime_rate_per_10k = ((weighted_crimes / suburb_population) / 30) * 10000
 
 
     result = pd.DataFrame([{
