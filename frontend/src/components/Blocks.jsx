@@ -11,7 +11,7 @@ export default function Panel({ title, description, children, runbutton, loading
   const myAnimation = {
     initial: { opacity: 0, x: -50 },
     inView: { opacity: 1, x: 0 },
-    hover: { borderColor: "white", scale: 1.02 , y: -6}
+    hover: { borderColor: "rgba(255,255,255,1)", scale: 1.02 , y: -6}
    };
   return (
     <motion.div 
@@ -20,7 +20,7 @@ export default function Panel({ title, description, children, runbutton, loading
       whileHover='hover'
       viewport={{ once: true }}
       variants={myAnimation}
-      className={`flex w-[90vw] pt-8 mx-auto flex-col rounded-xl border border-white/30 bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 text-white backdrop-blur-20 ${loading && "animate-bg"}`}>
+      className={`flex w-[90vw] pt-8 mx-auto flex-col rounded-xl border border-[rgba(100,100,100,1)] bg-[linear-gradient(to_top_right,rgba(24,44,88,0.4)_13.2%,rgba(227,228,252,0.02)_100%)] px-4 text-white backdrop-blur-20 ${loading && "animate-bg"}`}>
       <div className="flex items-center justify-between w-full">
         <div className="flex flex-col pl-6">
           <h2 className="text-[32px] text-white font-bold">{title}</h2>

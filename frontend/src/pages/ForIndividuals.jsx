@@ -6,6 +6,7 @@ import TopSchoolArea from "./TopSchoolArea";
 import TestPropertyAfford from "./testPropertyAfford";
 import CrimeWeight from "./CrimeWeight";
 import { motion } from "framer-motion";
+import InfluenceFactor from "./InfluenceFactor";
 
 const ForIndividuals = () => {
   const maskVariants = {
@@ -34,11 +35,12 @@ const ForIndividuals = () => {
       </motion.div>
       <div className="page mx-auto w-full px-6 py-5 flex flex-col gap-10 pb-40">
       <PropertyPrices />
+      <CrimeWeight />
+      <InfluenceFactor/>
       <PropertyAffordabilityIndex />
       <SuburbLivability />
       <SuburbPriceMap />
       <TopSchoolArea />
-      <CrimeWeight />
       </div>
     </>
   );
