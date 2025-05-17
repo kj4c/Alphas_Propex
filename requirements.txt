@@ -12,3 +12,4 @@ matplotlib
 statsmodels
 requests
 pytest
+sqlalchemy
