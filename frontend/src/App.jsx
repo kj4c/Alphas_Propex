@@ -12,11 +12,12 @@ import UploadJson from "./pages/UploadJson";
 import SuburbLivability from "./pages/SuburbLivability";
 import ForBusinesses from "./pages/ForBusinesses";
 import ForIndividuals from "./pages/ForIndividuals";
+import CompareSuburbs from "./pages/CompareSuburbs";
 import "./App.css";
 
 const AppContent = () => {
   const location = useLocation();
-  const knownPaths = ["/uploadjson", "/businesses", "/individuals"];
+  const knownPaths = ["/uploadjson", "/businesses", "/individuals", "/compare"];
 
   const hideNavBarPaths = ["/"];
 
@@ -33,6 +34,7 @@ const AppContent = () => {
         <Route path="/uploadjson" element={<UploadJson />} />
         <Route path="/businesses" element={<ForBusinesses />} />
         <Route path="/individuals" element={<ForIndividuals />} />
+        <Route path="/compare" element={<CompareSuburbs />} />
       </Routes>
     </div>
   );
