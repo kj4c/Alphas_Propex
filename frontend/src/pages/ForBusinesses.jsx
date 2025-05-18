@@ -33,7 +33,6 @@ const ForBusinesses = () => {
           <InvestmentPotential />
           <CommercialRecommendations />
           <CommercialRecommendationsTargeted />
-          <InfluenceFactor/>
       </div>
     </>
   );
