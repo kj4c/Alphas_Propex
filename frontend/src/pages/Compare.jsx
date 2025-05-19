@@ -11,8 +11,8 @@ import { ArrowUpRight, Shield, Home, DollarSign, BarChart2, Smile } from "lucide
 
 // Compare Suburbs Panels
 const metrics = [
-  { key: 'medianPrice', label: 'Average Property Price' },
-  { key: 'crimeRate', label: 'Weighted Crime Rate' },
+  { key: 'medianPrice', label: 'Median Property Price' },
+  { key: 'crimeRate', label: 'Weighted Crime Rate per 10,000 population' },
   { key: 'investmentScore', label: 'Investment Potential Score' },
   { key: 'commercialScore', label: 'Commercial Score' },
   { key: 'affordabilityIndex', label: 'Property Affordability Index' },
@@ -32,26 +32,26 @@ const results = [
     name: 'Hornsby',
     investmentScore: 73.94,
     commercialScore: 74.23,
-    medianPrice: '$780,000',
-    crimeRate: '4.29',
+    medianPrice: '$2,009,999',
+    crimeRate: '1957.56',
     affordabilityIndex: '6.14',
     livabilityScore: 68.32,
   },
   {
     name: 'Bondi',
-    investmentScore: 76,
-    commercialScore: 81,
-    medianPrice: '$720,000',
-    crimeRate: '23.72',
+    investmentScore: 76.73,
+    commercialScore: 81.45,
+    medianPrice: '$3,076,000',
+    crimeRate: '1739.15',
     affordabilityIndex: '4.21',
     livabilityScore: 53.18,
   },
   {
     name: 'Artarmon',
-    investmentScore: 89,
-    commercialScore: 68,
-    medianPrice: '$850,000',
-    crimeRate: '6.66',
+    investmentScore: 89.16,
+    commercialScore: 68.07,
+    medianPrice: '$2,910,000',
+    crimeRate: '1237.95',
     affordabilityIndex: '9.52',
     livabilityScore: 66.85,
   }
@@ -67,7 +67,7 @@ const Compare = () => {
 
   const fetchData = async () => {
     if (!suburb1 || !suburb2 || !suburb3) {
-      alert("missing suburb");
+      alert("Missing Suburb");
       return;
     }
     // const requestBody = {
