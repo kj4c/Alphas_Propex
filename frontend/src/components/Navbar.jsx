@@ -2,6 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import './Navbar.css'
 import { GiFamilyHouse } from 'react-icons/gi';
+import Profile from './Profile';
 const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -55,6 +56,7 @@ const Navbar = () => {
                     Compare Suburbs
                 </motion.button>
             </div>
+            <Profile/>
         </div>
     )
 }

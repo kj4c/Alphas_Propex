@@ -7,7 +7,6 @@ import Loading from "@/components/Loading";
 import { Button } from "@/components/ui/button";
 
 const CrimeWeight = () => {
-  const [id, setId] = useState(null);
   const [suburbInput, setSuburbInput] = useState("");
   const [suburbs, setSuburbs] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -24,7 +23,15 @@ const CrimeWeight = () => {
     setSuburbs(suburbs.filter((s) => s !== sub));
   };
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
+
   const fetchData = async () => {
+    const id = getId();
     if (!id) {
       alert("Please enter an ID");
       return;
@@ -77,14 +84,6 @@ const CrimeWeight = () => {
         description="Check the weighted crime rate per 10,000 population by suburbs. Crimes are weighted by their severity."
         loading={loading}
       >
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Enter ID"
-          value={id || ""}
-          onChange={(e) => setId(e.target.value)}
-        />
-
         <div className="flex gap-2 mb-4 justify-center items-center">
           <BasicInput
             type="text"

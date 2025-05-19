@@ -11,7 +11,6 @@ const DemoTopSchoolArea = () => {
   const [option, setOption] = useState(0);
   const [option1, setOption1] = useState(0);
   const [radius, setRadius] = useState(10);
-  const [id, setId] = useState(null);
 
   const districts = [
     "Central Coast",
@@ -25,7 +24,14 @@ const DemoTopSchoolArea = () => {
 
   const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
   const fetchData = async () => {
+    const id = getId()
     if (id == null) {
       alert("missing id");
       return;
@@ -65,14 +71,6 @@ const DemoTopSchoolArea = () => {
         title="Schools Nearby"
         description="Find out how many properties are near a school and what the average property price is."
       >
-        <p>Id:</p>
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Id"
-          onChange={(e) => setId(e.target.value || null)}
-        />
-
         <Dropdown
           label="School level:"
           value={option}

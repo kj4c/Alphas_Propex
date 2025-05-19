@@ -14,7 +14,6 @@ const TopSchoolArea = () => {
   const [schoolTypeIndex, setSchoolTypeIndex] = useState(0);
   const [districtIndex, setDistrictIndex] = useState(0);
   const [radius, setRadius] = useState(10);
-  const [id, setId] = useState(null);
   const [sortConfig, setSortConfig] = useState({ key: "avg_property_price", direction: "desc" });
 
   const schoolTypes = ["Secondary School", "Primary School", "Infants School"];
@@ -28,7 +27,14 @@ const TopSchoolArea = () => {
     "Nepean Blue Mountains",
   ];
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0";
+
+    return storedId;
+  };
   const fetchData = async () => {
+    const id = getId();
     if (!id) {
       alert("Please enter a valid ID.");
       return;
@@ -60,7 +66,6 @@ const TopSchoolArea = () => {
   };
 
   const handleSort = (key) => {
-    console.log(key);
     setSortConfig((prev) =>
       prev.key === key
         ? { key, direction: prev.direction === "asc" ? "desc" : "asc" }
@@ -90,14 +95,6 @@ const TopSchoolArea = () => {
         description="Check top schools accessibility and property prices in educational hotspots for your family."
         loading={loading}
       >
-        {/* ID Input */}
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Enter Location ID"
-          onChange={(e) => setId(e.target.value || null)}
-        />
-
         {/* School Level Dropdown */}
         <Dropdown
           className="mb-4 text-white/90"

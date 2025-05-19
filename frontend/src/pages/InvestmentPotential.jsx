@@ -16,10 +16,16 @@ import {
 const InvestmentPotential = () => {
   const [loading, setLoading] = useState(false);
   const [investPotential, setInvestPotential] = useState(null);
-  const [id, setId] = useState(null);
   const [topN, setTopN] = useState(null);
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; 
+
+    return storedId;
+  };
   const fetchData = async () => {
+    const id = getId();
     if (id == null) {
       alert("missing id");
       return;
@@ -63,18 +69,6 @@ const InvestmentPotential = () => {
         ]}
         loading={loading}
       >
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Dataset ID"
-          onChange={(e) => {
-            if (e.target.value !== "") {
-              setId(e.target.value);
-            } else {
-              setId(null);
-            }
-          }}
-        />
         <BasicInput
           type="number"
           name="top_n"
