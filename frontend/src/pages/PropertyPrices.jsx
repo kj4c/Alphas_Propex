@@ -8,7 +8,6 @@ const PropertyPrices = () => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [price, setPrice] = useState("");
-  const [id, setId] = useState(null);
 
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
@@ -22,7 +21,15 @@ const PropertyPrices = () => {
   const [maxSize, setMaxSize] = useState(null);
   const [type, setType] = useState(null);
 
+
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
   const fetchPrice = async () => {
+    const id = getId()
     if (id == null) {
       alert("missing id");
       return;
@@ -85,18 +92,6 @@ const PropertyPrices = () => {
         description="Explore average property prices with optional filters like suburb, size and features. "
         loading={loading}
       >
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Id"
-          onChange={(e) => {
-            if (e.target.value !== "") {
-              setId(e.target.value);
-            } else {
-              setId(null);
-            }
-          }}
-        />
         <p>Price range:</p>
         <BasicInput
           type="text"

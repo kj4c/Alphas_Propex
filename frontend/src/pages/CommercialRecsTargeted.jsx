@@ -9,13 +9,20 @@ import Panel from "@/components/Blocks";
 import Loading from "@/components/Loading";
 
 const CommercialRecommendationsTargeted = () => {
-  const [id, setId] = useState(null);
   const [topN, setTopN] = useState(10);
   const [loading, setLoading] = useState(false);
   const [recs, setRecs] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
+
   const fetchPrice = async () => {
+    const id = getId();
     if (id == null) {
       alert("no id given");
       return;
@@ -69,12 +76,6 @@ const CommercialRecommendationsTargeted = () => {
         ]}
         loading={loading}
       >
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Dataset ID"
-          onChange={(e) => setId(e.target.value || null)}
-        />
 
         <BasicInput
           type="number"

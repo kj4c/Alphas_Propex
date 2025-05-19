@@ -7,8 +7,15 @@ import Loading from "@/components/Loading";
 const SuburbPriceMap = () => {
   const [loading, setLoading] = useState(false);
   const [ret, setRet] = useState(null);
-  const [id, setId] = useState(null);
+
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
   const fetchData = async () => {
+    const id = getId()
     if (id == null) {
       alert("missing id");
       return;
@@ -44,22 +51,10 @@ const SuburbPriceMap = () => {
       >
         {!ret ? (
           <>
-            <BasicInput
-              type="text"
-              name="id"
-              placeholder="Id"
-              onChange={(e) => {
-                if (e.target.value !== "") {
-                  setId(e.target.value);
-                } else {
-                  setId(null);
-                }
-              }}
-            />
             {loading ? (
               <Loading />
             ) : (
-              <RunButton text={"Submit"} onClick={fetchData} />
+              <RunButton text={"Generate map"} onClick={fetchData} />
             )}
           </>
         ) : (

@@ -20,7 +20,6 @@ const DemoSuburbLivability = () => {
   const [density, setDensity] = useState(0.1);
   const [crimeRiskWeight, setCrimeRiskWeight] = useState(0.1);
   const [weatherRiskWeight, setWeatherRiskWeight] = useState(0.1);
-  const [id, setId] = useState(null);
   const [livabilityData, setLivabilityData] = useState(null);
   const [mapHtml, setMapHtml] = useState(null);
   const [minIndex, setMinIndex] = useState(0);
@@ -64,7 +63,15 @@ const DemoSuburbLivability = () => {
   //   }, 3000);
   // };
 
+  const getId = () => {
+    const storedId = localStorage.getItem('id');
+    if (!storedId) return "76d3b838-5880-4320-b42f-8bd8273ab6a0"; // fallback to 'Default'
+
+    return storedId;
+  };
+
   const fetchData = async () => {
+    const id = getId()
     if (id == null) {
       alert("missing id");
       return;
@@ -113,18 +120,6 @@ const DemoSuburbLivability = () => {
         title="Suburb Livability Score"
         description="Calculates livability score given weightings of proximity to CBD, property size, population density, crime risk and weather risk"
       >
-        <BasicInput
-          type="text"
-          name="id"
-          placeholder="Id"
-          onChange={(e) => {
-            if (e.target.value !== "") {
-              setId(e.target.value);
-            } else {
-              setId(null);
-            }
-          }}
-        />
         <BasicInput
           type="text"
           name="proximityWeight"
