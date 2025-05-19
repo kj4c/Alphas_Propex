@@ -46,7 +46,14 @@ const Navbar = () => {
                 >
                     For Individuals
                 </motion.button>
-
+                <motion.button
+                    whileHover={{ y: -4 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className={`nav-btn ${isActive('/compare') ? 'active' : ''}`}
+                    onClick={() => navigate('/compare')}
+                >
+                    Compare Suburbs
+                </motion.button>
             </div>
         </div>
     )
