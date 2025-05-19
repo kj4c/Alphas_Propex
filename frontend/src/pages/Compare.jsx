@@ -52,7 +52,7 @@ const results = [
     commercialScore: 68.07,
     medianPrice: '$2,910,000',
     crimeRate: '1237.95',
-    affordabilityIndex: '9.52',
+    affordabilityIndex: '5.52',
     livabilityScore: 66.85,
   }
 ];
@@ -87,8 +87,10 @@ const Compare = () => {
     // );
     // console.log("response = ", response.data.investment_potentials);
     //setCompare(response.data.investment_potentials);
-    setCompare(results)
-    setLoading(false)
+    setTimeout(() => {
+      setCompare(results);
+      setLoading(false);
+    }, 18500);
   }
 
   return (
