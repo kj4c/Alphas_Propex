@@ -1,5 +1,6 @@
 import json
 import os
+import os
 import importlib
 import sys
 sys.path.append('.')
@@ -21,14 +22,8 @@ def lambda_handler(event, context):
         response = handler_module.lambda_handler(event, context)
         return response
         
-    function_name = None
-    if "body" in event:
-        try:
-            body = json.loads(event["body"])
-            function_name = body.get("function_name")
-        except json.JSONDecodeError:
-            return {"statusCode": 400, "body": json.dumps("Invalid JSON payload")}
-    
+    function_name = os.environ.get("FUNCTION_NAME")
+
     if not function_name:
         return {
             "statusCode": 400,

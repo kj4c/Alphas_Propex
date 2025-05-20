@@ -1,11 +1,11 @@
 import json 
 import sys
 sys.path.append('../')
-import backend.compare.helpers as helpers
+import backend.compare_suburbs.helpers as helpers
 
 from sqlalchemy import create_engine, text
-from config.config import ENDPOINT, PORT, DATABASE_NAME
-from credentials.credentials import MASTER_USERNAME, MASTER_PASSWORD
+# from config.config import ENDPOINT, PORT, DATABASE_NAME
+# from credentials.credentials import MASTER_USERNAME, MASTER_PASSWORD
 
 def lambda_handler(event, context):
     """
@@ -29,14 +29,13 @@ def lambda_handler(event, context):
         else:
             raise ValueError("Unrecognized body format")
     
-        if "id" not in data:
-            raise ValueError("Missing 'id' in body")
         if "suburb_list" not in data:
             raise ValueError("Missing 'suburb_list' in body")
         
         suburb_list = data.get("suburb_list")
 
-        engine = create_engine(f'postgresql://{MASTER_USERNAME}:{MASTER_PASSWORD}@{ENDPOINT}:{PORT}/{DATABASE_NAME}')
+        # engine = create_engine(f'postgresql://{MASTER_USERNAME}:{MASTER_PASSWORD}@{ENDPOINT}:{PORT}/{DATABASE_NAME}')
+        engine = create_engine('postgresql://admin1:korzuf-Fyhxy7-vihqut@historical-property-sales.chpodz4akwo5.us-east-1.rds.amazonaws.com:5432/postgres')
         
         try:
             print("Trying to connect to database...")

@@ -3,7 +3,7 @@ sys.path.append('../')
 
 import unittest
 from unittest.mock import MagicMock, patch
-from compare.helpers import compare
+from compare_suburbs.helpers import compare
 
 class TestCompareFunction(unittest.TestCase):
 

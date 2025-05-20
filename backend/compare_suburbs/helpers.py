@@ -118,8 +118,6 @@ def compare(engine, suburb_list):
     if not suburb_list: raise ValueError("suburb_list cannot be empty")
     if any(not isinstance(suburb, str) or not suburb.strip() for suburb in suburb_list): raise ValueError("suburb_list must contain non-empty strings only")
 
-    # normalised_suburbs = [suburb.lower() for suburb in suburb_list]
-
     res = {
         'Postcode': {},
         'State': {},
